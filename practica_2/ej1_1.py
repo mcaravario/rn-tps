@@ -14,7 +14,7 @@ def learn_rn(xs, ys, epochs=100, eta=0.3):
         return 1 if y else -1
 
     # Agrega bias
-    xs = map(lambda x: [1]+x, xs)
+    xs = list(map(lambda x: [1]+x, xs))
 
     n = len(xs[0])
     w = npr.random((n, 1))

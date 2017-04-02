@@ -50,16 +50,3 @@ class PerceptronSimple(RN):
             error = d(ys[i]) - self.eval(x, biased=True)
 
             self.w += eta * error * x.T
-
-xs = [[0,0], [0,1], [1,0], [1, 1]]
-ys = [ 0,    0,      0,    1 ]
-epochs=1000
-eta=0.2
-
-rn_AND = PerceptronSimple(2)
-rn_AND.learn(xs, ys, epochs=epochs, eta=eta)
-
-print(rn_AND.w)
-
-for x in xs:
-    print("{} -> {}".format(x, rn_AND.eval(x)))

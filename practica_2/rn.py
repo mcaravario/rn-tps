@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 import random
 import numpy as np
@@ -27,10 +27,12 @@ class RN:
     def learn(self, xs, ys, eta=ETA, epochs=EPOCHS):
         # Agrega bias a la entrada
         xs = list(map(lambda x: [1]+x, xs))
+        zs = list(zip(xs, ys))
 
         for epoch in range(epochs):
             self.learn_one_epoch(xs, ys, eta=eta)
-            random.shuffle(xs)
+            random.shuffle(zs)
+            xs, ys = zip(*zs)
 
 class PerceptronSimple(RN):
     g = np.sign

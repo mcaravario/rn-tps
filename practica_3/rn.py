@@ -25,7 +25,7 @@ class RN:
          deltas[-1] = gs[-1][1](vs[-1][0]) * (y - vs[-1][1]))
          for m in (range(len(vs)-2, 0, -1):
              for i in range(self.Ws.shape[1]):
-                 delta[i] = gs[m][1](vs[m][0][i]) * sum[(Ws[m+1][j][i] * deltas[m+1][j])  for j in range(len(self.Ws.shape[0])) ]  
+                 delta[i] = gs[m][1](vs[m][0][i]) * sum(z((Ws[m+1][j][i] * deltas[m+1][j])  for j in range(len(self.Ws.shape[0]))))
 
             delta = gs[m][1](vs[m][0]) * sumatoria (Ws[m+1].T * deltas[m+1])
             deltas[m] = delta

@@ -22,29 +22,39 @@ class RN:
          return vs
 
      def backward(self, vs, y, eta=0.3):
-        deltas = []
         # g'(h_i(M) * [error])
-        # W = salidas * entradas
-        # delta = 
-        y = np.array(y).reshape((self.Ws[-1][0], 1))
+        ######################################################
+        ##        W en R^(salidas * entradas)               ##
+        ##--------------------------------------------------##
+        ##                                                  ##
+        ##  W_{i,j} = el peso de la entrada j a la salida i ##
+        #####################################################
 
         last_layer = -1
+        # W es la matriz de la ultima capa
+        W = self.Ws[last_layer]
+        # La ultima capa
+        assert(len(y) == W.shape[0])
+        # interpretamos y como un vector columna
+        y = np.array(y).reshape((W.shape[0], 1))
 
-        delta = np.zeros((self.Ws[-1].shape[0], 1))
-        for i in range(self.Ws[last_layer].shape):
-            g = gs[last_layer]
-            h = vs[last_layer][0]
-            V = vs[last_layer][1]
-            delta[i] = g.dif(h[i]) * (y - V[i])
+        delta = np.zeros((W.shape[0], 1))
 
+        g = gs[last_layer]
+        h, v = vs[last_layer]
+        delta = g.dif(h) * (y - V) # multiplicacion elemento a elemento
         delta_W = eta * delta * self.vs[last_layer-1].T
-        W[last_layer] += delta_W
+        W += delta_W
 
         for m in (range(len(vs)-2, 0, -1):
+            W = self.Ws[m]
+            delta = np.zeros((W.shape[0], 1))
             g = gs[m]
-            h = vs[m][0]
-            for i in range(self.Ws.shape[1]):
-                delta[i] = g.dif(h[i]) * self.Ws.T * delta
-            V = vs[m+1][1]
-            delta_W = eta * delta * V.T
+            h, v = vs[m]
+
+            s = self.Ws.T * delta
+            # Multiplicacion elemento a elemento
+            delta = g.dif(h) * s
+
+            delta_W = eta * delta * v.T
             W = W + delta_W

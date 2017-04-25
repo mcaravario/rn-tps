@@ -2,6 +2,8 @@ import abc
 import numpy as np
 import random
 
+ETA = 0.3
+
 class LearningMethod:
     def __init__(self, neural_network):
         self.neural_network = neural_network
@@ -18,3 +20,59 @@ class LearningMethod:
     @abc.abstractmethod
     def learn_one_sample(self, x, y, *args, **kwargs):
         return
+
+class BackPropagation(LearningMethod):
+    def __init__(self, neural_network):
+        super(BackPropagation, self).__init__(neural_network)
+
+    def learn_one_sample(self, x, y, eta=ETA):
+        vs = self.forward(x)
+        self.backward(vs, y, eta)
+
+    def forward(self, x):
+        vs = []
+        x = np.array(x).reshape((n, 1))
+        vs.append(x)
+        for W, g in zip(self.Ws, self.gs):
+            h = (W * x).T
+            v = g(h)
+            vs.append((y,x))
+         return vs
+
+     def backward(self, vs, y, eta=ETA):
+        ######################################################
+        ##        W en R^(salidas * entradas)               ##
+        ##--------------------------------------------------##
+        ##                                                  ##
+        ##  W_{i,j} = el peso de la entrada j a la salida i ##
+        #####################################################
+        nn = self.neural_network
+
+        last_layer = -1
+        # W es la matriz de la ultima capa
+        W = nn.Ws[last_layer]
+        # La ultima capa
+        assert(len(y) == W.shape[0])
+        # interpretamos y como un vector columna
+        y = np.array(y).reshape((W.shape[0], 1))
+
+        delta = np.zeros((W.shape[0], 1))
+        g = gs[last_layer]
+        h, v = vs[last_layer]
+
+        delta = g.dif(h) * (y - V) # multiplicacion elemento a elemento
+        delta_W = eta * delta * vs[last_layer-1].T
+        W += delta_W
+
+        for m in (range(len(vs)-2, 0, -1):
+            W = nn.Ws[m]
+            delta = np.zeros((W.shape[0], 1))
+            g = gs[m]
+            h, v = vs[m]
+
+            s = W.T * delta
+            # Multiplicacion elemento a elemento
+            delta = g.dif(h) * s
+
+            delta_W = eta * delta * v.T
+            W += delta_W

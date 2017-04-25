@@ -15,7 +15,7 @@ class RN:
         vs = []
         x = np.array(x).reshape((n, 1))
         vs.append(x)
-        for W, g, _ in zip(self.Ws, self.gs):
+        for W, g in zip(self.Ws, self.gs):
             y = (W * x).T
             x = g(y)
             vs.append((y,x))

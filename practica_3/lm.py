@@ -6,19 +6,27 @@ ETA = 0.3
 
 class LearningMethod:
     def __init__(self, neural_network):
+        """ Constructor del Método de aprendizaje
+        neural_network: Red neuronal que va a aprender
+        """
+
         self.neural_network = neural_network
 
     def learn_one_epoch(self, training, *args, **kwargs):
+        """ Aprende del conjunto de training una sola epoca"""
         for x, y in training:
             self.learn_one_sample(x, y, *args, **kwargs)
 
     def learn_epochs(self, training, epochs=1, *args, **kwargs):
+        """ Aprende tantas epocas del conjunto training como se le
+        indique en epochs"""
         for i in range(epochs):
             self.learn_one_epoch(training, *args, **kwargs)
             random.shuffle(training)
 
     @abc.abstractmethod
     def learn_one_sample(self, x, y, *args, **kwargs):
+        """ Aprende una sola muestra con su solucion"""
         return
 
 class BackPropagation(LearningMethod):
@@ -30,6 +38,7 @@ class BackPropagation(LearningMethod):
         self.backward(vs, y, eta)
 
     def forward(self, x):
+        """ Paso Forward del Backpropagation """
         vs = []
         x = np.array(x).reshape((n, 1))
         vs.append(x)
@@ -40,6 +49,7 @@ class BackPropagation(LearningMethod):
          return vs
 
      def backward(self, vs, y, eta=ETA):
+        """ Paso Backward del Backpropagation """
         ######################################################
         ##        W en R^(salidas * entradas)               ##
         ##--------------------------------------------------##

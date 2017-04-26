@@ -3,7 +3,7 @@ import random
 
 
 class RN:
-    random_funct = random.random
+    random_funct = lambda: random.uniform(-1.0, 1.0)
     def __init__(self, gs, **kwargs):
         """ Construye la red neuronal
 
@@ -22,9 +22,9 @@ class RN:
         if 'Ws' in kwargs:
             self.Ws = kwargs['Ws']
         elif 'ns' in kwargs:
-            if 'random_funct' in kwargs:
-                self.random_funct = kwargs['random_funct']
             ns = kwargs['ns']
+
+            self.random_funct = kwargs.get('random_funct') or RN.random_funct
 
             def gen_matrix(h, w):
                 return np.array([[self.random_funct() for _ in range(w)] for _ in range(h)])

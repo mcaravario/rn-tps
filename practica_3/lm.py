@@ -35,7 +35,8 @@ class BackPropagation(LearningMethod):
 
     def learn_one_sample(self, x, y, eta=ETA):
         vs = self.forward(x)
-        self.backward(vs, y, eta)
+        for l, delta_W in self.backward(vs, y, eta):
+            self.neural_network.Ws[l] += delta_W
 
     def forward(self, x):
         """ Paso Forward del Backpropagation """
@@ -73,7 +74,8 @@ class BackPropagation(LearningMethod):
 
        delta = g.dif(h) * (y - v) # multiplicacion elemento a elemento
        delta_W = eta * delta * vs[last_layer-1][1].T
-       prev_W, W = W, W + delta_W
+       prev_W = np.copy(W)
+       yield last_layer, delta_W
 
        for m in range(len(nn.Ws)-2, -1, -1):
 
@@ -85,6 +87,5 @@ class BackPropagation(LearningMethod):
            # Multiplicacion elemento a elemento
            delta = g.dif(h) * s
            delta_W = eta * (delta * vs[m][1].T)
-
-           W = nn.Ws[m]
-           prev_W, W = W, W + delta_W
+           prev_W = np.copy(nn.Ws[m])
+           yield m, delta_W

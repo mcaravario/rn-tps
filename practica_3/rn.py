@@ -17,16 +17,16 @@ class RN:
             Aclaración: Se deben introducir al menos ns o Ws de lo contrario dara error
             y si se proveen los dos, solo leera Ws
         """
-
         self.gs = gs
         if 'Ws' in kwargs:
             self.Ws = kwargs['Ws']
         elif 'ns' in kwargs:
             if 'random_funct' in kwargs:
                 self.random_funct = kwargs['random_funct']
+            ns = kwargs['ns']
             self.Ws = [None for i in range(len(ns)-1)]
-            for i in range(len(ns)-1)
-                self.Ws = np.from_function(lambda _, _: self.random_funct(), (ns[i+1],ns[i]))
+            for i in range(len(ns)-1):
+                self.Ws = np.from_function(lambda i, j: self.random_funct(), (ns[i+1],ns[i]))
         else:
             raise Exception("Se esperaba las matrices de pesos o la arquitectura")
 

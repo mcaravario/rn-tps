@@ -43,5 +43,15 @@ class TestLearnMethods(unittest.TestCase):
         l.learn(training, epochs=10)
         self.check_training(training, nn_and)
 
+    def test_XOR(self):
+        nn_xor = rn.RN(ns=[3, 3, 1], gs=[af.sign(), af.sign()])
+        l = lm.BackPropagation(nn_xor)
+        training = [([1,0,0],[-1]),
+                    ([1,0,1],[1]),
+                    ([1,1,0],[1]),
+                    ([1,1,1],[-1])]
+        l.learn(training, epochs=1000)
+        self.check_training(training, nn_xor)
+
 if __name__ == '__main__':
     unittest.main()

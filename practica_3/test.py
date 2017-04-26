@@ -3,6 +3,7 @@ import unittest
 import numpy as np
 import rn
 import af
+import lm
 
 class TestRNMethods(unittest.TestCase):
     def test_weights(self):
@@ -25,6 +26,22 @@ class TestRNMethods(unittest.TestCase):
         self.assertTrue(np.array_equal(nn_2.eval([1,0,0]), np.array([[39], [49]])))
         self.assertTrue(np.array_equal(nn_2.eval([0,1,0]), np.array([[54], [68]])))
         self.assertTrue(np.array_equal(nn_2.eval([0,0,1]), np.array([[69], [87]])))
+
+class TestLearnMethods(unittest.TestCase):
+    def check_training(self, training, nn):
+        for x, y in training:
+            o = nn.eval(x).flatten().tolist()
+            self.assertEqual(o, y)
+
+    def test_AND(self):
+        nn_and = rn.RN(ns=[3, 1], gs=[af.sign()])
+        l = lm.BackPropagation(nn_and)
+        training = [([1,0,0],[-1]),
+                    ([1,0,1],[-1]),
+                    ([1,1,0],[-1]),
+                    ([1,1,1],[1])]
+        l.learn(training, epochs=10)
+        self.check_training(training, nn_and)
 
 if __name__ == '__main__':
     unittest.main()

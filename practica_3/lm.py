@@ -17,7 +17,7 @@ class LearningMethod:
         for x, y in training:
             self.learn_one_sample(x, y, *args, **kwargs)
 
-    def learn_epochs(self, training, epochs=1, *args, **kwargs):
+    def learn(self, training, epochs=1, *args, **kwargs):
         """ Aprende tantas epocas del conjunto training como se le
         indique en epochs"""
         for i in range(epochs):

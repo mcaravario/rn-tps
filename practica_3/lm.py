@@ -76,7 +76,7 @@ class BackPropagation(LearningMethod):
        W += delta_W
 
        for m in range(len(vs)-2, 0, -1):
-           W = nn.Ws[m]
+           W = nn.Ws[m-1]
            delta = np.zeros((W.shape[0], 1))
            g = nn.gs[m]
            h, v = vs[m]
@@ -85,5 +85,5 @@ class BackPropagation(LearningMethod):
            # Multiplicacion elemento a elemento
            delta = g.dif(h) * s
 
-           delta_W = eta * delta * v.T
+           delta_W = eta * (delta * vs[m-1][0].T)
            W += delta_W

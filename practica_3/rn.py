@@ -1,8 +1,9 @@
 import numpy as np
+import random
 
 
 class RN:
-    random_funct = np.random
+    random_funct = random.random
     def __init__(self, gs, **kwargs):
         """ Construye la red neuronal
 
@@ -24,9 +25,11 @@ class RN:
             if 'random_funct' in kwargs:
                 self.random_funct = kwargs['random_funct']
             ns = kwargs['ns']
-            self.Ws = [None for i in range(len(ns)-1)]
-            for i in range(len(ns)-1):
-                self.Ws = np.from_function(lambda i, j: self.random_funct(), (ns[i+1],ns[i]))
+
+            def gen_matrix(h, w):
+                return np.array([[self.random_funct() for _ in range(w)] for _ in range(h)])
+
+            self.Ws = [ gen_matrix(ns[i+1],ns[i]) for i in range(len(ns)-1) ]
         else:
             raise Exception("Se esperaba las matrices de pesos o la arquitectura")
 

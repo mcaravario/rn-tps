@@ -42,11 +42,11 @@ class BackPropagation(LearningMethod):
         vs = []
         nn = self.neural_network
         x = np.array(x).reshape((nn.Ws[0].shape[1], 1))
-        vs.append((x, None))
+        vs.append((None, x))
         for W, g in zip(nn.Ws, nn.gs):
-            h = np.dot(W, x)
-            v = g(h)
-            vs.append((h,v))
+            y = np.dot(W, x)
+            x = g(y)
+            vs.append((y,x))
         return vs
 
     def backward(self, vs, y, eta=ETA):

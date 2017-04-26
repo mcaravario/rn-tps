@@ -33,6 +33,9 @@ class RN:
         else:
             raise Exception("Se esperaba las matrices de pesos o la arquitectura")
 
+        if len(self.Ws) != len(self.gs):
+            raise Exception("Se esperaba la misma cantidad de funciones que de capas")
+
     def weights(self):
         """ Devuelve los pesos """
         return self.Ws

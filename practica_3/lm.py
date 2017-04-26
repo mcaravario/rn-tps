@@ -42,7 +42,7 @@ class BackPropagation(LearningMethod):
         vs = []
         nn = self.neural_network
         x = np.array(x).reshape((nn.Ws[0].shape[1], 1))
-        vs.append(x, None)
+        vs.append((x, None))
         for W, g in zip(nn.Ws, nn.gs):
             h = np.dot(W, x)
             v = g(h)
@@ -68,17 +68,17 @@ class BackPropagation(LearningMethod):
        y = np.array(y).reshape((W.shape[0], 1))
 
        delta = np.zeros((W.shape[0], 1))
-       g = gs[last_layer]
+       g = nn.gs[last_layer]
        h, v = vs[last_layer]
 
        delta = g.dif(h) * (y - v) # multiplicacion elemento a elemento
-       delta_W = eta * delta * vs[last_layer-1].T
+       delta_W = eta * delta * vs[last_layer-1][0].T
        W += delta_W
 
        for m in range(len(vs)-2, 0, -1):
            W = nn.Ws[m]
            delta = np.zeros((W.shape[0], 1))
-           g = gs[m]
+           g = nn.gs[m]
            h, v = vs[m]
 
            s = np.dot(W.T, delta)

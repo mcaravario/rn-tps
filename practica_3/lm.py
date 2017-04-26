@@ -40,13 +40,14 @@ class BackPropagation(LearningMethod):
     def forward(self, x):
         """ Paso Forward del Backpropagation """
         vs = []
-        x = np.array(x).reshape((n, 1))
-        vs.append(x)
-        for W, g in zip(self.Ws, self.gs):
-            h = (W * x).T
+        nn = self.neural_network
+        x = np.array(x).reshape((nn.Ws[0].shape[1], 1))
+        vs.append(x, None)
+        for W, g in zip(nn.Ws, nn.gs):
+            h = np.dot(W, x)
             v = g(h)
-            vs.append((y,x))
-         return vs
+            vs.append((h,v))
+        return vs
 
      def backward(self, vs, y, eta=ETA):
         """ Paso Backward del Backpropagation """

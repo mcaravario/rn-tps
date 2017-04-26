@@ -37,7 +37,7 @@ class RN:
     def eval(self, x):
         """ Alimenta la red neuronal con entrada x
             y devuelva la salida en formato vector columna"""
-        x = np.array(x).reshape((n, 1))
+        x = np.array(x).reshape((self.Ws[0].shape[1], 1))
         for W, g in zip(self.Ws, self.gs):
-            x = (g(W * x)).T
+            x = g(np.dot(W, x))
         return x

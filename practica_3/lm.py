@@ -71,7 +71,7 @@ class BackPropagation(LearningMethod):
        g = gs[last_layer]
        h, v = vs[last_layer]
 
-       delta = g.dif(h) * (y - V) # multiplicacion elemento a elemento
+       delta = g.dif(h) * (y - v) # multiplicacion elemento a elemento
        delta_W = eta * delta * vs[last_layer-1].T
        W += delta_W
 
@@ -81,7 +81,7 @@ class BackPropagation(LearningMethod):
            g = gs[m]
            h, v = vs[m]
 
-           s = W.T * delta
+           s = np.dot(W.T, delta)
            # Multiplicacion elemento a elemento
            delta = g.dif(h) * s
 

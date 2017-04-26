@@ -28,6 +28,6 @@ def sig(x):
     return 1.0 / (1.0 + math.exp(-x))
 
 @vectorize_af
-@attach_diff(lambda beta: lambda x: 2 * beta * sig(2*beta*x) * (1.0 - sig(2*beta*x)))
+@attach_diff(lambda beta=0.3: lambda x: 2 * beta * sig(2*beta*x) * (1.0 - sig(2*beta*x)))
 def sigmoid(beta=0.5):
     return lambda x: sig(2*beta*x)

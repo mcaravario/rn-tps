@@ -45,7 +45,7 @@ class TestLearnMethods(unittest.TestCase):
 
     def test_XOR(self):
         nn_xor = rn.RN(ns=[3, 3, 1], gs=[af.sign(), af.sign()])
-        l = lm.BackPropagationMomentum(nn_xor)
+        l = lm.BackPropagationOptimized(nn_xor)
         training = [([1,0,0],[-1]),
                     ([1,0,1],[1]),
                     ([1,1,0],[1]),

@@ -33,16 +33,16 @@ class LearningMethod:
         else:
             training_mode = 'batch'
 
+        if 'batch_size' in kwargs:
+            batch_size = kwargs['batch_size']
+            del kwargs['batch_size']
+        else:
+            batch_size = 2
+
         if training_mode == 'stochastic':
             batch_size = 1
         elif training_mode == 'batch':
             batch_size = len(training)
-        else: # Mini-batch
-            if 'batch_size' in kwargs:
-                batch_size = kwargs['batch_size']
-                del kwargs['batch_size']
-            else:
-                batch_size = 2
 
         n = math.ceil(len(training) / batch_size)
         for i in range(0, n):

@@ -99,7 +99,13 @@ class BackPropagation(LearningMethod):
         """ Paso Forward del Backpropagation """
         vs = []
         nn = self.neural_network
+
+        x = list(x)
+        if not nn.biased:
+            x.insert(0, 1.0)
+
         x = np.array(x).reshape((nn.Ws[0].shape[1], 1))
+
         vs.append((None, x))
         for W, g in zip(nn.Ws, nn.gs):
             y = np.dot(W, x)

@@ -10,6 +10,9 @@ class RN:
             gs: Lista de funciones de activación por capa
             Ws: Si se pasa se inicializa los pesos con las matrices en el
             ns: Arquitectura de la red.
+            biased: Si es True ya estan considerados los pesos de bias,
+                    de lo contrario agrega las entrada/pesos del bias en cada capa correspondiente.
+                    De forma predeterminada es false.
             Ejemplo:
               n = rn.RN(ns=[3,2,1]) es una red con 3 capas
               (considerando a la de entrada como una capa)
@@ -21,15 +24,22 @@ class RN:
         self.gs = gs
         if 'Ws' in kwargs:
             self.Ws = kwargs['Ws']
+            if 'biased' in kwargs and (not kwargs['biased']):
+                raise Exception("Se especifico que no estaba con bias pero se paso la matriz")
+
         elif 'ns' in kwargs:
             ns = kwargs['ns']
+            self.biased = kwargs.get('biased') or False
 
             self.random_funct = kwargs.get('random_funct') or RN.random_funct
 
-            def gen_matrix(h, w):
-                return np.array([[self.random_funct() for _ in range(w)] for _ in range(h)])
+            def gen_weights(inputs, outputs):
+                return np.array([[self.random_funct() for _ in range(inputs)] for _ in range(outputs)])
 
-            self.Ws = [ gen_matrix(ns[i+1],ns[i]) for i in range(len(ns)-1) ]
+            if self.biased:
+                self.Ws = [gen_weights(ns[i],ns[i+1]) for i in range(len(ns)-1)]
+            else:
+                self.Ws = [gen_weights(ns[i+1]+1, ns[i]+1) for i in range(len(ns)-2)] + [gen_weights(ns[-2]+1, ns[-1])]
         else:
             raise Exception("Se esperaba las matrices de pesos o la arquitectura")
 
@@ -47,7 +57,10 @@ class RN:
     def eval(self, x):
         """ Alimenta la red neuronal con entrada x
             y devuelva la salida en formato vector columna"""
-        y = np.array(x,copy=True).reshape((self.Ws[0].shape[1], 1))
+        x = list(x)
+        if not self.biased:
+            x.insert(0, 1.0)
+        y = np.array(x).reshape((self.Ws[0].shape[1], 1))
         for W, g in zip(self.Ws, self.gs):
             y = g(np.dot(W, y))
         return y.flatten()

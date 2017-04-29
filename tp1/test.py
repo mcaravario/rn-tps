@@ -11,7 +11,7 @@ class TestRNMethods(unittest.TestCase):
         n1 = rn.RN(gs=[lambda x: x], Ws=Ws)
         self.assertEqual(n1.weights(), Ws)
         Ws = [np.array([[1, 2, 3], [4, 5, 6]]), np.array([[7, 8]])]
-        n2 = rn.RN(gs=[lambda x: x, lambda x:x], Ws=Ws)
+        n2 = rn.RN(gs=[lambda x: x, lambda x:x], Ws=Ws, biased=True)
         self.assertEqual(n2.weights(), Ws)
 
     def test_eval(self):
@@ -34,7 +34,7 @@ class TestLearnMethods(unittest.TestCase):
             self.assertEqual(o, y)
 
     def test_AND(self):
-        nn_and = rn.RN(ns=[3, 1], gs=[af.sign()])
+        nn_and = rn.RN(ns=[3, 1], gs=[af.sign()], biased=True)
         l = lm.BackPropagation(nn_and)
         training = [([1,0,0],[-1]),
                     ([1,0,1],[-1]),
@@ -44,12 +44,12 @@ class TestLearnMethods(unittest.TestCase):
         self.check_training(training, nn_and)
 
     def test_XOR(self):
-        nn_xor = rn.RN(ns=[3, 3, 1], gs=[af.sign(), af.sign()])
+        nn_xor = rn.RN(ns=[2, 2, 1], gs=[af.sign(), af.sign()], biased=False)
         l = lm.BackPropagationOptimized(nn_xor)
-        training = [([1,0,0],[-1]),
-                    ([1,0,1],[1]),
-                    ([1,1,0],[1]),
-                    ([1,1,1],[-1])]
+        training = [([0,0],[-1]),
+                    ([0,1],[1]),
+                    ([1,0],[1]),
+                    ([1,1],[-1])]
         l.learn(training, alpha=0.4, epochs=1000)
         self.check_training(training, nn_xor)
 

@@ -5,11 +5,11 @@ import af
 import lm
 
 def test_XOR(epochs=500, mode='stochastic', batch_size=1):
-    training = [([1,0,0],[-1]),
-                ([1,0,1],[1]),
-                ([1,1,0],[1]),
-                ([1,1,1],[-1])]
-    nn_xor = rn.RN(ns=[3,3,1],gs=[af.sign(), af.sign()])
+    training = [([0,0],[-1]),
+                ([0,1],[1]),
+                ([1,0],[1]),
+                ([1,1],[-1])]
+    nn_xor = rn.RN(ns=[2,2,1],gs=[af.sign(), af.sign()])
     l_bp = lm.BackPropagationOptimized(nn_xor)
     errors = l_bp.learn_adaptative(training=training, epochs=epochs, eta=0.1, a=0.5, b=0.7, training_mode=mode, batch_size=batch_size)
 

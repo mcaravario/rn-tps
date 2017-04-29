@@ -3,6 +3,7 @@ import numpy as np
 import random
 import math
 
+from logger import log
 
 ETA = 0.3
 ALPHA = 0.7

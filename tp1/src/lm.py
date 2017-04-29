@@ -1,6 +1,8 @@
 import abc
 import numpy as np
 import random
+import math
+
 
 ETA = 0.3
 ALPHA = 0.7
@@ -41,10 +43,14 @@ class LearningMethod:
             else:
                 batch_size = 2
 
-        n = len(training) // batch_size
+        n = math.ceil(len(training) / batch_size)
         for i in range(0, n):
             suma_delta_Ws = [np.zeros(W.shape) for W in nn.Ws]
-            for j in range(0, batch_size):
+            if i == n-1:
+                m = len(training) % batch_size
+            else:
+                m = batch_size
+            for j in range(0, m):
                 x, y = training[i*batch_size + j]
                 delta_Ws = self.get_delta_Ws(x, y, *args, **kwargs)
                 for k in range(nn.nr_layers):

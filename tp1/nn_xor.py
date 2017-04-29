@@ -4,7 +4,7 @@ import rn
 import af
 import lm
 
-def test_XOR(epochs=500, mode='stochastic', batch_size=1):
+def test_XOR(epochs=500, mode=lm.TrainMode.STOCHASTIC, batch_size=1):
     training = [([0,0],[-1]),
                 ([0,1],[1]),
                 ([1,0],[1]),

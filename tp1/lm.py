@@ -2,11 +2,17 @@ import abc
 import numpy as np
 import random
 import math
+from enum import Enum
 
 from logger import log
 
 ETA = 0.3
 ALPHA = 0.7
+
+class TrainMode(Enum):
+    STOCHASTIC = 1
+    BATCH = 2
+    MINI_BATCH = 3
 
 def preprocess_normalize(training):
     xs, ys = zip(*training)
@@ -31,7 +37,7 @@ class LearningMethod:
             training_mode = kwargs['training_mode']
             del kwargs['training_mode']
         else:
-            training_mode = 'batch'
+            training_mode = TrainMode.BATCH
 
         if 'batch_size' in kwargs:
             batch_size = kwargs['batch_size']
@@ -39,9 +45,9 @@ class LearningMethod:
         else:
             batch_size = 2
 
-        if training_mode == 'stochastic':
+        if training_mode is TrainMode.STOCHASTIC:
             batch_size = 1
-        elif training_mode == 'batch':
+        elif training_mode is TrainMode.BATCH:
             batch_size = len(training)
 
         n = math.ceil(len(training) / batch_size)

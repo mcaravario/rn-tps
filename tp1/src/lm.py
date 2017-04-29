@@ -20,16 +20,26 @@ class LearningMethod:
 
         self.neural_network = neural_network
 
-    def learn_one_epoch(self, training, training_mode = 'batch', batch_size=2, *args, **kwargs):
+    def learn_one_epoch(self, training, *args, **kwargs):
         """ Aprende del conjunto de training una sola epoca"""
         nn = self.neural_network
+
+        if 'training_mode' in kwargs:
+            training_mode = kwargs['training_mode']
+            del kwargs['training_mode']
+        else:
+            training_mode = 'batch'
 
         if training_mode == 'stochastic':
             batch_size = 1
         elif training_mode == 'batch':
             batch_size = len(training)
         else: # Mini-batch
-            batch_size = batch_size or 2
+            if 'batch_size' in kwargs:
+                batch_size = kwargs['batch_size']
+                del kwargs['batch_size']
+            else:
+                batch_size = 2
 
         n = len(training) // batch_size
         for i in range(0, n):
@@ -132,10 +142,33 @@ class BackPropagation(LearningMethod):
            delta_Ws[m] = delta_W
        return delta_Ws
 
-class BackPropagationMomentum(BackPropagation):
+class BackPropagationOptimized(BackPropagation):
     def __init__(self, neural_network):
-        super(BackPropagationMomentum, self).__init__(neural_network)
+        super(BackPropagationOptimized, self).__init__(neural_network)
         self.delta_W_prev = [np.zeros(W.shape) for W in self.neural_network.Ws]
+
+    def learn_adaptative(self, training, epochs=1, eta=ETA, a=1, b=2, *args, **kwargs):
+        preprocess =  kwargs.get('preprocess') or False
+
+        if preprocess:
+            _, _, training = preprocess_normalize(training)
+
+        list_errors = []
+        for epoch in range(epochs):
+            error = self.learn_one_epoch(training, eta, *args, **kwargs)
+            if epoch > 0:
+                delta_error = error-list_errors[-1]
+                delta_eta = 0
+                if delta_error > 0.0:
+                    delta_eta = -b * eta
+                elif delta_error < 0.0:
+                    delta_eta = a
+
+                eta += delta_eta
+
+            list_errors.append(error)
+            random.shuffle(training)
+        return list_errors
 
     def learn_one_sample(self, x, y, eta=ETA, alpha=ALPHA):
         vs = self.forward(x)

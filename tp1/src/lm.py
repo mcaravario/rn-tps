@@ -20,16 +20,33 @@ class LearningMethod:
 
         self.neural_network = neural_network
 
-    def learn_one_epoch(self, training, *args, **kwargs):
+    def learn_one_epoch(self, training, training_mode = 'batch', batch_size=2, *args, **kwargs):
         """ Aprende del conjunto de training una sola epoca"""
-        for x, y in training:
-            self.learn_one_sample(x, y, *args, **kwargs)
+        nn = self.neural_network
+
+        if training_mode == 'stochastic':
+            batch_size = 1
+        elif training_mode == 'batch':
+            batch_size = len(training)
+        else: # Mini-batch
+            batch_size = batch_size or 2
+
+        n = len(training) // batch_size
+        for i in range(0, n):
+            suma_delta_Ws = [np.zeros(W.shape) for W in nn.Ws]
+            for j in range(0, batch_size):
+                x, y = training[i*batch_size + j]
+                delta_Ws = self.get_delta_Ws(x, y, *args, **kwargs)
+                for k in range(nn.nr_layers):
+                    suma_delta_Ws[k] += delta_Ws[k]
+            for k in range(nn.nr_layers):
+                nn.Ws[k] += suma_delta_Ws[k] * 1.0 / float(batch_size)
 
         # Calcula error de la epoca
         error = 0.0
         for x,y in training:
             error += self.neural_network.get_error(x,y)
-        return error/len(training)
+        return error / len(training)
 
 
 
@@ -49,7 +66,7 @@ class LearningMethod:
         return list_errors
 
     @abc.abstractmethod
-    def learn_one_sample(self, x, y, *args, **kwargs):
+    def get_delta_Ws(self, x, y, *args, **kwargs):
         """ Aprende una sola muestra con su solucion"""
         return
 
@@ -57,10 +74,9 @@ class BackPropagation(LearningMethod):
     def __init__(self, neural_network):
         super(BackPropagation, self).__init__(neural_network)
 
-    def learn_one_sample(self, x, y, eta=ETA):
+    def get_delta_Ws(self, x, y, eta=ETA):
         vs = self.forward(x)
-        for l, delta_W in self.backward(vs, y, eta):
-            self.neural_network.Ws[l] += delta_W
+        return self.backward(vs, y, eta)
 
     def forward(self, x):
         """ Paso Forward del Backpropagation """
@@ -83,6 +99,7 @@ class BackPropagation(LearningMethod):
        ##  W_{i,j} = el peso de la entrada j a la salida i ##
        #####################################################
        nn = self.neural_network
+       delta_Ws = [None for i in range(self.neural_network.nr_layers)]
 
        last_layer = -1
        # W es la matriz de la ultima capa
@@ -98,10 +115,10 @@ class BackPropagation(LearningMethod):
 
        delta = g.dif(h) * (y - v) # multiplicacion elemento a elemento
        delta_W = eta * delta * vs[last_layer-1][1].T
-       prev_W = np.copy(W)
-       yield last_layer, delta_W
+       prev_W = W
+       delta_Ws[last_layer] = delta_W
 
-       for m in range(len(nn.Ws)-2, -1, -1):
+       for m in range(nn.nr_layers-2, -1, -1):
 
            g = nn.gs[m]
            h, v = vs[m+1]
@@ -111,8 +128,9 @@ class BackPropagation(LearningMethod):
            # Multiplicacion elemento a elemento
            delta = g.dif(h) * s
            delta_W = eta * (delta * vs[m][1].T)
-           prev_W = np.copy(nn.Ws[m])
-           yield m, delta_W
+           prev_W = nn.Ws[m]
+           delta_Ws[m] = delta_W
+       return delta_Ws
 
 class BackPropagationMomentum(BackPropagation):
     def __init__(self, neural_network):

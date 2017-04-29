@@ -40,6 +40,10 @@ class RN:
         """ Devuelve los pesos """
         return self.Ws
 
+    @property
+    def nr_layers(self):
+        return len(self.Ws)
+
     def eval(self, x):
         """ Alimenta la red neuronal con entrada x
             y devuelva la salida en formato vector columna"""

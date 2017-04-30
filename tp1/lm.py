@@ -182,10 +182,10 @@ class BackPropagationOptimized(BackPropagation):
             random.shuffle(training)
         return list_errors
 
-    def learn_one_sample(self, x, y, eta=ETA, alpha=ALPHA):
+    def get_delta_Ws(self, x, y, eta=ETA, alpha=ALPHA):
+        print("Respondí bien")
         vs = self.forward(x)
-        #self.delta_W_prev
-        for l, delta_W in self.backward(vs, y, eta):
+        for l, delta_W in enumerate(self.backward(vs, y, eta)):
             delta_W = delta_W + alpha * self.delta_W_prev[l]
-            self.delta_W_prev[l] = delta_W
-            self.neural_network.Ws[l] += delta_W
+            self.delta_W_prev[l] += delta_W
+        return self.delta_W_prev

@@ -16,9 +16,9 @@ class TrainMode(Enum):
 
 def preprocess_normalize(training):
     xs, ys = zip(*training)
-    avg_xs = numpy.mean(xs)
-    std_xs = numpy.std(xs)
-    xs_p = map(lambda x: (x-agv_xs)/std_xs, xs)
+    avg_xs = np.mean(xs)
+    std_xs = np.std(xs)
+    xs_p = map(lambda x: (x-avg_xs)/std_xs, xs)
     return avg_xs, std_xs, list(zip(xs_p, ys))
 
 class LearningMethod:

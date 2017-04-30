@@ -39,7 +39,7 @@ class RN:
             if self.biased:
                 self.Ws = [gen_weights(ns[i],ns[i+1]) for i in range(len(ns)-1)]
             else:
-                self.Ws = [gen_weights(ns[i+1]+1, ns[i]+1) for i in range(len(ns)-2)] + [gen_weights(ns[-2]+1, ns[-1])]
+                self.Ws = [gen_weights(ns[i]+1, ns[i+1]+1) for i in range(len(ns)-2)] + [gen_weights(ns[-2]+1, ns[-1])]
         else:
             raise Exception("Se esperaba las matrices de pesos o la arquitectura")
 

@@ -53,8 +53,8 @@ class LearningMethod:
         n = math.ceil(len(training) / batch_size)
         for i in range(0, n):
             suma_delta_Ws = [np.zeros(W.shape) for W in nn.Ws]
-            if i == n-1:
-                m = len(training) % batch_size
+            if len(training) % batch_size != 0 and i == n-1:
+                m = len(training) - batch_size * n
             else:
                 m = batch_size
             for j in range(0, m):

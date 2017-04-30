@@ -4,10 +4,23 @@ import random
 import math
 from enum import Enum
 
-from logger import log
+# from logger import log
 
 ETA = 0.3
 ALPHA = 0.7
+DEBUG = True
+
+def print_args(name):
+    def wrapper(funct):
+        def new_funct(*args, **kwargs):
+            if DEBUG:
+                print("----------------------------------")
+                print("Llamando a {} con parametros:".format(name))
+                print("Con nombre: {}".format(",".join(map(str,kwargs.items()))))
+            return funct(*args, **kwargs)
+        return new_funct
+    return wrapper
+
 
 class TrainMode(Enum):
     STOCHASTIC = 1
@@ -29,6 +42,7 @@ class LearningMethod:
 
         self.neural_network = neural_network
 
+    @print_args('learn_one_epoch_learning_method')
     def learn_one_epoch(self, training, *args, **kwargs):
         """ Aprende del conjunto de training una sola epoca"""
         nn = self.neural_network
@@ -70,6 +84,7 @@ class LearningMethod:
 
 
 
+    @print_args('learn_learning_method')
     def learn(self, training, preprocess=True, epochs=1, *args, **kwargs):
         """ Aprende tantas epocas del conjunto training como se le
         indique en epochs"""
@@ -92,6 +107,7 @@ class BackPropagation(LearningMethod):
     def __init__(self, neural_network):
         super(BackPropagation, self).__init__(neural_network)
 
+    @print_args('get_delta_Ws')
     def get_delta_Ws(self, x, y, eta=ETA):
         vs = self.forward(x)
         return self.backward(vs, y, eta)
@@ -114,6 +130,7 @@ class BackPropagation(LearningMethod):
             vs.append((h,y))
         return vs
 
+    @print_args('backward')
     def backward(self, vs, y, eta=ETA):
        """ Paso Backward del Backpropagation """
        ######################################################
@@ -161,6 +178,7 @@ class BackPropagationOptimized(BackPropagation):
         super(BackPropagationOptimized, self).__init__(neural_network)
         self.delta_W_prev = [np.zeros(W.shape) for W in self.neural_network.Ws]
 
+    @print_args('learn_adaptative_optimiezed')
     def learn_adaptative(self, training, preprocess=True, epochs=1, eta=ETA, a=1, b=2, *args, **kwargs):
         if preprocess:
             _, _, training = preprocess_normalize(training)
@@ -182,8 +200,8 @@ class BackPropagationOptimized(BackPropagation):
             random.shuffle(training)
         return list_errors
 
+    @print_args("get_delta_Ws_optimized")
     def get_delta_Ws(self, x, y, eta=ETA, alpha=ALPHA):
-        print("Respondí bien")
         vs = self.forward(x)
         for l, delta_W in enumerate(self.backward(vs, y, eta)):
             delta_W = delta_W + alpha * self.delta_W_prev[l]

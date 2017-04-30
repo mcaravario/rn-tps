@@ -63,10 +63,10 @@ class RN:
     def eval(self, x):
         """ Alimenta la red neuronal con entrada x
             y devuelva la salida en formato vector columna"""
-        x = list(x)
+        y = list(x)
         if not self.biased:
-            x.insert(0, 1.0)
-        y = np.array(x).reshape((self.Ws[0].shape[1], 1))
+            y.insert(0, 1.0)
+        y = np.array(y).reshape((self.Ws[0].shape[1], 1))
         for W, g in zip(self.Ws, self.gs):
             y = g(np.dot(W, y))
         return y.flatten()

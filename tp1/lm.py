@@ -103,17 +103,17 @@ class BackPropagation(LearningMethod):
         vs = []
         nn = self.neural_network
 
-        x = list(x)
+        y = list(x)
         if not nn.biased:
-            x.insert(0, 1.0)
+            y.insert(0, 1.0)
 
-        x = np.array(x).reshape((nn.Ws[0].shape[1], 1))
+        y = np.array(y).reshape((nn.Ws[0].shape[1], 1))
 
-        vs.append((None, x))
+        vs.append((None, y))
         for W, g in zip(nn.Ws, nn.gs):
-            y = np.dot(W, x)
-            x = g(y)
-            vs.append((y,x))
+            h = np.dot(W, y)
+            y = g(h)
+            vs.append((h,y))
         return vs
 
     def backward(self, vs, y, eta=ETA):

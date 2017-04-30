@@ -46,6 +46,12 @@ class RN:
         if len(self.Ws) != len(self.gs):
             raise Exception("Se esperaba la misma cantidad de funciones que de capas")
 
+    def error_training(self, training):
+        error = 0.0
+        for x,y in training:
+            error += self.get_error(x,y)
+        return error / len(training)
+
     def weights(self):
         """ Devuelve los pesos """
         return self.Ws

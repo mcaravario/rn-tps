@@ -66,10 +66,7 @@ class LearningMethod:
                 nn.Ws[k] += suma_delta_Ws[k] * 1.0 / float(batch_size)
 
         # Calcula error de la epoca
-        error = 0.0
-        for x,y in training:
-            error += self.neural_network.get_error(x,y)
-        return error / len(training)
+        return nn.error_training(training)
 
 
 

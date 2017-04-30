@@ -31,3 +31,8 @@ def sig(x):
 @attach_diff(lambda beta=0.5: lambda x: 2 * beta * sig(2*beta*x) * (1.0 - sig(2*beta*x)))
 def sigmoid(beta=0.5):
     return lambda x: sig(2*beta*x)
+
+@vectorize_af
+@attach_diff(lambda beta=0.5: lambda x: 2 * beta / ((2*beta*x)**2 + 1))
+def tanh(beta=0.5):
+    return lambda x: np.tanh(2*beta*x)

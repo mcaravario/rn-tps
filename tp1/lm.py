@@ -70,11 +70,9 @@ class LearningMethod:
 
 
 
-    def learn(self, training, epochs=1, *args, **kwargs):
+    def learn(self, training, preprocess=True, epochs=1, *args, **kwargs):
         """ Aprende tantas epocas del conjunto training como se le
         indique en epochs"""
-        preprocess =  kwargs.get('preprocess') or False
-
         if preprocess:
             _, _, training = preprocess_normalize(training)
 
@@ -163,9 +161,7 @@ class BackPropagationOptimized(BackPropagation):
         super(BackPropagationOptimized, self).__init__(neural_network)
         self.delta_W_prev = [np.zeros(W.shape) for W in self.neural_network.Ws]
 
-    def learn_adaptative(self, training, epochs=1, eta=ETA, a=1, b=2, *args, **kwargs):
-        preprocess =  kwargs.get('preprocess') or False
-
+    def learn_adaptative(self, training, preprocess=True, epochs=1, eta=ETA, a=1, b=2, *args, **kwargs):
         if preprocess:
             _, _, training = preprocess_normalize(training)
 

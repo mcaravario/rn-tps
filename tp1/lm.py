@@ -83,12 +83,10 @@ class LearningMethod:
 
     @print_args('learn_learning_method')
     def learn(self, training, epochs=1, *args, **kwargs):
-        list_errors = [None for i in range(epochs)]
         for epoch in range(epochs):
             error = self.learn_one_epoch(training, *args, **kwargs)
-            list_errors[epoch] = error
+            yield epoch, error
             random.shuffle(training)
-        return list_errors
 
     @abc.abstractmethod
     def get_delta_Ws(self, x, y, *args, **kwargs):
@@ -172,11 +170,12 @@ class BackPropagationOptimized(BackPropagation):
 
     @print_args('learn_adaptative_optimiezed')
     def learn_adaptative(self, training, epochs=1, eta=ETA, a=1, b=2, *args, **kwargs):
-        list_errors = []
+        last_error = None
         for epoch in range(epochs):
             error = self.learn_one_epoch(training, eta, *args, **kwargs)
+            yield epoch, error
             if epoch > 0:
-                delta_error = error-list_errors[-1]
+                delta_error = error-last_error
                 delta_eta = 0
                 if delta_error > 0.0:
                     delta_eta = -b * eta
@@ -185,9 +184,8 @@ class BackPropagationOptimized(BackPropagation):
 
                 eta += delta_eta
 
-            list_errors.append(error)
+            last_error = error
             random.shuffle(training)
-        return list_errors
 
     @print_args("get_delta_Ws_optimized")
     def get_delta_Ws(self, x, y, eta=ETA, alpha=ALPHA):

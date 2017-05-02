@@ -64,20 +64,24 @@ class LearningMethod:
         elif training_mode is TrainMode.BATCH:
             batch_size = len(training)
 
-        n = math.ceil(len(training) / batch_size)
+        r = len(training) % batch_size
+        n = len(training) // batch_size
+
+        if r > 0:
+            n += 1
+
         for i in range(0, n):
-            suma_delta_Ws = [np.zeros(W.shape) for W in nn.Ws]
-            if len(training) % batch_size != 0 and i == n-1:
-                m = len(training) - batch_size * n
-            else:
-                m = batch_size
+            suma_delta_Ws = [np.zeros(W.shape, dtype=np.float64) for W in nn.Ws]
+
+            m = r if i == n-1 and r > 0 else batch_size
+
             for j in range(0, m):
                 x, y = training[i*batch_size + j]
                 delta_Ws = self.get_delta_Ws(x, y, *args, **kwargs)
                 for k in range(nn.nr_layers):
                     suma_delta_Ws[k] += delta_Ws[k]
             for k in range(nn.nr_layers):
-                nn.Ws[k] += suma_delta_Ws[k] * 1.0 / float(batch_size)
+                nn.Ws[k] += suma_delta_Ws[k] / float(m)
 
         # Calcula error de la epoca
         return nn.error_training(training)

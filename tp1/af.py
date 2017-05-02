@@ -9,30 +9,27 @@ def vectorize_af(gen_f):
         return nf
     return g
 
-def attach_diff(derivative):
-    def wrapper(gen_f):
-        def g(*args, **kwargs):
-            f = gen_f(*args, **kwargs)
-            f.dif = derivative(*args, **kwargs)
-            return f
-        return g
-    return wrapper
-
-
 @vectorize_af
-@attach_diff(lambda: lambda x: 1)
 def sign():
-    return lambda x: 1 if x >= 0 else -1
-
-def sig(x):
-    return 1.0 / (1.0 + math.exp(-x))
+    f = lambda x: 1 if x >= 0 else -1
+    f.dif = lambda x: 1
+    return f
 
 @vectorize_af
-@attach_diff(lambda beta=0.5: lambda x: 2 * beta * sig(2*beta*x) * (1.0 - sig(2*beta*x)))
 def sigmoid(beta=0.5):
-    return lambda x: sig(2*beta*x)
+    def f(x):
+        return 1.0 / (1.0 + math.exp(-2.0 * beta * x))
+
+    def f_dif(x):
+        y = math.exp(-2.0 * beta * x)
+        return 2.0 * beta * y / (1.0 + y)**2
+
+    f.dif = f_dif
+
+    return f
 
 @vectorize_af
-@attach_diff(lambda beta=0.5: lambda x: 2 * beta / ((2*beta*x)**2 + 1))
 def tanh(beta=0.5):
-    return lambda x: np.tanh(2*beta*x)
+    f = lambda x: math.tanh(2.0 * beta * x)
+    f.dif = lambda x: 2.0 * beta / ((2.0 * beta * x)**2 + 1.0)
+    return f

@@ -13,7 +13,7 @@ from tp1 import af
 from tp1 import stat
 from tp1.rn import RN
 
-def load_training_validation():
+def load_training_validation(training_prop=0.6):
     TRAINING_DB = r'tp1/ej1/data/tp1_ej1_training.csv'
     df = pd.read_csv(TRAINING_DB, header=None)
 
@@ -21,8 +21,6 @@ def load_training_validation():
     inputs = df[df.columns[1:]].as_matrix()
 
     data = list(zip(inputs, outputs))
-
-    training_prop = 0.6
 
     training_size = math.floor(training_prop * len(data))
 
@@ -42,8 +40,7 @@ def porcentaje_aciertos(rn, data):
     return res / len(data)
 
 
-training, validation = load_training_validation()
-
+training, validation = load_training_validation(0.8)
 normalize = stat.norm_training_funct(training)
 training = list(map(normalize, training))
 validation = list(map(normalize, validation))

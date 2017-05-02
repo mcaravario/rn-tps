@@ -35,7 +35,7 @@ def load_training_validation(training_prop=0.6):
 def porcentaje_aciertos(rn, data):
     res = 0
     for x,y in data:
-        if red.eval(x) == y:
+        if rn.eval(x) == y:
             res += 1
     return res / len(data)
 

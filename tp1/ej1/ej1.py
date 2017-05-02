@@ -50,13 +50,13 @@ def random_funct(inputs, outputs):
     return random.uniform(-r, r)
 
 def entrenar_nueva_red():
-    red = RN(ns=[10, 8, 4, 2, 1], gs=[af.tanh(), af.tanh(), af.tanh(), af.sign()])
+    red = RN(ns=[10, 8, 4, 2, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()])
     tutor = lm.BackPropagation(red)
     for epoch, error in tutor.learn(training,
                                     training_mode=lm.TrainMode.MINI_BATCH,
                                     batch_size=20,
                                     epochs=500,
-                                    eta=0.001):
+                                    eta=0.1):
         p_aciertos_t = porcentaje_aciertos(red, training)
         p_aciertos_v = porcentaje_aciertos(red, validation)
         print("{}\t{}\t{}".format(epoch, p_aciertos_t, p_aciertos_v))

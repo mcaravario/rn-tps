@@ -32,19 +32,20 @@ def load_training_validation():
 
     return training, validation
 
+def rand_w():
+    r = 6/20
+    
+
 training, validation = load_training_validation()
-red = RN(ns=[10, 20, 20, 5, 1], gs=[af.tanh(), af.tanh(), af.sign(), af.sign()])
-tutor = lm.BackPropagationOptimized(red)
-errors = tutor.learn_adaptative(training,
-                                preprocess=True,
-                                training_mode=lm.TrainMode.BATCH,
-                                batch_size=20,
-                                epochs=1000,
-                                eta=0.01,
-                                alpha=0.01,
-                                a=0.1,
-                                b=0.1)
-error_valid = red.error_training(validation)
+red = RN(ns=[10, 10, 8, 5, 1], gs=[af.sigmoid(), af.sigmoid(), af.linear(), af.sign()])
+print(red.weights())
+tutor = lm.BackPropagation(red)
+errors = tutor.learn(training,
+                     preprocess=True,
+                     training_mode=lm.TrainMode.STOCHASTIC,
+                     epochs=1,
+                     eta=0.01)
+# error_valid = red.error_training(validation)
 
 print(errors[-1])
 print(min(errors))

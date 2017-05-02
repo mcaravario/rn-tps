@@ -18,11 +18,21 @@ def sign():
 @vectorize_af
 def sigmoid(beta=0.5):
     def f(x):
-        return 1.0 / (1.0 + math.exp(-2.0 * beta * x))
+        try:
+            return 1.0 / (1.0 + math.exp(-2.0 * beta * x))
+        except OverflowError:
+            if x > 0:
+                return 1.0
+            else:
+                return -1.0
+
 
     def f_dif(x):
-        y = math.exp(-2.0 * beta * x)
-        return 2.0 * beta * y / (1.0 + y)**2
+        try:
+            y = math.exp(-2.0 * beta * x)
+            return 2.0 * beta * y / (1.0 + y)**2
+        except OverflowError:
+            return 0.0
 
     f.dif = f_dif
 

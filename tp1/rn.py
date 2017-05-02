@@ -3,7 +3,7 @@ import random
 
 
 class RN:
-    random_funct = lambda: random.uniform(-1.0, 1.0)
+    random_funct = lambda inputs, outputs: random.uniform(-1.0, 1.0)
     def __init__(self, gs, **kwargs):
         """ Construye la red neuronal
 
@@ -34,7 +34,7 @@ class RN:
             self.random_funct = kwargs.get('random_funct') or RN.random_funct
 
             def gen_weights(inputs, outputs):
-                return np.array([[self.random_funct() for _ in range(inputs)] for _ in range(outputs)])
+                return np.array([[self.random_funct(inputs, outputs) for _ in range(inputs)] for _ in range(outputs)])
 
             if self.biased:
                 self.Ws = [gen_weights(ns[i],ns[i+1]) for i in range(len(ns)-1)]

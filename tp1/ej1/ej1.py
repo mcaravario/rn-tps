@@ -4,11 +4,13 @@ from itertools import compress
 from pandas import DataFrame, read_csv
 import math
 import random
+import numpy as np
 import pandas as pd
 import sys
 
 from tp1 import lm
 from tp1 import af
+from tp1 import stat
 from tp1.rn import RN
 
 def load_training_validation():
@@ -32,16 +34,18 @@ def load_training_validation():
 
     return training, validation
 
-def rand_w():
-    r = 6/20
-    
 
 training, validation = load_training_validation()
-red = RN(ns=[10, 10, 8, 5, 1], gs=[af.sigmoid(), af.sigmoid(), af.linear(), af.sign()])
+
+normalize = stat.norm_training_funct(training)
+training = list(map(normalize, training))
+validation = list(map(normalize, validation))
+
+
+red = RN(ns=[10, 10, 8, 5, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()])
 print(red.weights())
 tutor = lm.BackPropagation(red)
 errors = tutor.learn(training,
-                     preprocess=True,
                      training_mode=lm.TrainMode.STOCHASTIC,
                      epochs=1,
                      eta=0.01)

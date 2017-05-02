@@ -8,7 +8,7 @@ from enum import Enum
 
 ETA = 0.3
 ALPHA = 0.7
-DEBUG = True
+DEBUG = False
 
 def print_args(name):
     def wrapper(funct):
@@ -26,13 +26,6 @@ class TrainMode(Enum):
     STOCHASTIC = 1
     BATCH = 2
     MINI_BATCH = 3
-
-def preprocess_normalize(training):
-    xs, ys = zip(*training)
-    avg_xs = np.mean(xs)
-    std_xs = np.std(xs)
-    xs_p = map(lambda x: (x-avg_xs)/std_xs, xs)
-    return avg_xs, std_xs, list(zip(xs_p, ys))
 
 class LearningMethod:
     def __init__(self, neural_network):
@@ -89,12 +82,7 @@ class LearningMethod:
 
 
     @print_args('learn_learning_method')
-    def learn(self, training, preprocess=True, epochs=1, *args, **kwargs):
-        """ Aprende tantas epocas del conjunto training como se le
-        indique en epochs"""
-        if preprocess:
-            _, _, training = preprocess_normalize(training)
-
+    def learn(self, training, epochs=1, *args, **kwargs):
         list_errors = [None for i in range(epochs)]
         for epoch in range(epochs):
             error = self.learn_one_epoch(training, *args, **kwargs)
@@ -183,10 +171,7 @@ class BackPropagationOptimized(BackPropagation):
         self.delta_W_prev = [np.zeros(W.shape) for W in self.neural_network.Ws]
 
     @print_args('learn_adaptative_optimiezed')
-    def learn_adaptative(self, training, preprocess=True, epochs=1, eta=ETA, a=1, b=2, *args, **kwargs):
-        if preprocess:
-            _, _, training = preprocess_normalize(training)
-
+    def learn_adaptative(self, training, epochs=1, eta=ETA, a=1, b=2, *args, **kwargs):
         list_errors = []
         for epoch in range(epochs):
             error = self.learn_one_epoch(training, eta, *args, **kwargs)

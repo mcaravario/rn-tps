@@ -45,6 +45,10 @@ normalize = stat.norm_training_funct(training)
 training = list(map(normalize, training))
 validation = list(map(normalize, validation))
 
+def random_funct(inputs, outputs):
+    r = 4 * math.sqrt(6.0/(inputs+outputs))
+    return random.uniform(-r, r)
+
 def entrenar_nueva_red():
     red = RN(ns=[10, 8, 4, 2, 1], gs=[af.tanh(), af.tanh(), af.tanh(), af.sign()])
     tutor = lm.BackPropagation(red)

@@ -34,6 +34,13 @@ def load_training_validation():
 
     return training, validation
 
+def porcentaje_aciertos(rn, data):
+    res = 0
+    for x,y in data:
+        if red.eval(x) == y:
+            res += 1
+    return res / len(data)
+
 
 training, validation = load_training_validation()
 
@@ -43,26 +50,15 @@ validation = list(map(normalize, validation))
 
 
 red = RN(ns=[10, 10, 8, 5, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()])
-print(red.weights())
 tutor = lm.BackPropagation(red)
 errors = tutor.learn(training,
                      training_mode=lm.TrainMode.STOCHASTIC,
-                     epochs=1,
+                     epochs=100,
                      eta=0.01)
 # error_valid = red.error_training(validation)
 
-print(errors[-1])
-print(min(errors))
+# p_aciertos_training = porcentaje_aciertos(red, training)
+# p_aciertos_validation = porcentaje_aciertos(red, validation)
 
-acierta_training = 0
-acierta_validation = 0
-for x,y in training:
-    if red.eval(x) == y:
-        acierta_training += 1
-
-for x,y in validation:
-    if red.eval(x) == y:
-        acierta_validation += 1
-
-print(acierta_training / len(training) * 100.0)
-print(acierta_validation / len(validation) * 100.0)
+for i, e in enumerate(errors):
+    print("{}\t{}".format(i, e))

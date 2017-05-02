@@ -50,7 +50,7 @@ class RN:
         error = 0.0
         for x,y in training:
             error += self.get_error(x,y)
-        return error / len(training)
+        return error
 
     def weights(self):
         """ Devuelve los pesos """

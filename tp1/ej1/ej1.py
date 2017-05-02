@@ -51,14 +51,9 @@ validation = list(map(normalize, validation))
 
 red = RN(ns=[10, 10, 8, 5, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()])
 tutor = lm.BackPropagation(red)
-errors = tutor.learn(training,
-                     training_mode=lm.TrainMode.STOCHASTIC,
-                     epochs=100,
-                     eta=0.01)
-# error_valid = red.error_training(validation)
-
-# p_aciertos_training = porcentaje_aciertos(red, training)
-# p_aciertos_validation = porcentaje_aciertos(red, validation)
-
-for i, e in enumerate(errors):
-    print("{}\t{}".format(i, e))
+for epoch, error in tutor.learn(training,
+                                training_mode=lm.TrainMode.STOCHASTIC,
+                                epochs=100,
+                                eta=0.01):
+    error_validation = red.error_training(validation)
+    print("{}\t{}\t{}".format(epoch, error, error_validation))

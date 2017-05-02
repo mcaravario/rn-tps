@@ -45,12 +45,16 @@ normalize = stat.norm_training_funct(training)
 training = list(map(normalize, training))
 validation = list(map(normalize, validation))
 
+def entrenar_nueva_red():
+    red = RN(ns=[10, 8, 4, 2, 1], gs=[af.tanh(), af.tanh(), af.tanh(), af.sign()])
+    tutor = lm.BackPropagation(red)
+    for epoch, error in tutor.learn(training,
+                                    training_mode=lm.TrainMode.MINI_BATCH,
+                                    batch_size=20,
+                                    epochs=500,
+                                    eta=0.001):
+        p_aciertos_t = porcentaje_aciertos(red, training)
+        p_aciertos_v = porcentaje_aciertos(red, validation)
+        print("{}\t{}\t{}".format(epoch, p_aciertos_t, p_aciertos_v))
 
-red = RN(ns=[10, 10, 8, 5, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()])
-tutor = lm.BackPropagation(red)
-for epoch, error in tutor.learn(training,
-                                training_mode=lm.TrainMode.STOCHASTIC,
-                                epochs=100,
-                                eta=0.01):
-    error_validation = red.error_training(validation)
-    print("{}\t{}\t{}".format(epoch, error, error_validation))
+entrenar_nueva_red()

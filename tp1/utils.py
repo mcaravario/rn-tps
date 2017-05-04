@@ -1,6 +1,6 @@
 import numpy as np
 
-def norm_training_funct(training):
+def get_normalization_function(training):
     xs, ys = zip(*training)
     avg_xs = np.mean(xs)
     std_xs = np.std(xs)

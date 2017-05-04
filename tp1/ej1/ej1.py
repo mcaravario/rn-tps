@@ -10,7 +10,7 @@ import sys
 
 from tp1 import lm
 from tp1 import af
-from tp1 import stat
+from tp1.utils import get_normalization_function
 from tp1.rn import RN
 
 def load_training_validation(training_prop=0.6):
@@ -41,9 +41,8 @@ def porcentaje_aciertos(rn, data):
 
 
 training, validation = load_training_validation(0.8)
-normalize = stat.norm_training_funct(training)
-training = list(map(normalize, training))
-validation = list(map(normalize, validation))
+norm_funct = get_normalization_function(training)
+training = list(map(norm_funct, training))
 
 def random_funct(inputs, outputs):
     r = 4 * math.sqrt(6.0/(inputs+outputs))

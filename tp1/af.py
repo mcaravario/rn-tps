@@ -1,5 +1,4 @@
 import numpy as np
-import math
 
 def vectorize_af(gen_f):
     def g(*args, **kwargs):
@@ -10,8 +9,20 @@ def vectorize_af(gen_f):
     return g
 
 @vectorize_af
+def identity():
+	f = lambda x: x
+	f.dif = lambda x: 1.0
+	return f
+
+@vectorize_af
+def ReLu():
+	f = lambda x: x if x > 0 else 0.0
+	f.dif = lambda x: 1.0 if x < 0 else 0.0
+	return f
+
+@vectorize_af
 def sign():
-    f = lambda x: 1.0 if x >= 0 else -1.0
+    f = lambda x: 1.0 if x > 0.0 else -1.0
     f.dif = lambda x: 1.0
     return f
 
@@ -29,8 +40,8 @@ def sigmoid(beta=0.5):
 
     def f_dif(x):
         try:
-            y = np.exp(-2.0 * beta * x)
-            return 2.0 * beta * y / (1.0 + y)**2
+            y = f(2.0 * beta * x)
+            return 2.0 * beta * y * (1 - y)
         except OverflowError:
             return 0.0
 

@@ -47,10 +47,7 @@ class RN:
             raise Exception("Se esperaba la misma cantidad de funciones que de capas")
 
     def error_training(self, training):
-        error = 0.0
-        for x,y in training:
-            error += self.get_error(x,y)
-        return error
+        return sum(self.get_error(x,y) for x,y in training)
 
     def weights(self):
         """ Devuelve los pesos """

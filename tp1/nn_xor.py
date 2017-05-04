@@ -9,11 +9,12 @@ def test_XOR(epochs=500, mode=lm.TrainMode.STOCHASTIC, batch_size=1):
                 ([0,1],[1]),
                 ([1,0],[1]),
                 ([1,1],[-1])]
-    nn_xor = rn.RN(ns=[2,2,1],gs=[af.sign(), af.sign()])
-    l_bp = lm.BackPropagationOptimized(nn_xor)
-    errors = l_bp.learn_adaptative(training=training, epochs=epochs, eta=0.1, a=0.5, b=0.7, training_mode=mode, batch_size=batch_size)
+    nn_xor = rn.RN(ns=[2,5,1],gs=[af.sign(), af.sign()])
+    l_bp = lm.BackPropagation(nn_xor)
+    for epoch, error in l_bp.learn(training=training, epochs=epochs, eta=0.02, training_mode=mode, batch_size=batch_size):
+        print("{}\t{}".format(epoch, error))
 
-    return min(errors)
+test_XOR(epochs=200)
 
 # iters = 50
 # epochs= 500

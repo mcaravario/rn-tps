@@ -1,9 +1,10 @@
 import numpy as np
+import numpy.random as nprnd
 import random
 
 
 class RN:
-    random_funct = lambda inputs, outputs: random.uniform(-0.1, 0.1)
+    random_funct = lambda inputs, outputs: nprnd.normal(0, 1)
     def __init__(self, gs, **kwargs):
         """ Construye la red neuronal
 

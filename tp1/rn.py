@@ -55,6 +55,10 @@ class RN:
         return self.Ws
 
     @property
+    def ns(self):
+        return [self.Ws[0].shape[1]] + [W.shape[0] for W in self.Ws]
+
+    @property
     def nr_layers(self):
         return len(self.Ws)
 

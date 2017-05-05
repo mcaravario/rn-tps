@@ -50,7 +50,7 @@ class TestLearnMethods(unittest.TestCase):
                     ([0,1],[1]),
                     ([1,0],[1]),
                     ([1,1],[-1])]
-        l.learn(training, alpha=0.4, epochs=1000)
+        min_error = min(l.learn(training, alpha=0.4, epochs=1000))
         self.check_training(training, nn_xor)
 
 if __name__ == '__main__':

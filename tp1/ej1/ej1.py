@@ -62,9 +62,11 @@ experimento_1 = {'nombre': 'experimento 1',
 experimentos = [experimento_1]
 
 
+
 def experimentar(i):
     experimento = experimentos[i]
     for red in experimento['redes']:
+        print(red.ns)
         for params in experimento['parametros']:
             learn_params = params['learn_params']
             tutor = params['lc'](red)

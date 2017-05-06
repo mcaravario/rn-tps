@@ -81,6 +81,7 @@ def experimentar(i):
     for red in experimento['redes']:
         print(red.ns)
         for params in experimento['parametros']:
+            print(params['name'])
             learn_params = params['learn_params']
             tutor = params['lc'](red)
             filename_base = DIR_EJ1_BASE

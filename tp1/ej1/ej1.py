@@ -48,18 +48,31 @@ validation = list(map(norm_funct, validation))
 DIR_EJ1_BASE='tp1/ej1/pruebas/'
 
 # Experimento 1: Variamos capas y cantidad de neuronas
-redes_experimento_1 = (RN(ns=[10, 1], gs=[af.sign()]),
-                       RN(ns=[10, 5, 1], gs=[af.sigmoid(), af.sign()]),
-                       RN(ns=[10, 20, 1], gs=[af.sigmoid(), af.sign()]),
-                       RN(ns=[10, 5, 5, 8, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()]),
-                       RN(ns=[10, 15, 20, 5, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()]),
-                       RN(ns=[10, 10, 10, 10, 10, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()]))
+redes_1 = (RN(ns=[10, 1], gs=[af.sign()]),
+           RN(ns=[10, 20, 1], gs=[af.sigmoid(), af.sign()]),
+           RN(ns=[10, 5, 5, 8, 1], gs=[af.sigmoid(), af.sigmoid(), af.sigmoid(), af.sign()]))
 
 experimento_1 = {'nombre': 'experimento 1',
-                 'redes':redes_experimento_1,
-                 'parametros':[{'lc':lm.BackPropagation, 'learn_params':{'eta':0.03, 'epochs':500, 'training_mode': lm.TrainMode.STOCHASTIC}}]}
+                 'redes': redes_1,
+                 'parametros':[{'lc':lm.BackPropagation, 'name': 'eta_0.03', 'learn_params':{'eta':0.03, 'epochs':1000, 'training_mode': lm.TrainMode.STOCHASTIC}}]}
 
-experimentos = [experimento_1]
+# Experimento 2: Variamos momentum (alpha), coeficiente de aprendizaje eta
+experimento_2 = {'redes': (redes_1[1], redes_1[2]),
+                 'parametros':[{'name': 'eta_0.3_alpha_0.01', 'lc':lm.BackPropagationOptimized, 'learn_parms':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.3,'alpha': 0.01}},
+                               {'name': 'eta_0.05_alpha_0.01', 'lc':lm.BackPropagationOptimized, 'learn_parms':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.05,'alpha': 0.01}},
+                               {'name': 'eta_0.05_alpha_0.3', 'lc':lm.BackPropagationOptimized, 'learn_parms':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.05,'alpha': 0.3}},
+                               {'name': 'eta_0.3_alpha_0.3', 'lc':lm.BackPropagationOptimized, 'learn_parms':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.3,'alpha': 0.3}}]}
+
+# Experimento 3: Con y sin parametros adaptativos
+# experimento_3 = 
+
+# Experimento 4: Batch, Mini-Batch vs Estocástico
+# experimento_4 = 
+
+# Experimento 5: Variar funcion random de generacion de los pesos por uniforme y no normalizacion de la entrada
+# experimento_5 = 
+
+experimentos = [experimento_1, experimento_2]
 
 
 
@@ -71,9 +84,8 @@ def experimentar(i):
             learn_params = params['learn_params']
             tutor = params['lc'](red)
             filename_base = DIR_EJ1_BASE
-            filename_base += 'ex_{}_plot_{}_ep_{}_eta_{}.dat'.format(str(i+1), '-'.join(map(str,red.ns)),
-                                                              str(learn_params['epochs']),
-                                                              str(learn_params['eta']))
+            filename_base += 'ex_{}_plot_{}_{}.dat'.format(str(i+1), '-'.join(map(str,red.ns)),
+                                                           str(params['name']))
             with open(filename_base, 'w+') as f:
                 for epoch, error_training in tutor.learn(training,
                                                          **learn_params):

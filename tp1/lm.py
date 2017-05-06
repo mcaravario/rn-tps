@@ -190,7 +190,7 @@ class BackPropagationOptimized(BackPropagation):
     @print_args("get_delta_Ws_optimized")
     def get_delta_Ws(self, x, y, eta=ETA, alpha=ALPHA):
         vs = self.forward(x)
-        for l, delta_W in enumerate(self.backward(vs, y, eta)):
-            delta_W = delta_W + alpha * self.delta_W_prev[l]
-            self.delta_W_prev[l] += delta_W
+        deltas = self.backward(vs, y, eta)
+        for l in range(self.neural_network.nr_layers):
+            self.delta_W_prev[l] = deltas[l] + alpha * self.delta_W_prev[l]
         return self.delta_W_prev

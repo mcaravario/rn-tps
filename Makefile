@@ -1,4 +1,6 @@
 PYTHON=python3
+SCRIPT_TABLA=tp1/ej1/pruebas/build_table.sh
+TABLA=tp1/ej1/pruebas/aciertos.txt
 
 DATA=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
      tp1/ej1/pruebas/ex_1_1_red_11-21-1.dat \
@@ -29,7 +31,7 @@ DATA=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.dat \
 #          tp1/ej1/pruebas/ex_1_plot_11-16-21-6-1_eta_0.03_aciertos.png \
 #          tp1/ej1/pruebas/ex_1_plot_11-11-11-11-11-1_eta_0.03_aciertos.png
 
-all: ${ERRORES} ${DATA}
+all: ${ERRORES} ${DATA} ${TABLA}
 
 %_errors.png: %.dat
 	gnuplot -e "datafile='$<'" tp1/ej1/errores.gpi > $@
@@ -48,6 +50,9 @@ ex_2-3_%.dat:
 
 ex_2-4_%.dat:
 	${PYTHON} ej1-runner.py 1 3
+
+${TABLA}: ${DATA}
+	${SCRIPT_TABLA} $< > $@
 
 clean:
 	rm -rf ${ERRORES} ${ACIERTOS} ${DATA}

@@ -88,7 +88,7 @@ def experimentar(i, j):
         print(red.ns)
         tutor = params['lc'](red)
         filename_base = DIR_EJ1_BASE
-        filename_base += 'ex_{}-{}-red_{}'.format(str(i+1),str(j+1),"-".join(map(str, red.ns)))
+        filename_base += 'ex_{}-{}_red_{}'.format(str(i+1),str(j+1),"-".join(map(str, red.ns)))
         with open(filename_base + '.dat', 'w+') as f:
             for epoch, error_training in tutor.learn(training,
                                                      **learn_params):

@@ -58,10 +58,10 @@ experimento_1 = {'nombre': 'experimento 1',
 
 # Experimento 2: Variamos momentum (alpha), coeficiente de aprendizaje eta
 experimento_2 = {'redes': (redes_1[1], redes_1[2]),
-                 'parametros':[{'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.3,'alpha': 0.01}},
-                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.05,'alpha': 0.01}},
-                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.05,'alpha': 0.3}},
-                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.3,'alpha': 0.3}}]}
+                 'parametros':[{'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.07,'alpha': 0.1}},
+                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.03,'alpha': 0.1}},
+                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.03,'alpha': 0.3}},
+                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.STOCHASTIC, 'epochs': 500,'eta':0.07,'alpha': 0.3}}]}
 
 # Experimento 3: Con y sin parametros adaptativos
 experimento_3 = {'redes' : (redes_1[1],),

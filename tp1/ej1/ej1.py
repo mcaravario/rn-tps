@@ -89,8 +89,15 @@ def experimentar(i, j):
         tutor = params['lc'](red)
         filename_base = DIR_EJ1_BASE
         filename_base += 'ex_{}-{}_red_{}'.format(str(i+1),str(j+1),"-".join(map(str, red.ns)))
+
+        if 'adaptative' in params and params['adaptative']:
+            print("Adaptative!")
+            learn_funct = tutor.learn_adaptative
+        else:
+            learn_funct = tutor.learn
+
         with open(filename_base + '.dat', 'w+') as f:
-            for epoch, error_training in tutor.learn(training,
+            for epoch, error_training in learn_funct(training,
                                                      **learn_params):
                 error_validation = red.error_training(validation)
                 aciertos_training = porcentaje_aciertos(red, training)

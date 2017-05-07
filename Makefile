@@ -62,7 +62,7 @@ tp1/ej1/pruebas/ex_3-2_%.dat:
 	${PYTHON} ej1-runner.py 2 1
 
 ${TABLA}: ${DATA}
-	${SCRIPT_TABLA} $< > $@
+	${SCRIPT_TABLA} $^ > $@
 
 clean:
 	rm -rf ${ERRORES} ${DATA}

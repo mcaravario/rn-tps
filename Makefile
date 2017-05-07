@@ -13,17 +13,17 @@ DATA=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
      tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1.dat \
      tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1.dat \
      tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1.dat
-DATA=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
-     tp1/ej1/pruebas/ex_1-1_red_11-21-1_errors.png \
-     tp1/ej1/pruebas/ex_1-1_red_11-6-6-9-1_errors.png \
-     tp1/ej1/pruebas/ex_2-1_red_11-21-1_errors.png \
-     tp1/ej1/pruebas/ex_2-2_red_11-21-1_errors.png \
-     tp1/ej1/pruebas/ex_2-3_red_11-21-1_errors.png \
-     tp1/ej1/pruebas/ex_2-4_red_11-21-1_errors.png \
-     tp1/ej1/pruebas/ex_2-1_red_11-6-6-9-1_errors.png \
-     tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1_errors.png \
-     tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1_errors.png \
-     tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1_errors.png
+ERRORES=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
+        tp1/ej1/pruebas/ex_1-1_red_11-21-1_errors.png \
+        tp1/ej1/pruebas/ex_1-1_red_11-6-6-9-1_errors.png \
+        tp1/ej1/pruebas/ex_2-1_red_11-21-1_errors.png \
+        tp1/ej1/pruebas/ex_2-2_red_11-21-1_errors.png \
+        tp1/ej1/pruebas/ex_2-3_red_11-21-1_errors.png \
+        tp1/ej1/pruebas/ex_2-4_red_11-21-1_errors.png \
+        tp1/ej1/pruebas/ex_2-1_red_11-6-6-9-1_errors.png \
+        tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1_errors.png \
+        tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1_errors.png \
+        tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1_errors.png
 # ACIERTOS=tp1/ej1/pruebas/ex_1_plot_11-1_eta_0.03_aciertos.png \
 #          tp1/ej1/pruebas/ex_1_plot_11-6-1_eta_0.03_aciertos.png \
 #          tp1/ej1/pruebas/ex_1_plot_11-21-1_eta_0.03_aciertos.png \
@@ -55,6 +55,6 @@ ${TABLA}: ${DATA}
 	${SCRIPT_TABLA} $< > $@
 
 clean:
-	rm -rf ${ERRORES} ${ACIERTOS} ${DATA}
+	rm -rf ${ERRORES} ${DATA}
 
 .PHONY: clean

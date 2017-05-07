@@ -1,5 +1,5 @@
 PYTHON=python3
-SCRIPT_TABLA=tp1/ej1/pruebas/build_table.sh
+SCRIPT_TABLA=tp1/ej1/build_table.sh
 TABLA=tp1/ej1/pruebas/aciertos.txt
 
 DATA=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \

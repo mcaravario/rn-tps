@@ -41,7 +41,7 @@ DIR_EJ2_BASE='tp1/ej2/pruebas/'
 
 # Experimento 1: Variamos capas y cantidad de neuronas
 redes_1 = (RN(ns=[10, 5, 10, 1], gs=[af.sigmoid(), af.ReLu(), af.identity()]),
-            RN(ns=[10, 20, 10 1], gs=[af.ReLu(), af.tanh(), af.identity()]))
+            RN(ns=[10, 20, 10, 1], gs=[af.ReLu(), af.tanh(), af.identity()]))
 
 
 experimento_1 = {'nombre': 'experimento 1',
@@ -67,7 +67,7 @@ def experimentar(i, j):
                 error_validation = red.error_training(validation)
                 print("{}\t{}\t{}".format(epoch,
                                           error_training,
-                                          error_validation)
+                                          error_validation),
                      file=f)
         f.close()
 

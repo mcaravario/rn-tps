@@ -22,10 +22,11 @@ DATA_EJ1=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
 DATA_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-6-9-1.dat \
          tp1/ej2/pruebas/ex_1-1_red_9-21-9-1.dat
 
-all: ${ERRORES_EJ1} ${ERRORES_EJ2} ${DATA_EJ1} ${DATA_EJ2} ${TABLA_EJ1}
 ERRORES_EJ1=$(subst .dat,_errors.png,${DATA_EJ1})
 
 ERRORES_EJ2=$(subst .dat,_errors.png,${DATA_EJ2})
+
+all: ${ERRORES_EJ1} ${ERRORES_EJ2} ${DATA_EJ1} ${DATA_EJ2} ${TABLA_EJ1}
 
 
 %_errors.png: %.dat

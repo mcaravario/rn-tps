@@ -70,12 +70,15 @@ experimento_3 = {'redes' : (redes_1[2],),
                  }
 
 # Experimento 4: Batch, Mini-Batch vs Estocástico
-experimento_4 = {'redes': (redes_1[1],)}
+experimento_4 = {'redes': (redes_1[2],),
+                 'parametros':[{'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.BATCH, 'epochs':500, 'eta':0.03, 'alpha': 0.3}},
+                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.MINI_BATCH, 'batch_size': 10, 'epochs':500, 'eta':0.03, 'alpha': 0.3}},
+                               {'lc':lm.BackPropagationOptimized, 'learn_params':{'training_mode' : lm.TrainMode.MINI_BATCH, 'batch_size': 20, 'epochs':500, 'eta':0.03, 'alpha': 0.3}}]}
 
 # Experimento 5: Variar funcion random de generacion de los pesos por uniforme y no normalizacion de la entrada
 # experimento_5 = 
 
-experimentos = [experimento_1, experimento_2, experimento_3]
+experimentos = [experimento_1, experimento_2, experimento_3, experimento_4]
 
 
 

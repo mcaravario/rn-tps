@@ -15,6 +15,9 @@ DATA=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
      tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1.dat \
      tp1/ej1/pruebas/ex_3-1_red_11-6-6-9-1.dat \
      tp1/ej1/pruebas/ex_3-2_red_11-6-6-9-1.dat \
+     tp1/ej1/pruebas/ex_4-1_red_11-6-6-9-1.dat \
+     tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1.dat \
+     tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1.dat \
      tp1/ej2/pruebas/ex_1-1_red_9-6-9-1.dat \
      tp1/ej2/pruebas/ex_1-1_red_9-21-9-1.dat
 ERRORES=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
@@ -30,6 +33,9 @@ ERRORES=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
         tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1_errors.png \
         tp1/ej1/pruebas/ex_3-1_red_11-6-6-9-1_errors.png \
         tp1/ej1/pruebas/ex_3-2_red_11-6-6-9-1_errors.png \
+        tp1/ej1/pruebas/ex_4-1_red_11-6-6-9-1_errors.png \
+        tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1_errors.png \
+        tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1_errors.png \
         tp1/ej2/pruebas/ex_1-1_red_9-6-9-1_errors.png \
         tp1/ej2/pruebas/ex_1-1_red_9-21-9-1_errors.png
 # ACIERTOS=tp1/ej1/pruebas/ex_1_plot_11-1_eta_0.03_aciertos.png \
@@ -67,6 +73,15 @@ tp1/ej1/pruebas/ex_3-1_%.dat:
 
 tp1/ej1/pruebas/ex_3-2_%.dat:
 	${PYTHON} ej1-runner.py 2 1
+
+tp1/ej1/pruebas/ex_4-1_%.dat:
+	${PYTHON} ej1-runner.py 3 0
+
+tp1/ej1/pruebas/ex_4-2_%.dat:
+	${PYTHON} ej1-runner.py 3 1
+
+tp1/ej1/pruebas/ex_4-3_%.dat:
+	${PYTHON} ej1-runner.py 3 2
 
 ${TABLA}: ${DATA}
 	${SCRIPT_TABLA} $^ > $@

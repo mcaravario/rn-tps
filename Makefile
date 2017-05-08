@@ -19,8 +19,8 @@ DATA_EJ1=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
          tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1.dat \
          tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1.dat \
 
-DATA_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-6-9-1.dat \
-         tp1/ej2/pruebas/ex_1-1_red_9-21-9-1.dat
+DATA_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-17-7-2.dat \
+         tp1/ej2/pruebas/ex_1-1_red_9-7-17-2.dat
 
 ERRORES_EJ1=$(subst .dat,_errors.png,${DATA_EJ1})
 

@@ -1,8 +1,87 @@
 \section{Ejercicio 1}
 
 \subsection{Introducción}
+Este ejercicio consiste en entrenar una red neuronal que, dados los resultados de un examen específico que es utilizado en el diagnóstico del
+cáncer de mamas, sepa clasificar ese conjunto dentro de dos categorias posibles: B y M. Para el este ejercicio B significará que el tumor diagnosticado
+es benigno y M será maligno.
 
 \subsection{Experimentación}
+Al ser un ejercicio de clasificacion la red neuronal deberá devolver un valor para clase, por lo que la ultima función de activacion necesariamente
+será la función signo, la cual devolverá -1 en caso de pertenecer la muestra a la clase M y 1 en caso de pertenecer a la clase B.
+
+\subsubsection{Experimento 1}
+Este experimento consistió en comparar distintas arquitecturas de redes neuronales variando la cantidad de capas ocultas y de neuronas por capa.
+Para este experimento se decidió fijar el coeficiente de aprendizaje $\eta$ en 0.03, la cantidad de epocas sobre las que se entrena la red en 1000 y el
+método de entrenamiento estocástico. Con respecto a las funcioes de activación se utilizaron sigmoideas para las capas intermedias y la función signo
+para la capa final.
+
+Las redes que se utilizaron fueron las siguientes:
+%%%%%%%%%%%%%%% PONER DIBUJITO DE LA RED SI NOS DA EL TIEMPO %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+red 1: 10 - 1
+red 2: 10 - 20 - 1
+red 3: 10 - 5 - 5 - 8 - 1
+
+Los resultados que se obtuvieron fueron los siguientes:
+%%%%%%%%%%%%%%%% GRAFICOS EXPERIMENTO 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% TABLA DE ACIERTOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ Tal como se observa en los resultados de la red 1, la cual es un perceptrón simple, el error cuadratico medio (ECM) no es una función
+ Esto tambien se evidencia en la matriz de aciertos en la cual logra un 63.41\% de aciertos sobre los datos de entrenamiento y un 62.19\% sobre datos de validación,
+ lo cual es bastante bajo. Con toda la evidencia provista por los graficos se concluyó que el problema a resolver no es linealmente separable pues no es posible
+ aprenderlo con un perceptrón simple, por lo tanto esta red se descartó para futuros experimentos.
+
+ Con respecto a la red 3, se observa que el ECM decrece tanto en validacion como en entrenamiento, comenzando en 350 sobre validacion y
+ logrando un valor minimo de 265. En la matriz de aciertos se observa un 67.47\% de aciertos sobre entrenamiento y un 66.46\% sobre validacion.
+ A diferencia de la red 1, se observa un decrecimiento en la funcion de ECM por lo que se concluyo que esta red logra aprender, pero la cantidad
+ de aciertos sigue siendo baja. Se decidió continuar utilizando esta red para experimentar con el objetivo de analizar su comportamiento al optimizar
+ el algoritmo de BackPropagation.
+
+ Finalmente, la red 2 es la que mejor aprende de los datos de entrenamiento llegando al valor minimo de 0 en ECM sobre datos de entrenamiento y un valor minimo
+ de 90 en ECM sobre datos de validación. Tambien se observa que la funcion del ECM es claramente decreciente por lo que se concluye que este perceptron multicapa
+ logra aprender, resta comprobar con mas experimentos si se esta realizando \textit{overfitting} sobre los datos. En la matriz de aciertos se observó un alto
+ porcentaje de aciertos, 100\% y 89.63\% para entrenamiento y validacion respectivamente por lo que se decidió seguir utilizando esta red para futuros experimentos
+ con el objetivo de mejorar el porcentaje de aciertos al hacer mejoras al algoritmo de BackPropagation.
+
+\subsubsection{Experimento 2}
+Para este experimento se decidió variar el coeficiente de aprendizaje $\eta$ e introducir la optimizacion del \textit{momentum} al algoritmo de BackPropagation,
+variando su respectivo coeficiente $\alpha$.
+Las redes utilizadas fueron las redes 2 y 3 del Experimento 1, con 500 epocas y un modo entrenamiento estocastico. El valor de $\eta$ lo variamos con los
+siguientes valores: 0.03 y 0.07, mientras que el valor de $\alpha$ se varió con los valores: 0.1 y 0.3, con lo cual se obtuvieron 4 combinaciones
+posibles para cada red, las cuales se presentan a continuacion:
+%%%%%%%%%%%%%%%% GRAFICOS EXPERIMENTO 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% TABLA DE ACIERTOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+Para la primera combinacion de parametros, la cual es $\eta = 0.07$ y $\alpha = 0.1$ se observó que la red 2 converge en una menor cantidad de epocas
+ y que el ECM minimo sobre validación es menor en comparación al experimento anterior. %% Falta hablar de la cantidad de aciertos
+ En la red 3 no se observó mejora sino que la red empeoró, tanto en cantidad de aciertos como en ECM sobre validación.
+
+En la segunda combinacion de parametros ($\eta = 0.03$ y $\alpha = 0.1$) no se observaron mejoras sobre la red 2 con respecto a la primera combinacion
+de parametros, es mas, la convergencia tarda mas epocas. A diferencia de la red 2, en la red 3 si se observaron mejoras con respecto a los parametros
+anteriores, ya que ahora el ECM minimo sobre datos de validacion alcanza el valor de 205.
+
+Con respecto a la tercera combinacion ($\eta = 0.03$ y $\alpha = 0.3$) no se observan mejoras en la red 2 ni en la red 3.
+
+Finalmente con la cuarta combinacion($\eta = 0.07$ y $\alpha = 0.3$) no se observan mejoras en la red 3, pero en la red 2 el ECM alcanza valores por
+debajo de los 200.
+
+%% TERMINAR
+A raíz de estos experimentos se pudo concluir que ... y se decidio continuar experimentando con la red 3
+
+\subsubsection{Experimento 3}
+En este experimento se decidió experimentar con parametros adaptativos y sus respectivos coeficientes $a$ y $b$. Se utilizó la red 3 definida
+previamente, fijando la cantidad de epocas en 500, el modo de entrenamiento estocástico, $\eta = 0.03$ y $\alpha = 0.3$. Con respecto a los coeficientes
+de los parametros adaptativos, se fijo $a = 0.02$ y $b$ se varió con los valores : 0.7 y 0.1.
+
+Los resultados obtenidos fueron los siguientes:
+%%%%%%%%%%%%%%%% GRAFICOS EXPERIMENTO 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%% TABLA DE ACIERTOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+
+Para la primera combinacion de parametros($a = 0.02$ y $b = 0.7$) se observa una mejora en el grafico del ECM, ya que en este caso se alcanzaron valores
+muy por debajo de los obtenidos con la mejor configuracion de parametros del experimento anterior. Esto no se vió reflejado en la tabla de aciertos, ya
+que el porcentaje de aciertos es menor al obtenido en el experimento 2.
+
+Para la segundo segunda combinacion de parametros($a = 0.02$ y $b = 0.1$) 
 
 \subsection{Conclusión}
 

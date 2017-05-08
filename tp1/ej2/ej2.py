@@ -17,8 +17,8 @@ def load_training_validation(training_prop=0.6):
     TRAINING_DB = r'tp1/ej2/data/tp1_ej2_training.csv'
     df = pd.read_csv(TRAINING_DB, header=None)
 
-    outputs = map(lambda x: [x], df[df.columns[0]].as_matrix())
-    inputs = df[df.columns[1:]].as_matrix()
+    outputs = df[df.columns[-2:]].as_matrix()
+    inputs = df[df.columns[:-2]].as_matrix()
 
     data = list(zip(inputs, outputs))
 
@@ -40,13 +40,13 @@ validation = list(map(norm_funct, training))
 DIR_EJ2_BASE='tp1/ej2/pruebas/'
 
 # Experimento 1: Variamos capas y cantidad de neuronas
-redes_1 = (RN(ns=[9, 5, 9, 1], gs=[af.sigmoid(), af.ReLu(), af.identity()]),
-            RN(ns=[9, 20, 9, 1], gs=[af.ReLu(), af.tanh(), af.identity()]))
+redes_1 = (RN(ns=[8, 16, 6, 2], gs=[af.sigmoid(), af.ReLu(), af.identity()]),
+            RN(ns=[8, 6, 16, 2], gs=[af.ReLu(), af.tanh(), af.identity()]))
 
 
 experimento_1 = {'nombre': 'experimento 1',
                  'redes': redes_1,
-                 'parametros':[{'lc':lm.BackPropagation, 'learn_params':{'eta':0.03, 'epochs':500, 'training_mode': lm.TrainMode.STOCHASTIC}}]}
+                 'parametros':[{'lc':lm.BackPropagation, 'learn_params':{'eta':0.03, 'epochs':200, 'training_mode': lm.TrainMode.STOCHASTIC}}]}
 
 
 experimentos = [experimento_1]

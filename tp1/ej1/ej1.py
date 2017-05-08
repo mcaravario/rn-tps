@@ -34,10 +34,25 @@ def load_training_validation(training_prop=0.6):
 
 def porcentaje_aciertos(rn, data):
     res = 0
+    errors = 0
+    fp = 0
+    fn = 0
     for x,y in data:
         if rn.eval(x) == y:
             res += 1
-    return res / len(data) * 100.0
+        elif rn.eval(x) == [1] and y == [-1]: # Falso negativo: Te dice que es benigno cuando es maligno
+            errors += 1
+            fn += 1
+        else: # Falso positivo: Te dice que es maligno cuando es benigno
+            errors += 1
+            fp += 1
+    if errors == 0:
+        fp = 0
+        fn = 0
+    else:
+        fp = fp / errors
+        fn = fn / errors
+    return res / len(data) * 100.0, fp * 100.0, fn * 100.0
 
 
 training, validation = load_training_validation(0.6)
@@ -103,13 +118,15 @@ def experimentar(i, j):
             for epoch, error_training in learn_funct(training,
                                                      **learn_params):
                 error_validation = red.error_training(validation)
-                aciertos_training = porcentaje_aciertos(red, training)
-                aciertos_validation = porcentaje_aciertos(red, validation)
-                print("{}\t{}\t{}\t{}\t{}".format(epoch,
+                aciertos_training, fp_training, fn_training  = porcentaje_aciertos(red, training)
+                aciertos_validation, fp_validation, fn_validation  = porcentaje_aciertos(red, validation)
+                print("{}\t{}\t{}\t{}\t{}\t{}\t{}".format(epoch,
                                                   error_training,
                                                   error_validation,
                                                   aciertos_training,
-                                                  aciertos_validation),
+                                                  aciertos_validation,
+                                                  fp_validation,
+                                                  fn_validation),
                      file=f)
         f.close()
 

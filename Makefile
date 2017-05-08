@@ -48,7 +48,7 @@ ERRORES=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
 all: ${ERRORES} ${DATA} ${TABLA}
 
 %_errors.png: %.dat
-	gnuplot -e "datafile='$<'" tp1/ej1/errores.gpi > $@
+	gnuplot -e "datafile='$<'" tp1/plot/errores.gpi > $@
 
 tp1/ej1/pruebas/ex_1-1_%.dat:
 	${PYTHON} ej1-runner.py 0 0

@@ -22,27 +22,11 @@ DATA_EJ1=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
 DATA_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-6-9-1.dat \
          tp1/ej2/pruebas/ex_1-1_red_9-21-9-1.dat
 
-ERRORES_EJ1=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
-            tp1/ej1/pruebas/ex_1-1_red_11-21-1_errors.png \
-            tp1/ej1/pruebas/ex_1-1_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_2-1_red_11-21-1_errors.png \
-            tp1/ej1/pruebas/ex_2-2_red_11-21-1_errors.png \
-            tp1/ej1/pruebas/ex_2-3_red_11-21-1_errors.png \
-            tp1/ej1/pruebas/ex_2-4_red_11-21-1_errors.png \
-            tp1/ej1/pruebas/ex_2-1_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_3-1_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_3-2_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_4-1_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1_errors.png \
-            tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1_errors.png \
-
-ERRORES_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-6-9-1_errors.png \
-            tp1/ej2/pruebas/ex_1-1_red_9-21-9-1_errors.png
-
 all: ${ERRORES_EJ1} ${ERRORES_EJ2} ${DATA_EJ1} ${DATA_EJ2} ${TABLA_EJ1}
+ERRORES_EJ1=$(subst .dat,_errors.png,${DATA_EJ1})
+
+ERRORES_EJ2=$(subst .dat,_errors.png,${DATA_EJ2})
+
 
 %_errors.png: %.dat
 	gnuplot -e "datafile='$<'" tp1/plot/errores.gpi > $@

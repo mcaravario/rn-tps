@@ -40,8 +40,8 @@ validation = list(map(norm_funct, training))
 DIR_EJ2_BASE='tp1/ej2/pruebas/'
 
 # Experimento 1: Variamos capas y cantidad de neuronas
-redes_1 = (RN(ns=[10, 5, 10, 1], gs=[af.sigmoid(), af.ReLu(), af.identity()]),
-            RN(ns=[10, 20, 10, 1], gs=[af.ReLu(), af.tanh(), af.identity()]))
+redes_1 = (RN(ns=[9, 5, 9, 1], gs=[af.sigmoid(), af.ReLu(), af.identity()]),
+            RN(ns=[9, 20, 9, 1], gs=[af.ReLu(), af.tanh(), af.identity()]))
 
 
 experimento_1 = {'nombre': 'experimento 1',

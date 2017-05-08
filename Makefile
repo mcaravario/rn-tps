@@ -1,51 +1,48 @@
 PYTHON=python3
-SCRIPT_TABLA=tp1/ej1/build_table.sh
-TABLA=tp1/ej1/pruebas/aciertos.txt
+SCRIPT_TABLA_EJ1=tp1/ej1/build_table.sh
+TABLA_EJ1=tp1/ej1/pruebas/aciertos.txt
 
-DATA=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
-     tp1/ej1/pruebas/ex_1-1_red_11-21-1.dat \
-     tp1/ej1/pruebas/ex_1-1_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_2-1_red_11-21-1.dat \
-     tp1/ej1/pruebas/ex_2-2_red_11-21-1.dat \
-     tp1/ej1/pruebas/ex_2-3_red_11-21-1.dat \
-     tp1/ej1/pruebas/ex_2-4_red_11-21-1.dat \
-     tp1/ej1/pruebas/ex_2-1_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_3-1_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_3-2_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_4-1_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1.dat \
-     tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1.dat \
-     tp1/ej2/pruebas/ex_1-1_red_9-6-9-1.dat \
-     tp1/ej2/pruebas/ex_1-1_red_9-21-9-1.dat
-ERRORES=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
-        tp1/ej1/pruebas/ex_1-1_red_11-21-1_errors.png \
-        tp1/ej1/pruebas/ex_1-1_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_2-1_red_11-21-1_errors.png \
-        tp1/ej1/pruebas/ex_2-2_red_11-21-1_errors.png \
-        tp1/ej1/pruebas/ex_2-3_red_11-21-1_errors.png \
-        tp1/ej1/pruebas/ex_2-4_red_11-21-1_errors.png \
-        tp1/ej1/pruebas/ex_2-1_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_3-1_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_3-2_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_4-1_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1_errors.png \
-        tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1_errors.png \
-        tp1/ej2/pruebas/ex_1-1_red_9-6-9-1_errors.png \
-        tp1/ej2/pruebas/ex_1-1_red_9-21-9-1_errors.png
-# ACIERTOS=tp1/ej1/pruebas/ex_1_plot_11-1_eta_0.03_aciertos.png \
-#          tp1/ej1/pruebas/ex_1_plot_11-6-1_eta_0.03_aciertos.png \
-#          tp1/ej1/pruebas/ex_1_plot_11-21-1_eta_0.03_aciertos.png \
-#          tp1/ej1/pruebas/ex_1_plot_11-6-6-9-1_eta_0.03_aciertos.png \
-#          tp1/ej1/pruebas/ex_1_plot_11-16-21-6-1_eta_0.03_aciertos.png \
-#          tp1/ej1/pruebas/ex_1_plot_11-11-11-11-11-1_eta_0.03_aciertos.png
+DATA_EJ1=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
+         tp1/ej1/pruebas/ex_1-1_red_11-21-1.dat \
+         tp1/ej1/pruebas/ex_1-1_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_2-1_red_11-21-1.dat \
+         tp1/ej1/pruebas/ex_2-2_red_11-21-1.dat \
+         tp1/ej1/pruebas/ex_2-3_red_11-21-1.dat \
+         tp1/ej1/pruebas/ex_2-4_red_11-21-1.dat \
+         tp1/ej1/pruebas/ex_2-1_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_3-1_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_3-2_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_4-1_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1.dat \
+         tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1.dat \
 
-all: ${ERRORES} ${DATA} ${TABLA}
+DATA_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-6-9-1.dat \
+         tp1/ej2/pruebas/ex_1-1_red_9-21-9-1.dat
+
+ERRORES_EJ1=tp1/ej1/pruebas/ex_1-1_red_11-1_errors.png \
+            tp1/ej1/pruebas/ex_1-1_red_11-21-1_errors.png \
+            tp1/ej1/pruebas/ex_1-1_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_2-1_red_11-21-1_errors.png \
+            tp1/ej1/pruebas/ex_2-2_red_11-21-1_errors.png \
+            tp1/ej1/pruebas/ex_2-3_red_11-21-1_errors.png \
+            tp1/ej1/pruebas/ex_2-4_red_11-21-1_errors.png \
+            tp1/ej1/pruebas/ex_2-1_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_2-2_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_2-3_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_2-4_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_3-1_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_3-2_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_4-1_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1_errors.png \
+            tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1_errors.png \
+
+ERRORES_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-6-9-1_errors.png \
+            tp1/ej2/pruebas/ex_1-1_red_9-21-9-1_errors.png
+
+all: ${ERRORES_EJ1} ${ERRORES_EJ2} ${DATA_EJ1} ${DATA_EJ2} ${TABLA_EJ1}
 
 %_errors.png: %.dat
 	gnuplot -e "datafile='$<'" tp1/plot/errores.gpi > $@
@@ -83,10 +80,10 @@ tp1/ej1/pruebas/ex_4-2_%.dat:
 tp1/ej1/pruebas/ex_4-3_%.dat:
 	${PYTHON} ej1-runner.py 3 2
 
-${TABLA}: ${DATA}
-	${SCRIPT_TABLA} $^ > $@
+${TABLA_EJ1}: ${DATA_EJ1}
+	${SCRIPT_TABLA_EJ1} $^ > $@
 
 clean:
-	rm -rf ${ERRORES} ${DATA}
+	rm -rf ${ERRORES_EJ1} ${ERRORES_EJ2} ${DATA_EJ1} ${DATA_EJ2} ${TABLA_EJ1}
 
 .PHONY: clean

@@ -75,5 +75,3 @@ def experimentar(i, j):
 nr_experimento = int(sys.argv[1])
 nr_param =  int(sys.argv[2])
 experimentar(nr_experimento, nr_param)
-
-entrenar_nueva_red()

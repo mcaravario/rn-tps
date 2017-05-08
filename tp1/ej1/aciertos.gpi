@@ -3,5 +3,9 @@ set terminal png
 set xlabel "Epocas"
 set ylabel "% Aciertos"
 
+set grid ytics mytics  # draw lines for each ytics and mytics
+set mytics 2           # set the spacing for the mytics
+set grid               # enable the grid
+
 plot datafile u 1:4 smooth bezier title 'Entrenamiento',\
      datafile u 1:5 smooth bezier title 'Validacion',\

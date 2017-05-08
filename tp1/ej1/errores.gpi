@@ -5,5 +5,9 @@ set xrange [0:]
 set xlabel "Épocas"
 set ylabel "ECM"
 
+set grid ytics mytics xtics  # draw lines for each ytics and mytics
+set mytics 2           # set the spacing for the mytics
+set grid               # enable the grid
+
 plot datafile u 1:2 smooth bezier title 'Entrenamiento', \
      datafile u 1:3 smooth bezier title 'Validacion'

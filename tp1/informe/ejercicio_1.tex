@@ -1,4 +1,24 @@
 \section{Ejercicio 1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AGREGAR QUE ES CADA COLUMNA EN UNA EXPLICACION %%%%%%%%%%%%%%%%%%
+\begin{tabular}{c|c|c|c}
+	 Mejor \% de aciertos training & Mejor \% de validacion & Mejor \% de validacion \\
+	  62.601626016260155 (944 epochs) & 61.58536585365854 (394 epochs) &  44.44444444444444 & 55.55555555555556 \\
+	  99.59349593495935 (96 epochs) & 89.02439024390245 (88 epochs) &  33.33333333333333 & 66.66666666666666 \\
+	   66.66666666666666 (969 epochs) & 64.02439024390245 (916 epochs) &  35.59322033898305 & 64.40677966101694 \\
+     98.78048780487805 (35 epochs) & 91.46341463414635 (25 epochs) &  35.714285714285715 & 64.28571428571429 \\
+	 99.59349593495935 (81 epochs) & 92.07317073170732 (51 epochs) &  38.46153846153847 & 61.53846153846154 \\
+	 99.59349593495935 (71 epochs) & 90.2439024390244 (73 epochs) &  50.0 & 50.0 \\
+	 99.59349593495935 (58 epochs) & 85.36585365853658 (51 epochs) &  45.83333333333333 & 54.166666666666664 \\
+	63.82113821138211 (431 epochs) & 56.70731707317073 (485 epochs) &  25.352112676056336 & 74.64788732394366 \\
+	69.10569105691057 (441 epochs) & 67.07317073170732 (356 epochs) &  62.96296296296296 & 37.03703703703704 \\
+	80.48780487804879 (387 epochs) & 70.1219512195122 (402 epochs) &  51.02040816326531 & 48.97959183673469 \\
+	70.73170731707317 (322 epochs) & 65.2439024390244 (479 epochs) &  64.91228070175438 & 35.08771929824561 \\
+	79.26829268292683 (131 epochs) & 77.4390243902439 (267 epochs) &  32.432432432432435 & 67.56756756756756 \\
+	65.85365853658537 (213 epochs) & 65.85365853658537 (294 epochs) &  44.642857142857146 & 55.35714285714286 \\
+	59.34959349593496 (486 epochs) & 58.536585365853654 (331 epochs) &  89.70588235294117 & 10.294117647058822 \\
+	60.16260162601627 (487 epochs) & 56.70731707317073 (487 epochs) &  63.38028169014085 & 36.61971830985916 \\
+	78.45528455284553 (496 epochs) & 71.95121951219512 (496 epochs) &  41.30434782608695 & 58.69565217391305
+\end{tabular}
 
 \subsection{Introducción}
 Este ejercicio consiste en entrenar una red neuronal que, dados los resultados de un examen específico que es utilizado en el diagnóstico del
@@ -6,82 +26,178 @@ cáncer de mamas, sepa clasificar ese conjunto dentro de dos categorias posibles
 es benigno y M será maligno.
 
 \subsection{Experimentación}
-Al ser un ejercicio de clasificacion la red neuronal deberá devolver un valor para clase, por lo que la ultima función de activacion necesariamente
-será la función signo, la cual devolverá -1 en caso de pertenecer la muestra a la clase M y 1 en caso de pertenecer a la clase B.
+Al ser un ejercicio de clasificacion la red neuronal deberá devolver un valor para cada clase, por lo que la ultima función de activacion necesariamente
+deberá devolver unicamente dos valores posibles. En este caso se utilizó la función signo bipolar, la cual devolvera -1 en caso de la muestra pertenecer
+a la clase M (Maligno) y 1 en caso contrario la clase B (Benigno).
+
+Tambien se decidió utilizar el 60\% de los datos como datos de entrenamiento y el 40\% restante como datos de validacion. Esta eleccion se debe a que
+queremos poder extraer una mayor cantidad de informacion del entramiento, antes de pasar a clasificar nuevos datos.
 
 \subsubsection{Experimento 1}
 Este experimento consistió en comparar distintas arquitecturas de redes neuronales variando la cantidad de capas ocultas y de neuronas por capa.
 Para este experimento se decidió fijar el coeficiente de aprendizaje $\eta$ en 0.03, la cantidad de epocas sobre las que se entrena la red en 1000 y el
-método de entrenamiento estocástico. Con respecto a las funcioes de activación se utilizaron sigmoideas para las capas intermedias y la función signo
+método de entrenamiento estocástico. Con respecto a las funciones de activación se utilizaron sigmoideas para las capas intermedias y la función signo
 para la capa final.
 
 Las redes que se utilizaron fueron las siguientes:
-%%%%%%%%%%%%%%% PONER DIBUJITO DE LA RED SI NOS DA EL TIEMPO %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-red 1: 10 - 1
-red 2: 10 - 20 - 1
-red 3: 10 - 5 - 5 - 8 - 1
+\begin{enumerate}
+  \item 10 - 1 (Perceptron simple): Esta red se planteó para ver si el problema era linealmente separable y podia ser aprendido por un perceptron
+                                      simple.
+  \item 10 - 20 - 1: Esta red se planteo para extraer una cantidad de features mayor a la cantidad de datos de entrada del problema y asi poder sintetizar
+                      estos en la neurona de salida.
+  \item 10 - 5 - 5 - 8 - 1: Esta red se planteo para analizar el comportamiento de la red al agregarle mas etapas de procesamiento anidadas.
+\end{enumerate}
 
 Los resultados que se obtuvieron fueron los siguientes:
-%%%%%%%%%%%%%%%% GRAFICOS EXPERIMENTO 1 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_1-1_red_11-1_errors.png}
+  \caption{Red 1}
+\end{figure}
 
-%%%%%%%%%%%%%%% TABLA DE ACIERTOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
- Tal como se observa en los resultados de la red 1, la cual es un perceptrón simple, el error cuadratico medio (ECM) no es una función
- Esto tambien se evidencia en la matriz de aciertos en la cual logra un 63.41\% de aciertos sobre los datos de entrenamiento y un 62.19\% sobre datos de validación,
- lo cual es bastante bajo. Con toda la evidencia provista por los graficos se concluyó que el problema a resolver no es linealmente separable pues no es posible
- aprenderlo con un perceptrón simple, por lo tanto esta red se descartó para futuros experimentos.
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_1-1_red_11-6-6-9-1_errors.png}
+  \caption{Red 2}
+\end{figure}
 
- Con respecto a la red 3, se observa que el ECM decrece tanto en validacion como en entrenamiento, comenzando en 350 sobre validacion y
- logrando un valor minimo de 265. En la matriz de aciertos se observa un 67.47\% de aciertos sobre entrenamiento y un 66.46\% sobre validacion.
- A diferencia de la red 1, se observa un decrecimiento en la funcion de ECM por lo que se concluyo que esta red logra aprender, pero la cantidad
- de aciertos sigue siendo baja. Se decidió continuar utilizando esta red para experimentar con el objetivo de analizar su comportamiento al optimizar
- el algoritmo de BackPropagation.
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_1-1_red_11-21-1_errors.png}
+  \caption{Red 3}
+\end{figure}
 
- Finalmente, la red 2 es la que mejor aprende de los datos de entrenamiento llegando al valor minimo de 0 en ECM sobre datos de entrenamiento y un valor minimo
- de 90 en ECM sobre datos de validación. Tambien se observa que la funcion del ECM es claramente decreciente por lo que se concluye que este perceptron multicapa
- logra aprender, resta comprobar con mas experimentos si se esta realizando \textit{overfitting} sobre los datos. En la matriz de aciertos se observó un alto
+
+ Tal como se observa en los resultados de la Red 1, la cual es un perceptrón simple, el error cuadratico medio (ECM) no es notorio un decrecimiento (aun mas una oscilacion
+ muy variada) de esta a medida que aumentan las epocas.
+ Esto tambien se evidencia en la tabla de aciertos en la cual logra un 62.60\% de aciertos sobre los datos de entrenamiento y un 61.58\% sobre datos de validación,
+ lo cual es bastante bajo siendo 1000 la cantidad de epocas con las que se entrena. Ademas analizando las columnas de falsos positivos y falsos negativos no se observó
+ predominancia de un tipo de error sobre el otro, es decir que casi la mitad de las veces se observan falsos negativos, lo cual no es deseable para el dominio de este problema.
+ Con toda la evidencia provista por los graficos se estimó que el problema a resolver no es linealmente separable pues no es posible
+ aprenderlo con un perceptrón simple, por lo tanto esta red se descartó para futuros experimentos ya que sus resultados no fueron relevantes.
+
+ Con respecto a la Red 2, se observa que el ECM decrece casi linealmente tanto en validacion como en entrenamiento, comenzando en 340 sobre validacion y
+ logrando un valor minimo de 96. En la tabla de aciertos se observa un 99.59\% de aciertos sobre entrenamiento y un 89.02\% sobre validacion. Tambien se observa
+ que el ritmo de aprendizaje es inferior con respecto a la Red 3 pero es superior al de la Red 1, sin embargo, dados los resultados obtenidos se consideró
+ que puede ser notablemente mejorada con una optimizacion del algoritmo de BackPropagation, por lo que se decidió continuar experimentado sobre ella.
+
+ Finalmente, la red 3 es la que mejor aprende de los datos de entrenamiento llegando al valor minimo absoluto de 0 en ECM sobre los datos de entrenamiento y un valor minimo
+ de 96 en ECM sobre datos de validación. Tambien se observa que la funcion del ECM decrece rapidamente por lo que se concluye que este perceptron multicapa
+ logra aprender en solo 150 epocas todo el set de entrenamiento. Esto trae como desventaja el hecho de que no se podrá disminuir mucho mas el ECM puesto que el set
+ de entrenamiento fue completamente aprendido y luego de esto el ECM del set de validacion se mantendrá constante.
+ A pesar de esto, en la tabla de aciertos se observó un alto
  porcentaje de aciertos, 100\% y 89.63\% para entrenamiento y validacion respectivamente por lo que se decidió seguir utilizando esta red para futuros experimentos
- con el objetivo de mejorar el porcentaje de aciertos al hacer mejoras al algoritmo de BackPropagation.
+ con el objetivo de mejorar el porcentaje de aciertos sobre validacion al hacer mejoras al algoritmo de BackPropagation.
 
 \subsubsection{Experimento 2}
 Para este experimento se decidió variar el coeficiente de aprendizaje $\eta$ e introducir la optimizacion del \textit{momentum} al algoritmo de BackPropagation,
-variando su respectivo coeficiente $\alpha$.
-Las redes utilizadas fueron las redes 2 y 3 del Experimento 1, con 500 epocas y un modo entrenamiento estocastico. El valor de $\eta$ lo variamos con los
-siguientes valores: 0.03 y 0.07, mientras que el valor de $\alpha$ se varió con los valores: 0.1 y 0.3, con lo cual se obtuvieron 4 combinaciones
-posibles para cada red, las cuales se presentan a continuacion:
-%%%%%%%%%%%%%%%% GRAFICOS EXPERIMENTO 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+variando su respectivo parametro $\alpha$. Esto permite darle una aceleracion o decaiminento al nivel de aprendizaje en base al valor del parametro.
+Las redes utilizadas fueron las redes 2 y 3 del Experimento 1, con 1000 epocas y continuando con el modo entrenamiento estocastico.
+El valor de $\eta$ lo variamos con los siguientes valores: 0.03 y 0.07, mientras que el valor de $\alpha$ se varió con los valores: 0.1 y 0.3,
+con lo cual se obtuvieron 4 combinaciones posibles para cada red. Estos valores se elegieron dentro de lo razonable (valores de $\eta$ mayores a 0.1
+representan un cambio brusco en el aprdendizaje) para representar las posibles combinaciones de $\eta$ chico/grande junto a un $\alpha$ chico/grande y
+ asi poder analizar diversos comportamientos de la red.
 
-%%%%%%%%%%%%%%% TABLA DE ACIERTOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
-Para la primera combinacion de parametros, la cual es $\eta = 0.07$ y $\alpha = 0.1$ se observó que la red 2 converge en una menor cantidad de epocas
- y que el ECM minimo sobre validación es menor en comparación al experimento anterior. %% Falta hablar de la cantidad de aciertos
- En la red 3 no se observó mejora sino que la red empeoró, tanto en cantidad de aciertos como en ECM sobre validación.
+ Los resultados obtenidos se presentan a continuacion:
 
-En la segunda combinacion de parametros ($\eta = 0.03$ y $\alpha = 0.1$) no se observaron mejoras sobre la red 2 con respecto a la primera combinacion
-de parametros, es mas, la convergencia tarda mas epocas. A diferencia de la red 2, en la red 3 si se observaron mejoras con respecto a los parametros
-anteriores, ya que ahora el ECM minimo sobre datos de validacion alcanza el valor de 205.
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-1_red_11-6-6-9-1_errors.png}
+  \caption{Red 3 con parametros $\eta = 0.07$ y $  \alpha = 0.1$}
+\end{figure}
 
-Con respecto a la tercera combinacion ($\eta = 0.03$ y $\alpha = 0.3$) no se observan mejoras en la red 2 ni en la red 3.
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-1_red_11-21-1_errors.png}
+  \caption{Red 2 con parametros $\eta = 0.07$ y $  \alpha = 0.1$}
+\end{figure}
 
-Finalmente con la cuarta combinacion($\eta = 0.07$ y $\alpha = 0.3$) no se observan mejoras en la red 3, pero en la red 2 el ECM alcanza valores por
-debajo de los 200.
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-2_red_11-6-6-9-1_errors.png}
+  \caption{Red 3 con parametros $\eta = 0.03$ y $\alpha = 0.1$}
+\end{figure}
 
-%% TERMINAR
-A raíz de estos experimentos se pudo concluir que ... y se decidio continuar experimentando con la red 3
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-2_red_11-21-1_errors.png}
+  \caption{Red 2 con parametros $\eta = 0.03$ y $  \alpha = 0.1$}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-3_red_11-6-6-9-1_errors.png}
+  \caption{Red 3 con parametros $\eta = 0.03 $ y $ \alpha = 0.3$}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-3_red_11-21-1_errors.png}
+  \caption{Red 2 con parametros $\eta = 0.03 $ y $ \alpha = 0.3$}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-4_red_11-6-6-9-1_errors.png}
+  \caption{Red 3 con parametros $\eta = 0.07 $ y $ \alpha = 0.3$}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_2-4_red_11-21-1_errors.png}
+  \caption{Red 2 con parametros $\eta = 0.07 $ y $ \alpha = 0.3$}
+\end{figure}
+
+Se observa que la mejor combinacion de parametros para la Red 2, es aquella en la cual $\eta = 0.07$ y $\alpha = 0.3$, pues presenta los valores
+mas bajos de ECM en validacion, alcanzando valores por debajo de 50. Con respecto a la cantidad de aciertos para estos parametros se obtiene un
+93.90\% en datos de validacion y a su vez se obtiene la misma cantidad de falsos positivos como de falsos negativos en caso de fallos.
+ Esto mejora ampliamente los resultados obtenidos en el experimento 1 y contradice el hecho de que el ECM no podia disminuir mas debido a la veloz
+ convergencia.
+
+Con respecto a la Red 3, la mejor combinacion de parametros fue $\eta = 0.03$ y $\alpha = 0.1$, en la cual se observan valores de ECM por debajo de 150
+en validacion. Tambien se observa una mejora en la cantidad de aciertos obteniendo un valor de 88.41\%, esta mejora de un 20\% con respecto al experimento
+anterior, validan la hipotesis de que esta red podia ser aun mas optimizada para poder competir con la eficiencia de la Red 2.
+
+
+A raíz de estos experimentos se concluyó que para la Red 2 una mayor influencia de los pesos de las epocas anteriores genera una mejora en la performance
+de esta red. En cambio, la Red 3 al agregar una minima proporcion de los pesos de las epocas anteriores genera una importante mejora en la eficiencia
+de la red.
+Finalmente para el resto de la experimentacion se decidio descartar la Red 2 debido a que obtuvo una mejora de solo un 3\% en la cantidad de aciertos,
+mientras que la Red 3 obtuvo un 20\%.
 
 \subsubsection{Experimento 3}
-En este experimento se decidió experimentar con parametros adaptativos y sus respectivos coeficientes $a$ y $b$. Se utilizó la red 3 definida
-previamente, fijando la cantidad de epocas en 500, el modo de entrenamiento estocástico, $\eta = 0.03$ y $\alpha = 0.3$. Con respecto a los coeficientes
-de los parametros adaptativos, se fijo $a = 0.02$ y $b$ se varió con los valores : 0.7 y 0.1.
+Para este experimento se decidió experimentar con parametros adaptativos y sus respectivos coeficientes $a$ y $b$. Se utilizó la Red 3 definida
+previamente, fijando la cantidad de epocas en 1000, continuando aun con el modo de entrenamiento estocástico, $\eta = 0.03$ y $\alpha = 0.1$ ( producto
+de los mejores parametros del experimento anterior).
+Con respecto a los coeficientes de los parametros adaptativos, se fijo $a = 0.02$ y $b$ se varió con los valores: 0.7 y 0.1. La eleccion del $a$ se debe
+a que en caso de disminuir el error se buscó aumentar el $\eta$, pero que la diferencia de salto no sea muy grande o se mantenga chica. Los valores de
+ $b$ representan la disminucion de un porcentaje del valor del $\eta$ anterior, produciendo que los saltos sean mas finos, y es por esto que se decidió
+ tomar un valor representantivo grande(0.7) y otro chico(0.1).
 
 Los resultados obtenidos fueron los siguientes:
-%%%%%%%%%%%%%%%% GRAFICOS EXPERIMENTO 3 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_3-1_red_11-6-6-9-1_errors.png}
+  \caption{Red 3 con parametros $a = 0.02 $ y $b= 0.7$}
+\end{figure}
 
-%%%%%%%%%%%%%%% TABLA DE ACIERTOS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_3-2_red_11-6-6-9-1_errors.png}
+  \caption{Red 2 con parametros $a = 0.02 $ y $b = 0.1$}
+\end{figure}
 
-Para la primera combinacion de parametros($a = 0.02$ y $b = 0.7$) se observa una mejora en el grafico del ECM, ya que en este caso se alcanzaron valores
-muy por debajo de los obtenidos con la mejor configuracion de parametros del experimento anterior. Esto no se vió reflejado en la tabla de aciertos, ya
-que el porcentaje de aciertos es menor al obtenido en el experimento 2.
+Sobre estos resultados no se observó una mejora con respecto a los obtenidos en el experimento anterior por lo cual estos parametros no serán
+tenidos en cuenta para el resto de la experimentacion.
 
-Para la segundo segunda combinacion de parametros($a = 0.02$ y $b = 0.1$) 
+\subsubsection{Experimento 4}
+Para este experimento se decidió variar el modo de entrenamiento entre \textit{Batch} y \textit{Mini Batch}. Para este ultimo se tomó como tamaño
+de batch los valores 10 y 30. Con respecto a los valores restantes se utilizaron los mismos a la configuracion del Experimento 3.
+
+Los resultados obtenidos fueron los siguientes:
+
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_4-1_red_11-6-6-9-1_errors.png}
+  \caption{Modo de entrenamiento Batch}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_4-2_red_11-6-6-9-1_errors.png}
+  \caption{Modo de entrenamiento Mini Batch con tamaño de batch 10}
+\end{figure}
+
+\begin{figure}[h!]
+  \includegraphics[width=125mm]{imagenes/ej1/ex_4-3_red_11-6-6-9-1_errors.png}
+  \caption{Modo de entrenamiento Mini Batch con tamaño de batch 30}
+\end{figure}
+
 
 \subsection{Conclusión}
 

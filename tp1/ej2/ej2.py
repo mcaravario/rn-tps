@@ -46,16 +46,32 @@ def random_funct(inputs, outputs):
 	
 
 # Experimento 1: Variamos capas y cantidad de neuronas
-redes_1 = (RN(ns=[8, 16, 6, 2], gs=[af.sigmoid(), af.ReLu(), af.identity()]),
-            RN(ns=[8, 6, 16, 2], gs=[af.ReLu(), af.tanh(), af.identity()]))
+redes_1 = (RN(ns=[8, 16, 2], gs=[af.sigmoid(), af.identity()]),)
+redes_2 = (RN(ns=[8, 16, 2], gs=[af.tanh(), af.identity()]),)
+redes_3 = (RN(ns=[8, 16, 4, 2], gs=[af.ReLu(), af.tanh(), af.identity()]),)
+redes_4 = (RN(ns=[8, 16, 2], gs=[af.tanh(), af.identity()], random_funct=random_funct), )
+
+params = {'lc':lm.BackPropagation, 'learn_params':{'eta':0.02, 'epochs':500, 'training_mode': lm.TrainMode.STOCHASTIC}}
 
 
 experimento_1 = {'nombre': 'experimento 1',
                  'redes': redes_1,
-                 'parametros':[{'lc':lm.BackPropagation, 'learn_params':{'eta':0.03, 'epochs':200, 'training_mode': lm.TrainMode.STOCHASTIC}}]}
+                 'parametros':[params]}
+
+experimento_2 = {'nombre': 'experimento 1',
+                 'redes': redes_2,
+                 'parametros':[params]}
+
+experimento_3 = {'nombre': 'experimento 1',
+                 'redes': redes_3,
+                 'parametros':[params]}
+
+experimento_4 = {'nombre': 'experimento 1',
+                 'redes': redes_4,
+                 'parametros':[params]}
 
 
-experimentos = [experimento_1]
+experimentos = [experimento_1, experimento_2, experimento_3, experimento_4]
 
 def experimentar(i, j):
     experimento = experimentos[i]
@@ -71,10 +87,9 @@ def experimentar(i, j):
             for epoch, error_training in tutor.learn(training,
                                                      **learn_params):
                 error_validation = red.error_training(validation)
-                print("{}\t{}\t{}".format(epoch,
-                                          error_training,
-                                          error_validation),
-                     file=f)
+                print("{}\t{}\t{}".format(epoch, \
+                                          error_training, \
+                                          error_validation), file=f)
         f.close()
 
 

@@ -19,8 +19,10 @@ DATA_EJ1=tp1/ej1/pruebas/ex_1-1_red_11-1.dat \
          tp1/ej1/pruebas/ex_4-2_red_11-6-6-9-1.dat \
          tp1/ej1/pruebas/ex_4-3_red_11-6-6-9-1.dat \
 
-DATA_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-17-7-2.dat \
-         tp1/ej2/pruebas/ex_1-1_red_9-7-17-2.dat
+DATA_EJ2=tp1/ej2/pruebas/ex_1-1_red_9-17-2.dat \
+         tp1/ej2/pruebas/ex_2-1_red_9-17-2.dat \
+         tp1/ej2/pruebas/ex_3-1_red_9-17-5-2.dat \
+         tp1/ej2/pruebas/ex_4-1_red_9-17-2.dat \
 
 ERRORES_EJ1=$(subst .dat,_errors.png,${DATA_EJ1})
 
@@ -37,6 +39,15 @@ tp1/ej1/pruebas/ex_1-1_%.dat:
 
 tp1/ej2/pruebas/ex_1-1_%.dat:
 	${PYTHON} ej2-runner.py 0 0
+
+tp1/ej2/pruebas/ex_2-1_%.dat:
+	${PYTHON} ej2-runner.py 1 0
+
+tp1/ej2/pruebas/ex_3-1_%.dat:
+	${PYTHON} ej2-runner.py 2 0
+
+tp1/ej2/pruebas/ex_4-1_%.dat:
+	${PYTHON} ej2-runner.py 3 0
 
 tp1/ej1/pruebas/ex_2-1_%.dat:
 	${PYTHON} ej1-runner.py 1 0

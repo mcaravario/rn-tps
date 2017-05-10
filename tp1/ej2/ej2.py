@@ -39,6 +39,12 @@ validation = list(map(norm_funct, training))
 
 DIR_EJ2_BASE='tp1/ej2/pruebas/'
 
+def random_funct(inputs, outputs):
+	d = float(inputs + outputs)
+	sd = math.sqrt(1.0/d)
+	return random.uniform(sd, sd)
+	
+
 # Experimento 1: Variamos capas y cantidad de neuronas
 redes_1 = (RN(ns=[8, 16, 6, 2], gs=[af.sigmoid(), af.ReLu(), af.identity()]),
             RN(ns=[8, 6, 16, 2], gs=[af.ReLu(), af.tanh(), af.identity()]))

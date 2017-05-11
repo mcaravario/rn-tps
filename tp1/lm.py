@@ -1,3 +1,4 @@
+import sys
 import abc
 import numpy as np
 import random
@@ -14,9 +15,9 @@ def print_args(name):
     def wrapper(funct):
         def new_funct(*args, **kwargs):
             if DEBUG:
-                print("----------------------------------")
-                print("Llamando a {} con parametros:".format(name))
-                print("Con nombre: {}".format(",".join(map(str,kwargs.items()))))
+                print("----------------------------------", file=sys.stderr)
+                print("Llamando a {} con parametros:".format(name), file=sys.stderr)
+                print("Con nombre: {}".format(",".join(map(str,kwargs.items()))), file=sys.stderr)
             return funct(*args, **kwargs)
         return new_funct
     return wrapper

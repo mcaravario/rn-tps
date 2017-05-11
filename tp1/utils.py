@@ -5,6 +5,10 @@ import pandas as pd
 import sys
 from itertools import compress
 
+def random_uniform(inputs, outputs):
+    d = 1.0 / math.sqrt(inputs + outputs)
+    return random.uniform(-d,d)
+
 
 def get_normalization_function(training, normalize_input=True, normalize_output=False):
     xs, ys = zip(*training)

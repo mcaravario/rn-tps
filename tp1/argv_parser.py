@@ -1,7 +1,9 @@
+import sys
 import argparse
 from tp1 import rn
 from tp1 import af
 from tp1 import lm
+from tp1.utils import random_uniform
 
 ETA=0.03
 EPOCHS=100
@@ -24,6 +26,7 @@ def parse_argv():
     parser.add_argument('--no-normalize-input', dest='normalize_input', action='store_false')
     parser.add_argument('--normalize-output', dest='normalize_output', action='store_true')
     parser.add_argument('--no_normalize-output', dest='normalize_output', action='store_false')
+    parser.add_argument('--random-funct', choices=('normal', 'uniform'))
     parser.set_defaults(normalize_input=True, normalize_output=False)
     args = parser.parse_args()
 
@@ -59,7 +62,16 @@ def parse_argv():
     if len(gs) != len(ns)-1:
         salir("Se esperaba la misma cantidad de funciones de activacion que de capas")
 
-    red = rn.RN(ns=ns, gs=gs)
+    if args.random_funct:
+        if args.random_funct == 'normal':
+            random_funct = RN.random_funct
+        else:
+            random_funct = random_uniform
+
+    if args.random_funct:
+        red = rn.RN(ns=ns, gs=gs, random_funct=random_funct)
+    else:
+        red = rn.RN(ns=ns, gs=gs)
 
     if args.training_mode in ('stochastic', 'online'):
         training_mode = lm.TrainMode.STOCHASTIC

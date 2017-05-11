@@ -7,7 +7,7 @@ from enum import Enum
 # from logger import log
 
 ETA = 0.3
-ALPHA = 0.7
+ALPHA = 0.0
 DEBUG = False
 
 def print_args(name):
@@ -97,7 +97,6 @@ class BackPropagation(LearningMethod):
     def __init__(self, neural_network):
         super(BackPropagation, self).__init__(neural_network)
 
-    @print_args('get_delta_Ws')
     def get_delta_Ws(self, x, y, eta=ETA):
         vs = self.forward(x)
         return self.backward(vs, y, eta)
@@ -120,7 +119,6 @@ class BackPropagation(LearningMethod):
             vs.append((h,y))
         return vs
 
-    @print_args('backward')
     def backward(self, vs, y, eta=ETA):
        """ Paso Backward del Backpropagation """
        ######################################################

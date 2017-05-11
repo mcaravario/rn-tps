@@ -8,7 +8,6 @@ from itertools import compress
 
 def get_normalization_function(training, normalize_input=True, normalize_output=False):
     xs, ys = zip(*training)
-    print(ys)
     if normalize_input:
         avg_xs = np.mean(xs, axis=0)
         std_xs = np.std(xs, axis=0)

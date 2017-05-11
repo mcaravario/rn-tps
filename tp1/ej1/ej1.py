@@ -36,7 +36,7 @@ def porcentaje_aciertos(rn, data):
     return res / len(data) * 100.0, fp * 100.0, fn * 100.0
 
 def experimentar(training, validation, red, learn_funct, learn_params):
-    print(red)
+    print("-".join(map(str,red.ns)))
     print(str(learn_params))
     for epoch, error_training in learn_funct(training,
                                              **learn_params):
@@ -59,7 +59,7 @@ def main():
     def to_bipolar(d):
         x = d[0]
         y = d[1]
-        return (x, [1] if y == 'B' else [-1])
+        return (x, [1.0] if y == 'B' else [-1.0])
 
     training = list(map(to_bipolar, training))
     validation = list(map(to_bipolar, validation))
@@ -69,7 +69,7 @@ def main():
                                                 arguments['normalize_input'],
                                                 False)
         training = list(map(norm_funct, training))
-        validation = list(map(norm_funct, training))
+        validation = list(map(norm_funct, validation))
 
     experimentar(training, validation, arguments['red'], arguments['learn_funct'], arguments['learn_params'])
 

@@ -53,12 +53,12 @@ EOT
 
 for key in ${!deps_ej1[@]}; do
     echo "${key}:"
-    echo -e "\t./ej1-runner.py ${deps_ej1[$key]} > \$@"
+    echo -e "\t\${PYTHON} ./ej1-runner.py ${deps_ej1[$key]} > \$@"
 done
 
 for key in ${!deps_ej2[@]}; do
     echo "${key}:"
-    echo -e "\t./ej2-runner.py ${deps_ej2[$key]} > \$@"
+    echo -e "\t\${PYTHON} ./ej2-runner.py ${deps_ej2[$key]} > \$@"
 done
 
 cat <<EOT

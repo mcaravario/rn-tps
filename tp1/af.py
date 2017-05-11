@@ -17,7 +17,7 @@ def identity():
 @vectorize_af
 def ReLu():
 	f = lambda x: x if x > 0 else 0.0
-	f.dif = lambda x: 1.0 if x < 0 else 0.0
+	f.dif = lambda x: 1.0 if x > 0 else 0.0
 	return f
 
 @vectorize_af

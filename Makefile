@@ -24,6 +24,7 @@ DATA_EJ2=\
 tp1/ej2/pruebas/ex_1-1_red-9-17-2.dat \
 tp1/ej2/pruebas/ex_2-1_red-9-17-2.dat \
 tp1/ej2/pruebas/ex_1-2_red-9-17-2.dat \
+tp1/ej2/pruebas/ex_2-2_red-9-17-2.dat \
 
 ERRORES_EJ1=$(subst .dat,_errors.png,${DATA_EJ1})
 
@@ -72,6 +73,8 @@ tp1/ej2/pruebas/ex_2-1_red-9-17-2.dat:
 	./ej2-runner.py  8-16-2 t-i --eta=0.02 --epochs=500 --training-mode='stochastic' --normalize-output > $@
 tp1/ej2/pruebas/ex_1-2_red-9-17-2.dat:
 	./ej2-runner.py  8-16-2 t-i --eta=0.02 --epochs=500 --training-mode='stochastic' > $@
+tp1/ej2/pruebas/ex_2-2_red-9-17-2.dat:
+	./ej2-runner.py  8-16-2 r-i --eta=0.02 --epochs=500 --training-mode='stochastic' --normalize-output > $@
 ${TABLA_EJ1}: ${DATA_EJ1}
 	${SCRIPT_TABLA_EJ1} $^ > $@
 clean:

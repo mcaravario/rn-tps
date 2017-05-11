@@ -195,6 +195,7 @@ A continuación se presenta la tabla de aciertos con todos los resultados de la 
 	\hline
 	1 & 1 & 0.03 & E  &                                       & 62.60 (944 epochs) & 61.58 (394 epochs) & 44.44  & 55.55 \\
 	\hline
+	\hline
 	2 & 2 & 0.07 & E  & $\alpha$ = 0.1                        & 98.37 (55 epochs)  & 93.29 (50 epochs)  & 54.54  & 45.45 \\
 	\hline
 	2 & 3 & 0.07 & E  & $\alpha$ = 0.1                        & 80.89 (903 epochs) & 71.34 (795 epochs) & 80.85  & 19.14 \\
@@ -211,9 +212,11 @@ A continuación se presenta la tabla de aciertos con todos los resultados de la 
 	\hline
 	2 & 2 & 0.07 & E  & $\alpha$ = 0.3                        & 99.59 (52 epochs)  & 93.90 (100 epochs) & 50.0   & 50.0 \\
 	\hline
+	\hline
 	3 & 3 & 0.03 & E  & \tcell{$\alpha$ = 0.1\\ $a$ = 0.02\\ $b$ = 0.7} & 88.61 (928 epochs) & 79.26 (880 epochs) & 50.0   & 50.0 \\
 	\hline
 	3 & 3 & 0.03 & E  & \tcell{$\alpha$ = 0.1\\ $a$ = 0.02\\ $b$ = 0.1} & 84.14 (968 epochs) & 79.87 (924 epochs) & 36.36  & 63.63 \\
+	\hline
 	\hline
 	4 & 3 & 0.03 & B  & $\alpha$ = 0.1                        & 52.84 (61 epochs)  & 58.53 (61 epochs)  & 2.94   & 97.05 \\
 	\hline
@@ -222,15 +225,17 @@ A continuación se presenta la tabla de aciertos con todos los resultados de la 
 	4 & 3 & 0.03 & MB & \tcell{b\_s = 50\\ $\alpha$ = 0.1}      & 71.54 (986 epochs) & 67.68 (827 epochs) & 35.84  & 64.15 \\
 	\hline
 \end{longtable}
-\caption{\textbf{Columnas}:\\
-         Ex: Experimento \\
-         R: Nro de Red \\
-         ME: Modo de Entrenamiento (E=Estocastico, B=Batch, MB=Mini-Batch)\\
-         EP: Parametros Extras ($\alpha$=Momentum, $a$, $b$=Paratros adaptativos, b\_s=Tamaño del batch)\\
-         MPT: Mejor \% de aciertos de Entrenamiento. Entre parsentesis en que época se alcanza\\
-         MPV: Mejor \% de aciertos de Validacion. Entre parentesis en que época se alcanza\\
-         FP: \% de Falsos Positivos en el error en validacion\\
-         FN: \% de Falsos Negativos en el error en validacion}
+\caption{\textbf{Columnas}}
+\begin{tabular}{ccl}
+         Ex & : & Experimento \\
+         R & : & Nro de Red \\
+         ME & : & Modo de Entrenamiento (E=Estocastico, B=Batch, MB=Mini-Batch)\\
+         EP & : & Parametros Extras ($\alpha$=Momentum, $a$, $b$=Paratros adaptativos, b\_s=Tamaño del batch)\\
+         MPT & : & Mejor \% de aciertos de Entrenamiento. Entre parsentesis en que época se alcanza\\
+         MPV & : & Mejor \% de aciertos de Validacion. Entre parentesis en que época se alcanza\\
+         FP & : & \% de Falsos Positivos en el error en validacion\\
+         FN & : & \% de Falsos Negativos en el error en validacion
+\end{tabular}
 \end{figure}
 
 

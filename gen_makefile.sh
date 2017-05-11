@@ -7,7 +7,7 @@ while read line; do
 	if [[ ! -z "$line" ]] && [[ ! $line =~ ^#+ ]]; then
 		output="$(echo "${line}" | cut -f 1 -d ':')"
 		cmd="$(echo "${line}" | cut -f 2 -d ':')"
-		deps_ej1["${output}"]="$cmd"
+		deps_ej1["tp1/ej1/pruebas/${output}"]="$cmd"
 	fi
 done < red_ej1.txt
 
@@ -15,7 +15,7 @@ while read line; do
 	if [[ ! -z "$line" ]] && [[ ! $line =~ ^#+ ]]; then
 		output="$(echo "${line}" | cut -f 1 -d ':')"
 		cmd="$(echo "${line}" | cut -f 2 -d ':')"
-		deps_ej2["${output}"]="$cmd"
+		deps_ej2["tp1/ej2/pruebas/${output}"]="$cmd"
 	fi
 done < red_ej2.txt
 

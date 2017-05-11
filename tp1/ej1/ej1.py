@@ -36,8 +36,8 @@ def porcentaje_aciertos(rn, data):
     return res / len(data) * 100.0, fp * 100.0, fn * 100.0
 
 def experimentar(training, validation, red, learn_funct, learn_params):
-    print("-".join(map(str,red.ns)))
-    print(str(learn_params))
+    # print("-".join(map(str,red.ns)))
+    # print(str(learn_params))
     for epoch, error_training in learn_funct(training,
                                              **learn_params):
         error_validation = red.error_training(validation)

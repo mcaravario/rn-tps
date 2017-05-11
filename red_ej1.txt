@@ -26,5 +26,5 @@ ex_3-2_red_11-6-6-9-1.dat: 10-5-5-8-1 l-l-l-s --eta=0.03 --alpha=0.1 --a=0.02 --
 #EX_4:
 
 ex_4-1_red_11-6-6-9-1.dat: 10-5-5-8-1 l-l-l-s --eta=0.03 --alpha=0.1 --training-mode='batch' --epochs=1000
-ex_4-2_red_11-6-6-9-1.dat: 10-5-5-8-1 l-l-l-s --eta=0.03 --alpha=0.1 --training-mode='mini_batch' --batch_size=50 --epochs=1000
+ex_4-2_red_11-6-6-9-1.dat: 10-5-5-8-1 l-l-l-s --eta=0.03 --alpha=0.1 --training-mode='mini_batch' --batch_size=10 --epochs=1000
 ex_4-3_red_11-6-6-9-1.dat: 10-5-5-8-1 l-l-l-s --eta=0.03 --alpha=0.1 --training-mode='mini_batch' --batch_size=50 --epochs=1000

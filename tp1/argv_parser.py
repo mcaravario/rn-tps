@@ -46,6 +46,8 @@ def parse_argv():
             return af.sign()
         elif act_str in ('tanh', 't'):
             return af.tanh()
+        elif act_str in ('t2'):
+            return af.tanh(0.125)
         elif act_str in ('sigmoid', 'l'):
             return af.sigmoid()
         elif act_str in ('ReLu', 'r'):

@@ -18,9 +18,9 @@ def experimentar(training, validation, red, learn_funct, learn_params):
     for epoch, error_training in learn_funct(training,
                                              **learn_params):
         error_validation = red.error_training(validation)
-        print("{}\t{}\t{}\t{}\t{}\t{}\t{}".format(epoch,
-                                          error_training,
-                                          error_validation))
+        print("{}\t{}\t{}".format(epoch,
+                                  error_training,
+                                  error_validation))
 
 def main():
     arguments = parse_argv()

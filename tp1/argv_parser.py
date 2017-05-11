@@ -22,8 +22,8 @@ def parse_argv():
     parser.add_argument('--training-prop', type=float, default=0.6)
     parser.add_argument('--normalize-input', dest='normalize_input', action='store_true')
     parser.add_argument('--no-normalize-input', dest='normalize_input', action='store_false')
-    parser.add_argument('--normalize-ouput', dest='normalize_output', action='store_true')
-    parser.add_argument('--no_normalize-ouput', dest='normalize_output', action='store_false')
+    parser.add_argument('--normalize-output', dest='normalize_output', action='store_true')
+    parser.add_argument('--no_normalize-output', dest='normalize_output', action='store_false')
     parser.set_defaults(normalize_input=True, normalize_output=False)
     args = parser.parse_args()
 

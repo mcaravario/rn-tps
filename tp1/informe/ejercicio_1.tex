@@ -183,27 +183,55 @@ mantener el modo de entrenamiento en estocastico, con el cual se obtuvieron los 
 
 \subsection{Tabla de aciertos}
 A continuación se presenta la tabla de aciertos con todos los resultados de la experimentación del ejercicio 1.
-\begin{table}[h!]
-	\begin{tabular}{c|c|c|c|c|c|c}
-		Experimento & Red & Parametros & Mejor  de aciertos training & Mejor  de validacion & Mejor  de validacion \\
-		1 & 2 & $\eta$ = 0.03, epocas = 1000, Estocastico & 99.59349593495935 (96 epochs) & 89.02439024390245 (88 epochs) &  33.33333333333333 & 66.66666666666666 \\
-		1 & 3 & $\eta$ = 0.03, epocas = 1000, Estocastico & 66.66666666666666 (969 epochs) & 64.02439024390245 (916 epochs) &  35.59322033898305 & 64.40677966101694 \\
-		1 & 1 & $\eta$ = 0.03, epocas = 1000, Estocastico & 62.601626016260155 (944 epochs) & 61.58536585365854 (394 epochs) &  44.44444444444444 & 55.55555555555556 \\
-		2 & 2 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.1 & 98.3739837398374 (55 epochs) & 93.29268292682927 (50 epochs) &  54.54545454545454 & 45.45454545454545 \\
-		2 & 3 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.1  & 80.89430894308943 (903 epochs) & 71.34146341463415 (795 epochs) &  80.85106382978722 & 19.148936170212767 \\
-		2 & 2 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1 & 99.59349593495935 (54 epochs) & 87.8048780487805 (49 epochs) &  40.0 & 60.0 \\
-		2 & 3 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1 & 96.34146341463415 (934 epochs) & 88.41463414634147 (577 epochs) &  52.63157894736842 & 47.368421052631575 \\
-		2 & 2 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 99.59349593495935 (58 epochs) & 88.41463414634147 (43 epochs) &  73.68421052631578 & 26.31578947368421 \\
-		2 & 3 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 64.22764227642277 (766 epochs) & 57.92682926829268 (685 epochs) &  5.797101449275362 & 94.20289855072464 \\
-		2 & 3 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 72.76422764227642 (818 epochs) & 60.97560975609756 (816 epochs) &  59.375 & 40.625 \\
-		2 & 2 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 99.59349593495935 (52 epochs) & 93.90243902439023 (100 epochs) &  50.0 & 50.0 \\
-		3 & 3 & $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1, $a$ = 0.02, $b$ = 0.7 & 88.6178861788618 (928 epochs) & 79.26829268292683 (880 epochs) &  50.0 & 50.0 \\
-		3 & 3 & $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1, $a$ = 0.02, $b$ = 0.1 & 84.14634146341463 (968 epochs) & 79.8780487804878 (924 epochs) &  36.36363636363637 & 63.63636363636363 \\
-		4 & 3 & $\eta$ = 0.03, epocas = 1000, Batch, $\alpha$ = 0.1 & 52.84552845528455 (61 epochs) & 58.536585365853654 (61 epochs) &  2.941176470588235 & 97.05882352941177 \\
-		4 & 3 & $\eta$ = 0.03, epocas = 1000, MiniBatch, batch\_size = 10, $\alpha$ = 0.1 & 65.85365853658537 (863 epochs) & 57.92682926829268 (239 epochs) &  89.85507246376811 & 10.144927536231885 \\
-		4 & 3 & $\eta$ = 0.03, epocas = 1000, MiniBatch, batch\_size = 50, $\alpha$ = 0.1 & 71.54471544715447 (986 epochs) & 67.6829268292683 (827 epochs) &  35.84905660377358 & 64.15094339622641 \\
-	\end{tabular}
-\end{table}
+\clearpage
+\begin{figure}
+\begin{longtable}{ccccccccc}
+	\hline
+	Ex & R & $\eta$ & ME & EP & MPT & MPV & FP & FN \\
+	\hline
+	1 & 2 & 0.03 & E  &                                       & 99.59 (96 epochs)  & 89.02 (88 epochs)  & 33.33  & 66.66 \\
+	\hline
+	1 & 3 & 0.03 & E  &                                       & 66.66 (969 epochs) & 64.02 (916 epochs) & 35.59  & 64.40 \\
+	\hline
+	1 & 1 & 0.03 & E  &                                       & 62.60 (944 epochs) & 61.58 (394 epochs) & 44.44  & 55.55 \\
+	\hline
+	2 & 2 & 0.07 & E  & $\alpha$ = 0.1                        & 98.37 (55 epochs)  & 93.29 (50 epochs)  & 54.54  & 45.45 \\
+	\hline
+	2 & 3 & 0.07 & E  & $\alpha$ = 0.1                        & 80.89 (903 epochs) & 71.34 (795 epochs) & 80.85  & 19.14 \\
+	\hline
+	2 & 2 & 0.03 & E  & $\alpha$ = 0.1                        & 99.59 (54 epochs)  & 87.80 (49 epochs)  & 40.0   & 60.0 \\
+	\hline
+	2 & 3 & 0.03 & E  & $\alpha$ = 0.1                        & 96.34 (934 epochs) & 88.41 (577 epochs) & 52.63  & 47.36 \\
+	\hline
+	2 & 2 & 0.03 & E  & $\alpha$ = 0.3                        & 99.59 (58 epochs)  & 88.41 (43 epochs)  & 73.68  & 26.31 \\
+	\hline
+	2 & 3 & 0.03 & E  & $\alpha$ = 0.3                        & 64.22 (766 epochs) & 57.92 (685 epochs) & 5.79   & 94.20 \\
+	\hline
+	2 & 3 & 0.07 & E  & $\alpha$ = 0.3                        & 72.76 (818 epochs) & 60.97 (816 epochs) & 59.375 & 40.625 \\
+	\hline
+	2 & 2 & 0.07 & E  & $\alpha$ = 0.3                        & 99.59 (52 epochs)  & 93.90 (100 epochs) & 50.0   & 50.0 \\
+	\hline
+	3 & 3 & 0.03 & E  & \tcell{$\alpha$ = 0.1\\ $a$ = 0.02\\ $b$ = 0.7} & 88.61 (928 epochs) & 79.26 (880 epochs) & 50.0   & 50.0 \\
+	\hline
+	3 & 3 & 0.03 & E  & \tcell{$\alpha$ = 0.1\\ $a$ = 0.02\\ $b$ = 0.1} & 84.14 (968 epochs) & 79.87 (924 epochs) & 36.36  & 63.63 \\
+	\hline
+	4 & 3 & 0.03 & B  & $\alpha$ = 0.1                        & 52.84 (61 epochs)  & 58.53 (61 epochs)  & 2.94   & 97.05 \\
+	\hline
+	4 & 3 & 0.03 & MB & \tcell{b\_s = 10\\ $\alpha$ = 0.1}      & 65.85 (863 epochs) & 57.92 (239 epochs) & 89.85  & 10.14 \\
+	\hline
+	4 & 3 & 0.03 & MB & \tcell{b\_s = 50\\ $\alpha$ = 0.1}      & 71.54 (986 epochs) & 67.68 (827 epochs) & 35.84  & 64.15 \\
+	\hline
+\end{longtable}
+\caption{\textbf{Columnas}:\\
+         Ex: Experimento \\
+         R: Nro de Red \\
+         ME: Modo de Entrenamiento (E=Estocastico, B=Batch, MB=Mini-Batch)\\
+         EP: Parametros Extras ($\alpha$=Momentum, $a$, $b$=Paratros adaptativos, b\_s=Tamaño del batch)\\
+         MPT: Mejor \% de aciertos de Entrenamiento. Entre parsentesis en que época se alcanza\\
+         MPV: Mejor \% de aciertos de Validacion. Entre parentesis en que época se alcanza\\
+         FP: \% de Falsos Positivos en el error en validacion\\
+         FN: \% de Falsos Negativos en el error en validacion}
+\end{figure}
 
 
 

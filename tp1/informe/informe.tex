@@ -16,6 +16,7 @@
 % Descoración y gráficos
 \usepackage{caratulaV}
 \usepackage{graphicx}
+\usepackage{longtable}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
 \usepackage{caption}
@@ -29,6 +30,10 @@
 \newenvironment{reglas}
 {   \begin{tabular}{lcl} }
 { \end{tabular}\\ }
+\newcommand*{\thead}[1]{%
+\multicolumn{1}{c}{\bfseries\begin{tabular}{@{}c@{}}#1\end{tabular}}}
+\newcommand*{\tcell}[1]{%
+\multicolumn{1}{c}{\begin{tabular}{@{}c@{}}#1\end{tabular}}}
 \newcommand{\regla}[2]{#1 & $\to$ & #2 \\ }%
 \newcommand{\aregla}[1]{\ &  $|$  & #1 \\ }%
 \newcommand{\newToken}[2]{\newcommand{#1}{\textbf{#2} }}

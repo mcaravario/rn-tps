@@ -1,4 +1,5 @@
 ex_1-1_red-9-17-2.dat: 8-16-2 s-i --eta=0.02 --epochs=500 --training-mode='stochastic'
 ex_1-2_red-9-17-2.dat: 8-16-2 t-i --eta=0.02 --epochs=500 --training-mode='stochastic'
 ex_2-1_red-9-17-2.dat: 8-16-2 t-i --eta=0.02 --epochs=500 --training-mode='stochastic' --normalize-output
-ex_2-2_red-9-17-2.dat: 8-16-2 r-i --eta=0.02 --epochs=500 --training-mode='stochastic' --normalize-output
+ex_2-2_red-9-17-2.dat: 8-16-2 t-r --eta=0.02 --epochs=500 --training-mode='stochastic' --normalize-output
+ex_3-1_red-9-17-2.dat: 8-16-2 t-r --eta=0.02 --epochs=500 --training-mode='stochastic' --normalize-output --random-funct='uniform'

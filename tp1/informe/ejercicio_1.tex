@@ -1,24 +1,4 @@
 \section{Ejercicio 1}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AGREGAR QUE ES CADA COLUMNA EN UNA EXPLICACION %%%%%%%%%%%%%%%%%%
-\begin{tabular}{c|c|c|c}
-	 Mejor \% de aciertos training & Mejor \% de validacion & Mejor \% de validacion \\
-	  62.601626016260155 (944 epochs) & 61.58536585365854 (394 epochs) &  44.44444444444444 & 55.55555555555556 \\
-	  99.59349593495935 (96 epochs) & 89.02439024390245 (88 epochs) &  33.33333333333333 & 66.66666666666666 \\
-	   66.66666666666666 (969 epochs) & 64.02439024390245 (916 epochs) &  35.59322033898305 & 64.40677966101694 \\
-     98.78048780487805 (35 epochs) & 91.46341463414635 (25 epochs) &  35.714285714285715 & 64.28571428571429 \\
-	 99.59349593495935 (81 epochs) & 92.07317073170732 (51 epochs) &  38.46153846153847 & 61.53846153846154 \\
-	 99.59349593495935 (71 epochs) & 90.2439024390244 (73 epochs) &  50.0 & 50.0 \\
-	 99.59349593495935 (58 epochs) & 85.36585365853658 (51 epochs) &  45.83333333333333 & 54.166666666666664 \\
-	63.82113821138211 (431 epochs) & 56.70731707317073 (485 epochs) &  25.352112676056336 & 74.64788732394366 \\
-	69.10569105691057 (441 epochs) & 67.07317073170732 (356 epochs) &  62.96296296296296 & 37.03703703703704 \\
-	80.48780487804879 (387 epochs) & 70.1219512195122 (402 epochs) &  51.02040816326531 & 48.97959183673469 \\
-	70.73170731707317 (322 epochs) & 65.2439024390244 (479 epochs) &  64.91228070175438 & 35.08771929824561 \\
-	79.26829268292683 (131 epochs) & 77.4390243902439 (267 epochs) &  32.432432432432435 & 67.56756756756756 \\
-	65.85365853658537 (213 epochs) & 65.85365853658537 (294 epochs) &  44.642857142857146 & 55.35714285714286 \\
-	59.34959349593496 (486 epochs) & 58.536585365853654 (331 epochs) &  89.70588235294117 & 10.294117647058822 \\
-	60.16260162601627 (487 epochs) & 56.70731707317073 (487 epochs) &  63.38028169014085 & 36.61971830985916 \\
-	78.45528455284553 (496 epochs) & 71.95121951219512 (496 epochs) &  41.30434782608695 & 58.69565217391305
-\end{tabular}
 
 \subsection{Introducción}
 Este ejercicio consiste en entrenar una red neuronal que, dados los resultados de un examen específico que es utilizado en el diagnóstico del
@@ -197,6 +177,34 @@ Los resultados obtenidos fueron los siguientes:
   \includegraphics[width=125mm]{imagenes/ej1/ex_4-3_red_11-6-6-9-1_errors.png}
   \caption{Modo de entrenamiento Mini Batch con tamaño de batch 30}
 \end{figure}
+
+Se concluyó que esta experimentacion no mejora los resultados obtenidos en experimentos anteriores. Por lo tanto se decidió
+mantener el modo de entrenamiento en estocastico, con el cual se obtuvieron los mejores resultados.
+
+\subsection{Tabla de aciertos}
+A continuación se presenta la tabla de aciertos con todos los resultados de la experimentación del ejercicio 1.
+\begin{table}[h!]
+	\begin{tabular}{c|c|c|c|c|c|c}
+		Experimento & Red & Parametros & Mejor  de aciertos training & Mejor  de validacion & Mejor  de validacion \\
+		1 & 2 & $\eta$ = 0.03, epocas = 1000, Estocastico & 99.59349593495935 (96 epochs) & 89.02439024390245 (88 epochs) &  33.33333333333333 & 66.66666666666666 \\
+		1 & 3 & $\eta$ = 0.03, epocas = 1000, Estocastico & 66.66666666666666 (969 epochs) & 64.02439024390245 (916 epochs) &  35.59322033898305 & 64.40677966101694 \\
+		1 & 1 & $\eta$ = 0.03, epocas = 1000, Estocastico & 62.601626016260155 (944 epochs) & 61.58536585365854 (394 epochs) &  44.44444444444444 & 55.55555555555556 \\
+		2 & 2 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.1 & 98.3739837398374 (55 epochs) & 93.29268292682927 (50 epochs) &  54.54545454545454 & 45.45454545454545 \\
+		2 & 3 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.1  & 80.89430894308943 (903 epochs) & 71.34146341463415 (795 epochs) &  80.85106382978722 & 19.148936170212767 \\
+		2 & 2 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1 & 99.59349593495935 (54 epochs) & 87.8048780487805 (49 epochs) &  40.0 & 60.0 \\
+		2 & 3 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1 & 96.34146341463415 (934 epochs) & 88.41463414634147 (577 epochs) &  52.63157894736842 & 47.368421052631575 \\
+		2 & 2 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 99.59349593495935 (58 epochs) & 88.41463414634147 (43 epochs) &  73.68421052631578 & 26.31578947368421 \\
+		2 & 3 &  $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 64.22764227642277 (766 epochs) & 57.92682926829268 (685 epochs) &  5.797101449275362 & 94.20289855072464 \\
+		2 & 3 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 72.76422764227642 (818 epochs) & 60.97560975609756 (816 epochs) &  59.375 & 40.625 \\
+		2 & 2 & $\eta$ = 0.07, epocas = 1000, Estocastico, $\alpha$ = 0.3 & 99.59349593495935 (52 epochs) & 93.90243902439023 (100 epochs) &  50.0 & 50.0 \\
+		3 & 3 & $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1, $a$ = 0.02, $b$ = 0.7 & 88.6178861788618 (928 epochs) & 79.26829268292683 (880 epochs) &  50.0 & 50.0 \\
+		3 & 3 & $\eta$ = 0.03, epocas = 1000, Estocastico, $\alpha$ = 0.1, $a$ = 0.02, $b$ = 0.1 & 84.14634146341463 (968 epochs) & 79.8780487804878 (924 epochs) &  36.36363636363637 & 63.63636363636363 \\
+		4 & 3 & $\eta$ = 0.03, epocas = 1000, Batch, $\alpha$ = 0.1 & 52.84552845528455 (61 epochs) & 58.536585365853654 (61 epochs) &  2.941176470588235 & 97.05882352941177 \\
+		4 & 3 & $\eta$ = 0.03, epocas = 1000, MiniBatch, batch\_size = 10, $\alpha$ = 0.1 & 65.85365853658537 (863 epochs) & 57.92682926829268 (239 epochs) &  89.85507246376811 & 10.144927536231885 \\
+		4 & 3 & $\eta$ = 0.03, epocas = 1000, MiniBatch, batch\_size = 50, $\alpha$ = 0.1 & 71.54471544715447 (986 epochs) & 67.6829268292683 (827 epochs) &  35.84905660377358 & 64.15094339622641 \\
+	\end{tabular}
+\end{table}
+
 
 
 \subsection{Conclusión}

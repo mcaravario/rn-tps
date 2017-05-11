@@ -9,15 +9,24 @@ set grid ytics mytics xtics  # draw lines for each ytics and mytics
 set mytics 2           # set the spacing for the mytics
 set grid               # enable the grid
 
-set output 'combinado_1.png'
+set output 'combinado_1_t.png'
 
 plot 'ex_1-2_red-9-17-2.dat' u 1:2 smooth bezier title 'Sigmoide', \
      'ex_2-1_red-9-17-2.dat' u 1:2 smooth bezier title 'Tanh', \
      'ex_2-2_red-9-17-2.dat' u 1:2 smooth bezier title 'Relu'
 
+set output 'combinado_1_v.png'
 
-set output 'combinado_2.png'
+plot 'ex_1-2_red-9-17-2.dat' u 1:3 smooth bezier title 'Sigmoide', \
+     'ex_2-1_red-9-17-2.dat' u 1:3 smooth bezier title 'Tanh', \
+     'ex_2-2_red-9-17-2.dat' u 1:3 smooth bezier title 'Relu'
+
+set output 'combinado_2_t.png'
 
 plot 'ex_3-1_red-9-17-2.dat' u 1:2 smooth bezier title 'Tanh random uniforme', \
      'ex_3-2_red-9-17-2.dat' u 1:2 smooth bezier title 'Relu random uniforme'
 
+set output 'combinado_2_v.png'
+
+plot 'ex_3-1_red-9-17-2.dat' u 1:3 smooth bezier title 'Tanh random uniforme', \
+     'ex_3-2_red-9-17-2.dat' u 1:3 smooth bezier title 'Relu random uniforme'

@@ -84,14 +84,14 @@ def parse_argv():
     if args.alpha:
         learn_params['alpha'] = args.alpha
 
-    if not args.alpha and not args.a and not args.b:
+    if args.alpha or args.a or args.b:
+        tutor = lm.BackPropagationOptimized(red)
+    else:
         tutor = lm.BackPropagation(red)
-        learn_funct = tutor.learn
-    elif args.a or args.b:
-        tutor = lm.BackPropagationOptimized(red)
+
+    if args.a or args.b:
         learn_funct = tutor.learn_adaptative
-    else: # args.alpha:
-        tutor = lm.BackPropagationOptimized(red)
+    else:
         learn_funct = tutor.learn
 
     return {'learn_funct': learn_funct,

@@ -31,7 +31,7 @@ all: \${ERRORES_EJ1} \${ERRORES_EJ2} \${DATA_EJ1} \${DATA_EJ2} \${TABLA_EJ1}
 
 
 %_errors.png: %.dat
-	gnuplot -e "datafile='$<'" tp1/plot/errores.gpi > $@
+	gnuplot -e "datafile='$<'" tp1/plot/errores.gpi > \$@
 EOT
 
 for key in ${!deps_ej1[@]}; do

@@ -63,8 +63,7 @@ class RN:
         return len(self.Ws)
 
     def eval(self, x):
-        """ Alimenta la red neuronal con entrada x
-            y devuelva la salida en formato vector columna"""
+        """ Devuelve la salida de evaluar la red con x"""
         y = list(x)
         if not self.biased:
             y.insert(0, 1.0)

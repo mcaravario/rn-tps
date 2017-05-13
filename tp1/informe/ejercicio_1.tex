@@ -20,26 +20,43 @@ método de entrenamiento estocástico. Con respecto a las funciones de activaci�
 para la capa final.
 
 Las redes que se utilizaron fueron las siguientes:
-\begin{enumerate}
-  \item 10 - 1 (Perceptron simple): Esta red se planteó para ver si el problema era linealmente separable y podia ser aprendido por un perceptron
-                                      simple.
-  \item 10 - 20 - 1: Esta red se planteo para extraer una cantidad de features mayor a la cantidad de datos de entrada del problema y asi poder sintetizar
-                      estos en la neurona de salida.
-  \item 10 - 5 - 5 - 8 - 1: Esta red se planteo para analizar el comportamiento de la red al agregarle mas etapas de procesamiento anidadas.
-\end{enumerate}
 
-Los resultados que se obtuvieron fueron los siguientes:
-\begin{figure}[h!]
+\begin{figure}[H]
+  \includegraphics[width=12cm, height=5cm]{../plot/11-1.pdf}
+  \centering
+  \caption{Red 1 (11-1)}
+\end{figure}
+
+Esta red se planteó para ver si el problema era linealmente separable y podia ser aprendido por un perceptron simple.
+
+\begin{figure}[H]
+  \includegraphics[width=12cm, height=6cm]{../plot/11-21-1.pdf}
+  \centering
+  \caption{Red 2 (11-21-1)}
+\end{figure}
+
+Esta red se planteo para extraer una cantidad de features mayor a la cantidad de datos de entrada del problema y asi poder sintetizar estos en la neurona de salida.
+
+\begin{figure}[H]
+  \includegraphics[width=12cm, height=6cm]{../plot/11-6-6-9-1.pdf}
+  \centering
+  \caption{Red 3 (11-6-6-9-1)}
+\end{figure}
+
+Esta red se planteo para analizar el comportamiento de la red al agregarle mas etapas de procesamiento anidadas.
+
+Luego de la experimentacion, los resultados que se obtuvieron fueron los siguientes:
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_1-1_red_11-1_errors.png}
   \caption{Red 1}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_1-1_red_11-6-6-9-1_errors.png}
   \caption{Red 2}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_1-1_red_11-21-1_errors.png}
   \caption{Red 3}
 \end{figure}
@@ -77,7 +94,7 @@ representan un cambio brusco en el aprdendizaje) para representar las posibles c
 
  Los resultados obtenidos se presentan a continuacion:
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 	\begin{subfigure}[b]{0.45\textwidth}
 	  \includegraphics[width=0.9\textwidth]{imagenes/ej1/ex_2-1_red_11-21-1_errors.png}
@@ -145,12 +162,12 @@ a que en caso de disminuir el error se buscó aumentar el $\eta$, pero que la di
  tomar un valor representantivo grande(0.7) y otro chico(0.1).
 
 Los resultados obtenidos fueron los siguientes:
-\begin{figure}[h!]
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_3-1_red_11-6-6-9-1_errors.png}
   \caption{Red 3 con parametros $a = 0.02 $ y $b= 0.7$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_3-2_red_11-6-6-9-1_errors.png}
   \caption{Red 2 con parametros $a = 0.02 $ y $b = 0.1$}
 \end{figure}
@@ -164,17 +181,17 @@ de batch los valores 10 y 30. Con respecto a los valores restantes se utilizaron
 
 Los resultados obtenidos fueron los siguientes:
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_4-1_red_11-6-6-9-1_errors.png}
   \caption{Modo de entrenamiento Batch}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_4-2_red_11-6-6-9-1_errors.png}
   \caption{Modo de entrenamiento Mini Batch con tamaño de batch 10}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej1/ex_4-3_red_11-6-6-9-1_errors.png}
   \caption{Modo de entrenamiento Mini Batch con tamaño de batch 30}
 \end{figure}
@@ -185,7 +202,7 @@ mantener el modo de entrenamiento en estocastico, con el cual se obtuvieron los 
 \subsection{Tabla de aciertos}
 A continuación se presenta la tabla de aciertos con todos los resultados de la experimentación del ejercicio 1.
 \clearpage
-\begin{figure}
+\begin{figure}[H]
 \begin{longtable}{ccccccccc}
 	\hline
 	Ex & R & $\eta$ & ME & EP & MPT & MPV & FP & FN \\

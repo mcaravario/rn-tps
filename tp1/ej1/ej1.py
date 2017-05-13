@@ -38,9 +38,19 @@ def porcentaje_aciertos(rn, data):
 def experimentar(training, validation, red, learn_funct, learn_params):
     # print("-".join(map(str,red.ns)))
     # print(str(learn_params))
+    best_error_v = None
+    W_best = None
     for epoch, error_training in learn_funct(training,
                                              **learn_params):
         error_validation = red.error_training(validation)
+
+        if not best_error_v:
+            best_error_v = error_validation
+            W_best = red.weights()
+        elif best_error_v > error_validation:
+            best_error_v = error_validation
+            W_best = red.weights()
+
         aciertos_training, fp_training, fn_training  = porcentaje_aciertos(red, training)
         aciertos_validation, fp_validation, fn_validation  = porcentaje_aciertos(red, validation)
         print("{}\t{}\t{}\t{}\t{}\t{}\t{}".format(epoch,
@@ -50,6 +60,8 @@ def experimentar(training, validation, red, learn_funct, learn_params):
                                           aciertos_validation,
                                           fp_validation,
                                           fn_validation))
+    print(str(W_best))
+
 def main():
     arguments = parse_argv()
     output_series = pd.Series([0])

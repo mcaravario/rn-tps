@@ -15,12 +15,21 @@ from tp1.rn import RN
 def experimentar(training, validation, red, learn_funct, learn_params):
     # print("-".join(map(str,red.ns)))
     # print(str(learn_params))
+    best_error_v = None
+    W_best = None
     for epoch, error_training in learn_funct(training,
                                              **learn_params):
+        if not best_error_v:
+            best_error_v = error_validation
+            W_best = red.weights()
+        elif best_error_v > error_validation:
+            best_error_v = error_validation
+            W_best = red.weights()
         error_validation = red.error_training(validation)
         print("{}\t{}\t{}".format(epoch,
                                   error_training,
                                   error_validation))
+    print(str(W_best.weights()))
 
 def main():
     arguments = parse_argv()

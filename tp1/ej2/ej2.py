@@ -8,7 +8,7 @@ import sys
 
 from tp1 import lm
 from tp1 import af
-from tp1.utils import get_normalization_function, load_training_validation
+from tp1.utils import *
 from tp1.argv_parser import parse_argv
 from tp1.rn import RN
 
@@ -22,18 +22,25 @@ def experimentar(training, validation, red, learn_funct, learn_params):
                                   error_training,
                                   error_validation))
 
+
 def main():
-    arguments = parse_argv()
+    arguments = parse_argv(1)
     output_series = pd.Series([8, 9])
     input_series = pd.Series([0,1,2,3,4,5,6,7])
-    training, validation = load_training_validation(r'tp1/ej2/data/tp1_ej2_training.csv', input_series, output_series, training_prop=arguments['training_prop'])
+    data = load_database(arguments['db'], input_series, output_series)
+    training, validation = split_training_validation(data, training_prop=arguments['training_prop'])
 
-    if arguments['normalize_input'] or arguments['normalize_output']:
-        norm_funct = get_normalization_function(training,
-                                                arguments['normalize_input'],
-                                                arguments['normalize_output'])
-        training = list(map(norm_funct, training))
-        validation = list(map(norm_funct, validation))
+    if not arguments['train']:
+        evaluar(rgsuments.db)
+        return
+
+
+    avg_xs, std_xs, avg_ys, std_ys = get_avg_std(training,
+                                                 arguments['normalize_input'],
+                                                 arguments['normalize_output'])
+    norm_funct = lambda x: normalize(avg_xs, std_xs, avg_ys, std_ys, x)
+    training = list(map(norm_funct, training))
+    validation = list(map(norm_funct, validation))
 
     experimentar(training, validation, arguments['red'], arguments['learn_funct'], arguments['learn_params'])
 

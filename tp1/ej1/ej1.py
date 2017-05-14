@@ -8,7 +8,7 @@ import sys
 
 from tp1 import lm
 from tp1 import af
-from tp1.utils import get_normalization_function, load_training_validation
+from tp1.utils import *
 from tp1.argv_parser import parse_argv
 from tp1.rn import RN
 
@@ -35,7 +35,7 @@ def porcentaje_aciertos(rn, data):
         fn = fn / errors
     return res / len(data) * 100.0, fp * 100.0, fn * 100.0
 
-def experimentar(training, validation, red, learn_funct, learn_params):
+def entrenar(training, validation, red, learn_funct, learn_params):
     # print("-".join(map(str,red.ns)))
     # print(str(learn_params))
     for epoch, error_training in learn_funct(training,
@@ -50,27 +50,49 @@ def experimentar(training, validation, red, learn_funct, learn_params):
                                           aciertos_validation,
                                           fp_validation,
                                           fn_validation))
-def main():
-    arguments = parse_argv()
-    output_series = pd.Series([0])
-    input_series = pd.Series([1, 2,3,4,5,6,7,8,9,10])
-    training, validation = load_training_validation(r'tp1/ej1/data/tp1_ej1_training.csv', input_series, output_series, training_prop=arguments['training_prop'])
 
+def evaluar(test):
+    red = best_network.red
+    avg_xs, std_xs, avg_ys, std_ys = best_network.avg_std
+    norm_funct = lambda x: normalize(avg_xs, std_xs, avg_ys, std_ys, x)
+    test = list(map(norm_funct, test))
+    ecm = red.error_training(test)
+    aciertos, fp, fn = porcentaje_aciertos(red, training)
+    print("ECM: {}".format(ecm))
+    print("Aciertos: {}".format(aciertos))
+    print("Falsos Positivos: {}".format(fp))
+    print("Falsos Negativos: {}".format(fn))
+
+
+def main():
     def to_bipolar(d):
         x = d[0]
         y = d[1]
         return (x, [1.0] if y == 'B' else [-1.0])
 
-    training = list(map(to_bipolar, training))
-    validation = list(map(to_bipolar, validation))
+    arguments = parse_argv(0)
+    output_series = pd.Series([0])
+    input_series = pd.Series([1, 2,3,4,5,6,7,8,9,10])
+    data = load_database(arguments['db'], input_series, output_series)
+    data = list(map(to_bipolar, data))
+    print(data)
+
+    if not arguments['train']:
+        evaluar(arguments.db)
+        return
+
+    training, validation = split_training_validation(data, training_prop=arguments['training_prop'])
+
 
     if arguments['normalize_input']:
-        norm_funct = get_normalization_function(training,
-                                                arguments['normalize_input'],
-                                                False)
+        avg_xs, std_xs, avg_ys, std_ys = get_avg_std(training,
+                                                     arguments['normalize_input'],
+                                                     False)
+        norm_funct = lambda x: normalize(avg_xs, std_xs, avg_ys, std_ys, x)
+        print(avg_ys, std_ys)
         training = list(map(norm_funct, training))
         validation = list(map(norm_funct, validation))
 
-    experimentar(training, validation, arguments['red'], arguments['learn_funct'], arguments['learn_params'])
+    entrenar(training, validation, arguments['red'], arguments['learn_funct'], arguments['learn_params'])
 
 main()

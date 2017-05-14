@@ -10,7 +10,7 @@ def random_uniform(inputs, outputs):
     return random.uniform(-d,d)
 
 
-def get_normalization_function(training, normalize_input=True, normalize_output=False):
+def get_avg_std(training, normalize_input=True, normalize_output=False):
     xs, ys = zip(*training)
     if normalize_input:
         avg_xs = np.mean(xs, axis=0)
@@ -26,28 +26,30 @@ def get_normalization_function(training, normalize_input=True, normalize_output=
         avg_ys = np.zeros(len(ys))
         std_ys = np.ones(len(ys))
 
-    def t(xy):
-        x = xy[0]
-        y = xy[1]
-        rx = [0.0 for i in range(len(x))]
-        ry = [0.0 for i in range(len(y))]
-        for i in range(len(x)):
-            if std_xs[i] != 0:
-                rx[i] = (x[i] - avg_xs[i])/std_xs[i]
-        for i in range(len(y)):
-            if std_ys[i] != 0:
-                ry[i] = (y[i] - avg_ys[i])/std_ys[i]
-        return (rx, ry)
-    return t
+    return avg_xs, std_xs, avg_ys, avg_ys
 
-def load_training_validation(training_db, input_series, output_series, training_prop=0.6):
-    df = pd.read_csv(training_db, header=None)
+def normalize(avg_xs, std_xs, avg_ys, std_ys, xy):
+    x = xy[0]
+    y = xy[1]
+    rx = [0.0 for i in range(len(x))]
+    ry = [0.0 for i in range(len(y))]
+    for i in range(len(x)):
+        if std_xs[i] != 0:
+            rx[i] = (x[i] - avg_xs[i])/std_xs[i]
+    for i in range(len(y)):
+        if std_ys[i] != 0:
+            ry[i] = (y[i] - avg_ys[i])/std_ys[i]
+    return (rx, ry)
+
+def load_database(db, input_series, output_series):
+    df = pd.read_csv(db, header=None)
 
     outputs = df[output_series].as_matrix()
     inputs = df[input_series].as_matrix()
 
-    data = list(zip(inputs, outputs))
+    return list(zip(inputs, outputs))
 
+def split_training_validation(data, training_prop=0.6):
     training_size = int(training_prop * len(data))
 
     choices = [True for i in range(training_size)] + [False for j in range(len(data)-training_size)]

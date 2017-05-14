@@ -8,9 +8,12 @@ from tp1.utils import random_uniform
 ETA=0.03
 EPOCHS=100
 
-def parse_argv():
+def parse_argv(ej):
     TRAINING_DB = (r'tp1/ej1/data/tp1_ej1_training.csv', r'tp1/ej2/data/tp1_ej2_training.csv')
-    parser = argparse.ArgumentParser(description='Entrena una red neuronal')
+    parser = argparse.ArgumentParser(description='Entrena/Testea una red neuronal')
+    parser.add_argument('--db', type=str, help="Base de datos", default=TRAINING_DB[ej])
+    parser.add_argument('--train', dest='train', action='store_true', help="Modo entrenamiento")
+    parser.add_argument('--test', dest='train', action='store_false', help="Modo test")
     parser.add_argument('units', type=str, help="Cantidad de entradas por capa. Ejemplo: '10-20-1'")
     parser.add_argument('act_units', type=str, help="Activacion unidades de salida. Ejemplo: 'l-t-s'")
     training_mode_choices = ('stochastic', 'online', 'batch', 'mini_batch')
@@ -27,13 +30,18 @@ def parse_argv():
     parser.add_argument('--normalize-output', dest='normalize_output', action='store_true')
     parser.add_argument('--no_normalize-output', dest='normalize_output', action='store_false')
     parser.add_argument('--random-funct', choices=('normal', 'uniform'))
-    parser.set_defaults(normalize_input=True, normalize_output=False)
+    parser.set_defaults(normalize_input=True, normalize_output=False, train=True)
     args = parser.parse_args()
+
 
 
     def salir(msg):
         print(msg)
         sys.exit(1)
+
+    if not args.train:
+        return {'train': False,
+                'db' : args.db}
 
     if args.training_prop > 1.0:
         salir("Se esperaba una proporcion de training entre 0 y 1")
@@ -108,7 +116,9 @@ def parse_argv():
     else:
         learn_funct = tutor.learn
 
-    return {'learn_funct': learn_funct,
+    return {'train' : True,
+            'db' : args.db,
+            'learn_funct': learn_funct,
             'learn_params' : learn_params,
             'normalize_input' : args.normalize_input,
             'normalize_output' : args.normalize_output,

@@ -8,8 +8,14 @@ numericos y no clases.
 \subsection{Experimentación}
 Para los siguientes experimentos se utilizo una arquitectura de red con la siguiente topologia: 8 entradas, 1 capa oculta de 16 unidades y 2 unidades de salida,
 tal como se muestra en la figura a continuación.
-%%%% GRAFICO
 
+\begin{figure}[H]
+  \includegraphics[width=12cm, height=5cm]{../plot/9-17-2.pdf}
+  \centering
+  \caption{Red utilizada (9-17-2)}
+\end{figure}
+
+Cabe mencionar que para todos los experimentos se utilizo un $\eta$ = 0.02, 500 epocas de entrenamiento y un modo de entrenamiento estocastico.
 \subsubsection{Experimento 1}
 Para este experimento se decidió evaluar el efecto de preprocesar tanto los valores de entrada como de salida de la red propuesta a fin de observar su
 comportamiento. Se utilizaron funciones de activacion sigmoidea para la primer capa y lineal para la salida (debido a que la salida debe estar entre 0 y 50 aproximandamente,

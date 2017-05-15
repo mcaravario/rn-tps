@@ -8,7 +8,7 @@ de la herramienta pip de python mediante el comando
   sudo pip3 install pandas
   sudo pip3 install numpy
 \end{verbatim}
-En caso de no tener instalada la herramienta pip, puede hacer con el comando
+En caso de no tener instalada la herramienta pip, se la puede instalar con el comando
 \begin{verbatim}
   sudo apt-get install python3-pip
 \end{verbatim}
@@ -29,7 +29,7 @@ en donde:
                     l (sigmoidea), r (ReLu), i (funcion identidad). Las funciones deben ir separadas por un guion, por ejemplo l-t-s.
   \item \textbf{tm}: es el modo de entrenamiento, sus valores pueden ser {stochastic, online, batch, mini\_batch}. En caso de ser mini\_batch la opcion seleccionada se debera
             proveer el tamaño del batch a utilizar mediante la opcion --batch\_size bs, en donde bs será el tamaño en cuestion.
-  \item \textbf{n}: es el coeficiente de entrenamiento $\eta$ que se utilizará en el entrenamiento
+  \item \textbf{eta}: es el coeficiente de entrenamiento $\eta$ que se utilizará en el entrenamiento
   \item \textbf{epochs}: es la cantidad de epocas que se utilizaran para el entrenamiento
   \item \textbf{a}: es el coeficiente a correspondiente al correspondiente parametro adaptativo de entrenamiento
   \item \textbf{b}: es el coeficiente b correspondiente al correspondiente parametro adaptativo de entrenamiento

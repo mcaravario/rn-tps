@@ -71,13 +71,21 @@ Para este experimento se decidió variar la funcion aleatoria de generacion de p
 
 \begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej2/ex_3-1_red-9-17-2_errors.png}
-  \caption{Con preprocesamiento de entrada}
+  \caption{Con distribucion uniforme y funcion de activacion tangente hiperbolica}
 \end{figure}
 
 \begin{figure}[H]
   \includegraphics[width=125mm]{imagenes/ej2/ex_3-2_red-9-17-2_errors.png}
-  \caption{Con preprocesamiento de entrada y de salida}
+  \caption{Con distribucion uniforme y funcion de activacion ReLu}
 \end{figure}
 \subsection{Conclusión}
+Una conclusion que se obtuvo luego de experimentar con este ejercicio fue que los problemas de clasificacion son mas dificiles de aprender que los de regresion, ya que
+los errores obtuvidos en el ejercicio 2 fueron mucho menores a los obtenidos en el ejercicio 1, sin aplicar mejoras al Backpropagation y en una menor cantidad de epocas. \\
+Otro punto destacado es la importancia que tiene el hecho de normalizar tanto la entrada como la salida en los ejercicio de regresión, ya que esto lleva a una mejora importante
+en la minimizacion del error obtenido.
+
+Por Otra parte se concluyo que la funcion de activacion Relu resuelve los problemas que tienen la funciones tangente hiperbolica y logistica al momento de correr el Backpropagation,
+en el que si la derivada se encuentra saturada se obtienen valores muy chicos y esto conlleva a errores numericos en caso de que la entrada no este normalizada. Este fue un problema
+que se encontró al experimentar con el trabajo, pero se observó que al normalizar la entrada dejo de ocurrir. 
 
 \newpage

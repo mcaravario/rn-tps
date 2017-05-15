@@ -15,8 +15,10 @@ En caso de no tener instalada la herramienta pip, puede hacer con el comando
 
 Para utilizar el programa debe posicionarse en la carpeta correspondiente al ejercicio que se desea correr. Luego se debe ejecutar el siguiente comando
 \begin{verbatim}
-  python3 ej unidades af -t tm -n eta -e epochs -a a -b b --alpha alpha --batch_size bs --training-prop tp --random-funct rf --normalize-input --no-normalize-input
-          --normalize-output  --no_normalize-output
+  python3 ej unidades af -t tm -n eta -e epochs -a a -b b --alpha alpha
+            --batch_size bs --training-prop tp --random-funct rf
+            --normalize-input --no-normalize-input
+            --normalize-output  --no_normalize-output
 \end{verbatim}
 
 en donde:
@@ -32,7 +34,7 @@ en donde:
   \item \textbf{alpha}: es un parametro opcional que se utiliza en caso de querer utilizar la optimizacion de momentum para el algoritmo de BackPropagation. Corresponde al $\alpha$
                 correspondiente.
   \item \textbf{tp}: es un parametro opcional que representa la proporcion correspondiente del set de datos que se utilizara como datos de entrenamiento,
-            mientras que el resto se utilzara como datos de validacion. El valor de tp provisto debe ser 0 < tp < 1.
+            mientras que el resto se utilzara como datos de validacion. El valor de tp provisto debe ser 0 $<$ tp $<$ 1.
   \item \textbf{rf}: es un parametro opcional que selecciona el valor de la funcion random que se utilizara para la inicializacion de los pesos en la matriz de pesos de la red.
             Sus valores pueden ser {normal, uniform}
   \item \textbf{--no-normalize-input}: es un parametro opcional que especifica que no se normalice la entrada

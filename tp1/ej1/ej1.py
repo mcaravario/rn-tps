@@ -105,7 +105,7 @@ def main():
     best_Ws = entrenar(training, validation, arguments['red'], arguments['learn_funct'], arguments['learn_params'])
     if arguments['output']:
         with open(arguments['output'], 'w+') as f:
-            f.write("red = rn.RN(weights={})\n".format(best_Ws))
+            f.write("red = rn.RN(Ws={})\n".format(best_Ws))
             f.write("avg_std = ({},{},{},{})\n".format(avg_xs, std_xs, avg_ys, std_ys))
 
 main()

@@ -14,8 +14,8 @@ def parse_argv(ej):
     parser.add_argument('--db', type=str, help="Base de datos", default=TRAINING_DB[ej])
     parser.add_argument('--train', dest='train', action='store_true', help="Modo entrenamiento")
     parser.add_argument('--test', dest='train', action='store_false', help="Modo test")
-    parser.add_argument('units', type=str, help="Cantidad de entradas por capa. Ejemplo: '10-20-1'")
-    parser.add_argument('act_units', type=str, help="Activacion unidades de salida. Ejemplo: 'l-t-s'")
+    parser.add_argument('--units', type=str, help="Cantidad de entradas por capa. Ejemplo: '10-20-1'", required=False)
+    parser.add_argument('--act_units', type=str, help="Activacion unidades de salida. Ejemplo: 'l-t-s'", required=False)
     training_mode_choices = ('stochastic', 'online', 'batch', 'mini_batch')
     parser.add_argument('-t', '--training-mode', choices=training_mode_choices, default='stochastic', help="Modo de entrenamiento")
     parser.add_argument('-n', '--eta', type=float, default=ETA)
@@ -33,6 +33,8 @@ def parse_argv(ej):
     parser.set_defaults(normalize_input=True, normalize_output=False, train=True)
     args = parser.parse_args()
 
+    if args.train and (args.units is None or args.act_units is None):
+        raise Exception("Se esperaba units o act_units")
 
 
     def salir(msg):

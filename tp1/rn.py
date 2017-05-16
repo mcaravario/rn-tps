@@ -27,6 +27,7 @@ class RN:
             self.Ws = kwargs['Ws']
             if 'biased' in kwargs and (not kwargs['biased']):
                 raise Exception("Se especifico que no estaba con bias pero se paso la matriz")
+            self.biased = False
 
         elif 'ns' in kwargs:
             ns = kwargs['ns']

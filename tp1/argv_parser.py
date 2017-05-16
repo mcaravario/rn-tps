@@ -30,6 +30,7 @@ def parse_argv(ej):
     parser.add_argument('--normalize-output', dest='normalize_output', action='store_true')
     parser.add_argument('--no_normalize-output', dest='normalize_output', action='store_false')
     parser.add_argument('--random-funct', choices=('normal', 'uniform'))
+    parser.add_argument('--output', type=str)
     parser.set_defaults(normalize_input=True, normalize_output=False, train=True)
     args = parser.parse_args()
 
@@ -119,6 +120,7 @@ def parse_argv(ej):
         learn_funct = tutor.learn
 
     return {'train' : True,
+            'output' : args.output,
             'db' : args.db,
             'learn_funct': learn_funct,
             'learn_params' : learn_params,

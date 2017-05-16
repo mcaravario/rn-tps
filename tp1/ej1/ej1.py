@@ -36,13 +36,22 @@ def porcentaje_aciertos(rn, data):
     return res / len(data) * 100.0, fp * 100.0, fn * 100.0
 
 def entrenar(training, validation, red, learn_funct, learn_params):
-    # print("-".join(map(str,red.ns)))
-    # print(str(learn_params))
+    best_Ws = None
+    best_ecm_v = None
+    best_fn = None
     for epoch, error_training in learn_funct(training,
                                              **learn_params):
         error_validation = red.error_training(validation)
         aciertos_training, fp_training, fn_training  = porcentaje_aciertos(red, training)
         aciertos_validation, fp_validation, fn_validation  = porcentaje_aciertos(red, validation)
+
+        if best_ecm_v is None or \
+           (best_ecm_v > error_validation) or \
+           (best_ecm_v == error_validation and best_fn > fn_validation):
+            best_Ws = red.weights()
+            best_ecm_v = error_validation
+            best_fn = fn_validation
+
         print("{}\t{}\t{}\t{}\t{}\t{}\t{}".format(epoch,
                                           error_training,
                                           error_validation,
@@ -50,6 +59,7 @@ def entrenar(training, validation, red, learn_funct, learn_params):
                                           aciertos_validation,
                                           fp_validation,
                                           fn_validation))
+    return best_Ws
 
 def evaluar(test):
     red = best_network.red
@@ -84,15 +94,18 @@ def main():
     training, validation = split_training_validation(data, training_prop=arguments['training_prop'])
 
 
-    if arguments['normalize_input']:
-        avg_xs, std_xs, avg_ys, std_ys = get_avg_std(training,
-                                                     arguments['normalize_input'],
-                                                     False)
-        norm_funct = lambda x: normalize(avg_xs, std_xs, avg_ys, std_ys, x)
-        print(avg_ys, std_ys)
-        training = list(map(norm_funct, training))
-        validation = list(map(norm_funct, validation))
+    avg_xs, std_xs, avg_ys, std_ys = get_avg_std(training,
+                                                 arguments['normalize_input'],
+                                                 False)
+    norm_funct = lambda x: normalize(avg_xs, std_xs, avg_ys, std_ys, x)
+    training = list(map(norm_funct, training))
+    validation = list(map(norm_funct, validation))
 
-    entrenar(training, validation, arguments['red'], arguments['learn_funct'], arguments['learn_params'])
+
+    best_Ws = entrenar(training, validation, arguments['red'], arguments['learn_funct'], arguments['learn_params'])
+    if arguments['output']:
+        with open(arguments['output'], 'w+') as f:
+            f.write("red = rn.RN(weights={})\n".format(best_Ws))
+            f.write("avg_std = ({},{},{},{})\n".format(avg_xs, std_xs, avg_ys, std_ys))
 
 main()

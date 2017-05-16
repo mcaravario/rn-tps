@@ -23,10 +23,17 @@ Para utilizar el programa debe posicionarse en la carpeta correspondiente al eje
 
 en donde:
 \begin{itemize}
-  \item \textbf{ej}: es el ejericio que se va a correr, sus valores pueden ser {ej1.py, ej2.py}
-  \item \textbf{unidades}: es la cantidad de unidades por capa, por ejemplo 10-20-1
-  \item \textbf{af}: son las funciones de activacion que se utilizaran para cada capa intermedia de la red. Sus valores pueden ser: s (funcion signo), t (tangente hiperbolica),
-                    l (sigmoidea), r (ReLu), i (funcion identidad). Las funciones deben ir separadas por un guion, por ejemplo l-t-s.
+  \item \textbf{ej}: es el ejericio que se va a correr, sus valores pueden ser {ej1-runner.py, ej2-runner.py} desde la carpeta arriba de tp1.
+  \item \textbf{unidades}: es la cantidad de unidades por capa, separados por un guión, por ejemplo 10-20-1
+  \item \textbf{af}: son las funciones de activacion que se utilizaran para cada capa intermedia de la red. Sus valores pueden ser:
+	  \begin{itemize} 
+	      \item s: Funcion signo
+	      \item t: Tangente hiperbolica
+          \item l: Sigmoidea
+          \item r: ReLu
+          \item i: Funcion identidad
+       \end{itemize}
+	   Las funciones deben ir separadas por un guion, por ejemplo l-t-s.
   \item \textbf{tm}: es el modo de entrenamiento, sus valores pueden ser {stochastic, online, batch, mini\_batch}. En caso de ser mini\_batch la opcion seleccionada se debera
             proveer el tamaño del batch a utilizar mediante la opcion --batch\_size bs, en donde bs será el tamaño en cuestion.
   \item \textbf{eta}: es el coeficiente de entrenamiento $\eta$ que se utilizará en el entrenamiento
@@ -55,7 +62,7 @@ En caso de querer consultar el modo de uso manualmente puede hacerse mediante el
 \begin{verbatim}
     sudo python3 ej -h
 \end{verbatim}
-en donde ej puede ser {ej1.py, ej2.py}
+en donde ej puede ser {ej1-runner.py, ej2-runner.py} desde la carpeta arriba de tp1.
 %
 % -t {stochastic,online,batch,mini_batch}, --training-mode {stochastic,online,batch,mini_batch}
 %                        Modo de entrenamiento

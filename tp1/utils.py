@@ -26,7 +26,7 @@ def get_avg_std(training, normalize_input=True, normalize_output=False):
         avg_ys = np.zeros(len(ys))
         std_ys = np.ones(len(ys))
 
-    return avg_xs, std_xs, avg_ys, avg_ys
+    return avg_xs, std_xs, avg_ys, std_ys
 
 def normalize(avg_xs, std_xs, avg_ys, std_ys, xy):
     x = xy[0]

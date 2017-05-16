@@ -11,6 +11,7 @@ from tp1 import af
 from tp1.utils import *
 from tp1.argv_parser import parse_argv
 from tp1.rn import RN
+from tp1.ej1 import best_network
 
 
 def porcentaje_aciertos(rn, data):
@@ -67,7 +68,7 @@ def evaluar(test):
     norm_funct = lambda x: normalize(avg_xs, std_xs, avg_ys, std_ys, x)
     test = list(map(norm_funct, test))
     ecm = red.error_training(test)
-    aciertos, fp, fn = porcentaje_aciertos(red, training)
+    aciertos, fp, fn = porcentaje_aciertos(red, test)
     print("ECM: {}".format(ecm))
     print("Aciertos: {}".format(aciertos))
     print("Falsos Positivos: {}".format(fp))
@@ -85,10 +86,9 @@ def main():
     input_series = pd.Series([1, 2,3,4,5,6,7,8,9,10])
     data = load_database(arguments['db'], input_series, output_series)
     data = list(map(to_bipolar, data))
-    print(data)
 
     if not arguments['train']:
-        evaluar(arguments.db)
+        evaluar(data)
         return
 
     training, validation = split_training_validation(data, training_prop=arguments['training_prop'])

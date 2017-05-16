@@ -70,12 +70,12 @@ Luego de la experimentacion, los resultados que se obtuvieron fueron los siguien
  Con toda la evidencia provista por los graficos se estimó que el problema a resolver no es linealmente separable pues no es posible
  aprenderlo con un perceptrón simple, por lo tanto esta red se descartó para futuros experimentos ya que sus resultados no fueron relevantes.
 
- Con respecto a la Red 2, se observa que el ECM decrece casi linealmente tanto en validacion como en entrenamiento, comenzando en 340 sobre validacion y
+ Con respecto a la Red 3, se observa que el ECM decrece casi linealmente tanto en validacion como en entrenamiento, comenzando en 340 sobre validacion y
  logrando un valor minimo de 96. En la tabla de aciertos se observa un 99.59\% de aciertos sobre entrenamiento y un 89.02\% sobre validacion. Tambien se observa
  que el ritmo de aprendizaje es inferior con respecto a la Red 3 pero es superior al de la Red 1, sin embargo, dados los resultados obtenidos se consideró
  que puede ser notablemente mejorada con una optimizacion del algoritmo de BackPropagation, por lo que se decidió continuar experimentado sobre ella.
 
- Finalmente, la red 3 es la que mejor aprende de los datos de entrenamiento llegando al valor minimo absoluto de 0 en ECM sobre los datos de entrenamiento y un valor minimo
+ Finalmente, la red 2 es la que mejor aprende de los datos de entrenamiento llegando al valor minimo absoluto de 0 en ECM sobre los datos de entrenamiento y un valor minimo
  de 96 en ECM sobre datos de validación. Tambien se observa que la funcion del ECM decrece rapidamente por lo que se concluye que este perceptron multicapa
  logra aprender en solo 150 epocas todo el set de entrenamiento. Esto trae como desventaja el hecho de que no se podrá disminuir mucho mas el ECM puesto que el set
  de entrenamiento fue completamente aprendido y luego de esto el ECM del set de validacion se mantendrá constante.

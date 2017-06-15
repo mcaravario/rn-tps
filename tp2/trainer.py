@@ -1,3 +1,6 @@
+import numpy as np
+import abc
+
 class Trainer:
     def __init__(self, rn):
         self.rn = rn

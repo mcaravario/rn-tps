@@ -1,9 +1,12 @@
 #!/usr/bin/python3
 import sys
+import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from rn import RN
 from trainer import Oja, Sanger, Trainer
+from sklearn.decomposition import PCA
+from graficar import graficar_componentes
 
 def main():
     data = sys.argv[1]
@@ -20,9 +23,19 @@ def main():
     red = RN(inputs, outputs)
     trainer = Oja(red)
 
-    for x in x_train.as_matrix():
-        trainer.fit(x, 0.0001)
+    # pca = PCA(n_components=9)
+    # reduced = pca.fit_transform(x_train)
+    #
+    for i in range(200):
+        for x in x_train.as_matrix():
+            trainer.fit(x, 0.0001)
 
-    # print(red.w)
+    results = []
+    for x in x_train.as_matrix():
+        y = red.eval(x).flatten()
+        results.append(y)
+
+    results = np.array(results)
+    graficar_componentes(results, y_train)
 
 main()

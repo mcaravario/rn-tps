@@ -35,8 +35,8 @@ class Sanger(Trainer):
         y_predict = self.rn.eval(x)
         delta = np.zeros(self.rn.w.shape)
 
-        for j in range(len(delta.shape[0])):
-            for i in range(len(delta.shape[1])):
-                delta[j][i] = eta * y_predict[j] * (x[i] - sum(w[k][i] * y_predict[k] for k in range(0,i)))
+        for j in range(delta.shape[0]):
+            for i in range(delta.shape[1]):
+                delta[j][i] = eta * y_predict[j][0] * (x[i] - sum(self.rn.w[k][i] * y_predict[k][0] for k in range(0,j)))
 
         self.rn.w += delta

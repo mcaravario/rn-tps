@@ -26,7 +26,8 @@ def main():
     # pca = PCA(n_components=9)
     # reduced = pca.fit_transform(x_train)
     #
-    for i in range(200):
+
+    for i in range(300):
         for x in x_train.as_matrix():
             trainer.fit(x, 0.0001)
 
@@ -36,6 +37,6 @@ def main():
         results.append(y)
 
     results = np.array(results)
-    graficar_componentes(results, y_train)
+    graficar_componentes(results, y_train, "Reduccion con Oja")
 
 main()

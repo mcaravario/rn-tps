@@ -42,3 +42,26 @@ class Sanger(Trainer):
         delta = eta * (np.multiply(delta, y_predict.T)).T
 
         self.rn.w += delta
+
+class SOMTrainer(Trainer):
+    ETA = 0.001
+    SIGMA = 0.01
+    dist_map = lambda x: np.exp(-x**2/2)
+
+    def __init__(self,
+                 rn,
+                 dist_map = None,
+                 ):
+        self.rn = rn
+        self.dist_map = dist_map or SOMTrainer.dist_map
+
+    def fit(self, x, eta=ETA, sigma=SIGMA):
+        w_i, w_j = self.rn.winner(x)
+
+        def h(i, j):
+            d = np.linalg.norm(((i-w_i),(j-w_j)))
+            return self.dist_map(d/sigma)
+
+        for i in range(self.rn.rows):
+            for j in range(self.rn.columns):
+                self.rn.w[i][j] += eta * h(i, j) * (x-self.rn.w[i][j])

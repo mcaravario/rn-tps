@@ -4,18 +4,24 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.cm as cm
 
-def graficar_componentes(matriz, y, tipo):
+def graficar_componentes(matriz, y, matriz_test, y_test, tipo):
 
     c1 = matriz[:, 0:3]
     c2 = matriz[:, 3:6]
     c3 = matriz[:, 6:9]
 
+    v1 = matriz_test[:, 0:3]
+    v2 = matriz_test[:, 3:6]
+    v3 = matriz_test[:, 6:9]
+
     colors = cm.rainbow(np.linspace(0, 1, 9))
     y2 = list(map(lambda x: colors[x-1], y))
+    z2 = list(map(lambda x: colors[x-1], y_test))
 
     fig = plt.figure()
     ax1 = fig.add_subplot(131, projection='3d')
     ax1.scatter(c1[:,[0]], c1[:,[1]], c1[:,[2]], c=y2)
+    ax1.scatter(v1[:,[0]], v1[:,[1]], v1[:,[2]], c=z2, marker='x')
 
     ax1.set_title("Componentes 1 a 3")
     ax1.set_xlabel('X')
@@ -25,6 +31,7 @@ def graficar_componentes(matriz, y, tipo):
     ax2 = fig.add_subplot(132, projection='3d')
     ax2.set_title("Componentes 4 a 6")
     ax2.scatter(c2[:,[0]], c2[:,[1]], c2[:,[2]], c=y2)
+    ax2.scatter(v2[:,[0]], v2[:,[1]], v2[:,[2]], c=z2, marker='x')
 
     ax2.set_xlabel('X')
     ax2.set_ylabel('Y')
@@ -34,6 +41,7 @@ def graficar_componentes(matriz, y, tipo):
 
     ax3.set_title("Componentes 7 a 9")
     ax3.scatter(c3[:,[0]], c3[:,[1]], c3[:,[2]], c=y2)
+    ax3.scatter(v3[:,[0]], v3[:,[1]], v3[:,[2]], c=z2, marker='x')
 
     ax3.set_xlabel('X')
     ax3.set_ylabel('Y')
@@ -53,6 +61,6 @@ def graficar_componentes(matriz, y, tipo):
     # ax1.view_init(elev=10., azim=135)
     # ax2.view_init(elev=10., azim=135)
     # ax3.view_init(elev=10., azim=135)
-    
+
     plt.suptitle(tipo)
     plt.show()

@@ -36,7 +36,13 @@ def main():
         y = red.eval(x).flatten()
         results.append(y)
 
+    results_test = []
+    for x in x_test.as_matrix():
+        y = red.eval(x).flatten()
+        results_test.append(y)
+
     results = np.array(results)
-    graficar_componentes(results, y_train, "Reduccion con Oja")
+    results_test = np.array(results_test)
+    graficar_componentes(results, y_train, results_test, y_test, "Reduccion con Oja")
 
 main()

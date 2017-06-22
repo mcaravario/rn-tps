@@ -66,3 +66,10 @@ def graficar_componentes(matriz, y, matriz_test, y_test, tipo):
 
     plt.suptitle(tipo)
     plt.show()
+
+def graficar_som(grilla):
+    X = np.linspace(-grilla.shape[1]-1,0, grilla.shape[1]+1)
+    Y = np.linspace(0,grilla.shape[0]+1, grilla.shape[0]+1)
+    plt.pcolor(X,Y,grilla,vmin=1, vmax=9)
+    plt.colorbar()
+    plt.show()

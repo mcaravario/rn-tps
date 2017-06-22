@@ -17,27 +17,29 @@ def main():
 
     x_train, x_test, y_train, y_test =  train_test_split(X, y, test_size=0.1, random_state=42)
 
+    training = x_train.as_matrix()
+    test = x_test.as_matrix()
+
 
     inputs = x_train.shape[1]
     outputs = 9
     red = RN(inputs, outputs)
-    trainer = Oja(red)
+    trainer = Sanger(red)
 
     # pca = PCA(n_components=9)
     # reduced = pca.fit_transform(x_train)
     #
 
-    for i in range(300):
-        for x in x_train.as_matrix():
-            trainer.fit(x, 0.0001)
+
+    trainer.fit_train(training, epochs=500, eta=0.0001)
 
     results = []
-    for x in x_train.as_matrix():
+    for x in training:
         y = red.eval(x).flatten()
         results.append(y)
 
     results_test = []
-    for x in x_test.as_matrix():
+    for x in test:
         y = red.eval(x).flatten()
         results_test.append(y)
 

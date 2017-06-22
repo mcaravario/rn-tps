@@ -2,6 +2,8 @@ import numpy as np
 import abc
 
 class Trainer:
+    ETA = 0.0001
+
     def __init__(self, rn):
         self.rn = rn
 
@@ -9,9 +11,10 @@ class Trainer:
     def fit(self, x, eta):
         pass
 
-    def fit_train(self, eta, train):
-        for instance in train:
-            self.fit(instance, eta)
+    def fit_train(self, train, epochs, eta=ETA):
+        for epoch in range(epochs):
+            for instance in train:
+                self.fit(instance, eta)
 
 class Oja(Trainer):
 

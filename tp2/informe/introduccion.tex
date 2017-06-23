@@ -27,7 +27,8 @@ En caso de no tener instalada la herramienta pip, se la puede instalar con el co
 
 Para utilizar el programa realizado para el ejercicio 1 debe posicionarse en la carpeta tp2 Luego se debe ejecutar el siguiente comando
 \begin{verbatim}
-  python3 ej1.py --test --train --db db --epochs epocas --test_size ts --eta eta --rule r
+  python3 ej1.py --test --train --db db --epochs epocas
+                --test_size ts --eta eta --rule r
 \end{verbatim}
 
 en donde:
@@ -47,8 +48,9 @@ en donde:
 
 Para utilizar el programa correspondiente al ejercicio 2, debe ejecutarse el siguiente comando
 \begin{verbatim}
-  python3 ej2.py --test --train --db db --preprocess --no-preprocess  --epochs epocas --test_size ts --rows r --cols c --eta0 eta0 --sigma0 sigma0
-                --tao0 tao0 --tao1 tao1
+  python3 ej2.py --test --train --db db --preprocess --no-preprocess
+                --epochs epocas --test_size ts --rows r --cols c --eta0 eta0
+                --sigma0 sigma0 --tao0 tao0 --tao1 tao1
 \end{verbatim}
 
 en donde:
@@ -77,6 +79,6 @@ En caso de querer consultar el modo de uso manualmente puede hacerse mediante el
 \begin{verbatim}
     sudo python3 ej -h
 \end{verbatim}
-en donde ej puede ser {ej1.py, ej2.py} desde la carpeta arriba de tp1.
+en donde ej puede ser {ej1.py, ej2.py} dentro de la carpeta tp2.
 
 \newpage

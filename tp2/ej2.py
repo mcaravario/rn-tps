@@ -7,6 +7,7 @@ from rn import RN, SOM
 from trainer import Oja, Sanger, SOMTrainer
 import operator
 from graficar import graficar_som
+import trained_networks
 import argparse
 import config
 
@@ -23,8 +24,26 @@ def parser_args():
     parser.add_argument('--sigma0', help="Sigma inicial", type=float, default=10)
     parser.add_argument('--tao0', help="Factor dilatacion del tiempo (eta)", type=float, default=20)
     parser.add_argument('--tao1', help="Factor dilatacion del tiempo (sigma)", type=float, default=20)
-    parser.set_defaults(preprocess=False)
+    parser.add_argument('--train', help="Modo entrenamiento", dest='training', action="store_true")
+    parser.add_argument('--test', help="Testea la red ya entrenada", dest='training', action="store_false")
+    parser.add_argument('--output', help="Salida con los pesos de la red", type=str)
+    parser.set_defaults(preprocess=False, train=True)
     return parser.parse_args()
+
+def get_grid(red, data, y_data):
+    winning_table = [[{i: 0 for i in range(1,10)} for _ in range(red.columns)] for _ in range(red.rows)]
+
+    for x, y in zip(data, y_data):
+        i, j = red.winner(x)
+        winning_table[i][j][y] += 1
+
+    colors = np.zeros((red.rows, red.columns))
+    for i in range(red.rows):
+        for j in range(red.columns):
+            colors[i][j] = max(winning_table[i][j].items(), key=operator.itemgetter(1))[0]
+    return colors
+
+
 
 def main():
     args = parser_args()
@@ -62,30 +81,18 @@ def main():
 
 
     inputs = training.shape[1]
-    rows = args.rows
-    cols = args.cols
-    red = SOM(inputs, args.rows, args.cols)
-    trainer = SOMTrainer(red)
+    if args.train:
+        red = SOM(inputs, args.rows, args.cols)
+        trainer = SOMTrainer(red)
+        trainer.fit_train(training, eta0=args.eta0, sigma0=args.sigma0, tao0=args.tao0, tao1=args.tao1, epochs=args.epochs)
 
-    def get_grid(red, data, y_data):
-        winning_table = [[{i: 0 for i in range(1,10)} for _ in range(cols)] for _ in range(rows)]
-
-        for x, y in zip(data, y_data):
-            i, j = red.winner(x)
-            winning_table[i][j][y] += 1
-
-        colors = np.zeros((rows, cols))
-        for i in range(rows):
-            for j in range(cols):
-                colors[i][j] = max(winning_table[i][j].items(), key=operator.itemgetter(1))[0]
-        return colors
-
-    trainer.fit_train(training, eta0=args.eta0, sigma0=args.sigma0, tao0=args.tao0, tao1=args.tao1, epochs=args.epochs)
+        if args.output is not None:
+            with open(args.output, 'w') as f:
+                f.write(str(red.w))
+    else:
+        red = trained_networks.som_network
 
     c = get_grid(red, training, y_train)
-    print(c)
     graficar_som(c)
-
-
 
 main()

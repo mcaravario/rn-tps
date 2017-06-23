@@ -6,9 +6,9 @@ import abc
 from numpy import random as npr
 
 class RN:
-    def __init__(self, inputs, outputs):
+    def __init__(self, inputs, outputs, w=None):
         self.n = inputs
-        self.w = npr.random((outputs, self.n))
+        self.w = w or npr.random((outputs, self.n))
 
     def eval(self, x):
         x = np.array(x).reshape((self.n, 1))
@@ -16,11 +16,11 @@ class RN:
         return np.dot(self.w, x)
 
 class SOM:
-    def __init__(self, inputs, rows, columns):
+    def __init__(self, inputs, rows, columns, w=None):
         self.inputs = inputs
         self.rows = rows
         self.columns = columns
-        self.w = npr.random((rows, columns, inputs))
+        self.w = w or npr.random((rows, columns, inputs))
 
     def dist(self, i, j, x):
         return np.linalg.norm(self.w[i][j]-x)

@@ -3,6 +3,7 @@ import sys
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 from rn import RN, SOM
 from trainer import Oja, Sanger, SOMTrainer
 import operator
@@ -27,7 +28,9 @@ def parser_args():
     parser.add_argument('--train', help="Modo entrenamiento", dest='training', action="store_true")
     parser.add_argument('--test', help="Testea la red ya entrenada", dest='training', action="store_false")
     parser.add_argument('--output', help="Salida con los pesos de la red", type=str)
-    parser.set_defaults(preprocess=False, train=True)
+    parser.add_argument('--normalize', help="Normaliza la entrada", dest='normalize', action='store_true')
+    parser.add_argument('--no-normalize', help="No normaliza la entrada (defecto)", dest='normalize', action='store_false')
+    parser.set_defaults(preprocess=False, train=True, normalize=False)
     return parser.parse_args()
 
 def get_grid(red, data, y_data):
@@ -50,12 +53,15 @@ def main():
     df = pd.read_csv(args.db)
 
     y = df[df.columns[0]]
-    X = df[df.columns[1:]]
+    X = df[df.columns[1:]].as_matrix()
+
+    if args.normalize:
+        X = StandardScaler().fit_transform(X)
 
     x_train, x_test, y_train, y_test =  train_test_split(X, y, test_size=args.test_size, random_state=42)
 
-    training = x_train.as_matrix()
-    tests = x_test.as_matrix()
+    training = x_train
+    tests = x_test
 
     if args.preprocess:
         inputs = x_train.shape[1]

@@ -5,6 +5,7 @@ import pandas as pd
 import argparse
 import config
 from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 import trained_networks
 from rn import RN
 from trainer import Oja, Sanger, Trainer
@@ -22,7 +23,9 @@ def parser_args():
     parser.add_argument('--train', help="Modo entrenamiento", dest='training', action="store_true")
     parser.add_argument('--test', help="Testea la red ya entrenada", dest='training', action="store_false")
     parser.add_argument('--output', help="Salida con los pesos de la red", type=str)
-    parser.set_defaults(train=True)
+    parser.add_argument('--normalize', help="Normaliza la entrada", dest='normalize', action='store_true')
+    parser.add_argument('--no-normalize', help="No normaliza la entrada (defecto)", dest='normalize', action='store_false')
+    parser.set_defaults(train=True, normalize=False)
     return parser.parse_args()
 
 
@@ -32,12 +35,15 @@ def main():
     df = pd.read_csv(args.db)
 
     y = df[df.columns[0]]
-    X = df[df.columns[1:]]
+    X = df[df.columns[1:]].as_matrix()
+
+    if args.normalize:
+        X = StandardScaler().fit_transform(X)
 
     x_train, x_test, y_train, y_test =  train_test_split(X, y, test_size=args.test_size, random_state=42)
 
-    training = x_train.as_matrix()
-    test = x_test.as_matrix()
+    training = x_train
+    test = x_test
 
     if args.train:
         inputs = x_train.shape[1]

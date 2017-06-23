@@ -7,22 +7,39 @@ from rn import SOM
 from trainer import SOMTrainer
 import operator
 from graficar import graficar_som
+import argparse
+import config
+
+def parser_args():
+    parser = argparse.ArgumentParser(description='Entrena una red neuronal auto organizada')
+    parser.add_argument('--db', type=str, help="Base de entrenamiento CSV", default=config.DB_TRAINING)
+    parser.add_argument('-e', '--epochs', help="Cantidad de epocas", type=str, default=50)
+    parser.add_argument('--test-size', help="Proporcion de test en la particion entrenamiento/test", type=float, default=0.3)
+    parser.add_argument('-r', '--rows', help='Filas en la grilla SOM', type=int, default=10)
+    parser.add_argument('-c', '--cols', help='Columnas en la grilla SOM', type=int, default=10)
+    parser.add_argument('--eta0', help="Eta inicial", type=float, default=0.001)
+    parser.add_argument('--sigma0', help="Sima inicial", type=float, default=10)
+    parser.add_argument('--tao0', help="Factor dilatacion del tiempo (eta)", type=float, default=20)
+    parser.add_argument('--tao1', help="Factor dilatacion del tiempo (sigma)", type=float, default=20)
+    return parser.parse_args()
 
 def main():
-    data = sys.argv[1]
-    df = pd.read_csv(data)
+    args = parser_args()
+    df = pd.read_csv(args.db)
 
     y = df[df.columns[0]]
     X = df[df.columns[1:]]
 
-    x_train, x_test, y_train, y_test =  train_test_split(X, y, test_size=0.1, random_state=42)
+    x_train, x_test, y_train, y_test =  train_test_split(X, y, test_size=args.test_size, random_state=42)
 
     training = x_train.as_matrix()
+    tests = x_test.as_matrix()
 
-    inputs = x_train.as_matrix().shape[1]
-    rows = 10
-    cols = 10
-    red = SOM(inputs, rows, cols)
+
+    inputs = training.shape[1]
+    rows = args.rows
+    cols = args.cols
+    red = SOM(inputs, args.rows, args.cols)
     trainer = SOMTrainer(red)
 
     def get_grid(red, data, y_data):
@@ -38,7 +55,7 @@ def main():
                 colors[i][j] = max(winning_table[i][j].items(), key=operator.itemgetter(1))[0]
         return colors
 
-    trainer.fit_train(training, eta0=0.01, sigma0=0.1, tao0=100, tao1=100, epochs=10)
+    trainer.fit_train(training, eta0=args.eta0, sigma0=args.sigma0, tao0=args.tao0, tao1=args.tao1, epochs=args.epochs)
 
     c = get_grid(red, training, y_train)
     print(c)

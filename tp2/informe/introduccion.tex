@@ -28,7 +28,8 @@ En caso de no tener instalada la herramienta pip, se la puede instalar con el co
 Para utilizar el programa realizado para el ejercicio 1 debe posicionarse en la carpeta tp2 Luego se debe ejecutar el siguiente comando
 \begin{verbatim}
   python3 ej1.py --test --train --db db --epochs epocas
-                --test_size ts --eta eta --rule r
+                --test_size ts --eta eta --rule r --normalize
+                --no-normalize --output output
 \end{verbatim}
 
 en donde:
@@ -43,14 +44,17 @@ en donde:
   \item \textbf{ts}: es el porcentaje de datos de la base data que se utilizara como datos de testing.
   \item \textbf{eta}: es el coeficiente de entrenamiento $\eta$ que se utilizará en el entrenamiento
   \item \textbf{rule}: es la regla que se utilizara para realizar la reduccion de dimensionalidad. Sus valores pueden ser {"oja", "sanger"}
-  \item \textbf{--normalize-input}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
+  \item \textbf{--normalize}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
+  \item \textbf{--no-normalize}: es un parámetro opcional que especifica que no se normalice la entrada correspondiente.
+  \item \textbf{output}: es un parámetro opcional que indica el archivo en el que se guardan los pesos.
 \end{itemize}
 
 Para utilizar el programa correspondiente al ejercicio 2, debe ejecutarse el siguiente comando
 \begin{verbatim}
   python3 ej2.py --test --train --db db --preprocess --no-preprocess
                 --epochs epocas --test_size ts --rows r --cols c --eta0 eta0
-                --sigma0 sigma0 --tao0 tao0 --tao1 tao1
+                --sigma0 sigma0 --tao0 tao0 --tao1 tao1 --output output
+                --normalize --no-normalize
 \end{verbatim}
 
 en donde:
@@ -71,7 +75,9 @@ en donde:
   \item \textbf{sigma0}: es el coeficiente $\sigma$ inicial
   \item \textbf{tao0}: es el factor de dilatacion del tiempo (eta)
   \item \textbf{tao1}: es el factor de dilatacion del tiempo (sigma)
-
+  \item \textbf{output}: es un parámetro opcional que indica el archivo en el que se guardan los pesos.
+  \item \textbf{--normalize}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
+  \item \textbf{--no-normalize}: es un parámetro opcional que especifica que no se normalice la entrada correspondiente.
 
 \end{itemize}
 

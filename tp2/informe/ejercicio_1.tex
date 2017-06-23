@@ -37,35 +37,45 @@ de entrenamiento. Los resultados obtenidos se presentan a continuacion:
 
 
 \begin{figure}[H]
-  \includegraphics[width=125mm]{imagenes/reduccion_Oja_1.jpg}
+  \includegraphics[width=160mm]{imagenes/reduccion_Oja_1.jpg}
   \caption{Vista desde arriba con Oja}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=125mm]{imagenes/reduccion_Oja_2.jpg}
+  \includegraphics[width=160mm]{imagenes/reduccion_Oja_2.jpg}
   \caption{Vista desde abajo con Oja}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=125mm]{imagenes/reduccion_Oja_3.jpg}
+  \includegraphics[width=160mm]{imagenes/reduccion_Oja_3.jpg}
   \caption{Vista de costado con Oja}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=125mm]{imagenes/reduccion_Sanger_1.jpg}
+  \includegraphics[width=160mm]{imagenes/reduccion_Sanger_1.jpg}
   \caption{Vista desde arriba con Sanger}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=125mm]{imagenes/reduccion_Sanger_2.jpg}
+  \includegraphics[width=160mm]{imagenes/reduccion_Sanger_2.jpg}
   \caption{Vista desde abajo con Sanger}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=125mm]{imagenes/reduccion_Sanger_3.jpg}
+  \includegraphics[width=160mm]{imagenes/reduccion_Sanger_3.jpg}
   \caption{Vista de costado con Sanger}
 \end{figure}
 
-\subsection{Conclusión}
+Se observó que los vectores generados por el algoritmo de Sanger son mas descriptivos en comparacion a los generados por Oja.
+ Es decir, que lograron una mejor separacion de los datos. Una posible justificación a este razonamiento es que los pesos generados
+  por el algoritmo de Sanger convergen siempre al mismo vector, generando con ello siempre la misma proyeccion.
 
+\subsection{Conclusión}
+Como conclusión se pudo destacar que al tener los datos proyectados en las 9 componentes principales se pueden ver 9 clusters bien diferenciados espacialmente.
+Esto logra la posibilidad de clasificar facilmente los documentos en 9 categorías distinas mediante la aplicacion de un clasificador como por ejemplo un perceptron multicapa.
+Tambien se mejorararia los tiempos de entrenamiento ya que luego de ser preprocesada la entrada, los datos tienen una dimension menor y por lo tanto la entrada del clasificador
+es mucho mas chica.
+
+Estos modelos por si solos no sirven para clasificar, sino mas bien para darse una idea de cuantas clases hay dentro de los datos de entrada. Tambien sirven para preprocesar
+ la entrada que luego será ingresada en un clasificador, conformando asi un modelo de tipo híbrido.
 \newpage

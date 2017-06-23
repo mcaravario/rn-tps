@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.cm as cm
 
-def graficar_componentes(matriz, y, matriz_test, y_test, tipo):
+def graficar_componentes(matriz, y, matriz_test, y_test, rule, projection=1):
 
     c1 = matriz[:, 0:3]
     c2 = matriz[:, 3:6]
@@ -50,22 +50,21 @@ def graficar_componentes(matriz, y, matriz_test, y_test, tipo):
     ax3.set_zlabel('Z')
 
     # Figura 1 (Costado)
-    # ax1.view_init(elev=10., azim=90)
-    # ax2.view_init(elev=10., azim=90)
-    # ax3.view_init(elev=10., azim=90)
+    if projection == 1:
+        ax1.view_init(elev=10., azim=90)
+        ax2.view_init(elev=10., azim=90)
+        ax3.view_init(elev=10., azim=90)
+    elif projection == 2: # Figura 2 (Top)
+        ax1.view_init(elev=180., azim=90)
+        ax2.view_init(elev=180., azim=90)
+        ax3.view_init(elev=180., azim=90)
+    else: # Figura 3 (Diagonal)
+        ax1.view_init(elev=10., azim=135)
+        ax2.view_init(elev=10., azim=135)
+        ax3.view_init(elev=10., azim=135)
 
-    # Figura 2 (Top)
-    # ax1.view_init(elev=180., azim=90)
-    # ax2.view_init(elev=180., azim=90)
-    # ax3.view_init(elev=180., azim=90)
-
-    # Figura 3 (Diagonal)
-    # ax1.view_init(elev=10., azim=135)
-    # ax2.view_init(elev=10., azim=135)
-    # ax3.view_init(elev=10., azim=135)
-
-    plt.suptitle(tipo)
-    plt.show()
+    plt.suptitle("Reduccion con {}".format(rule.capitalize()))
+    fig.savefig('componentes_{}_{}.png'.format(rule,projection))
 
 def graficar_som(grilla):
     X = np.linspace(-grilla.shape[1]-1,0, grilla.shape[1]+1)

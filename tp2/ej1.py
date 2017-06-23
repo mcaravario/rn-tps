@@ -73,7 +73,8 @@ def main():
 
     results = np.array(results)
     results_test = np.array(results_test)
-    title = "Reduccion con " + ("Oja" if args.rule == 'oja' else 'Sanger')
-    graficar_componentes(results, y_train, results_test, y_test, title)
+    graficar_componentes(results, y_train, results_test, y_test, args.rule, projection=1)
+    graficar_componentes(results, y_train, results_test, y_test, args.rule, projection=2)
+    graficar_componentes(results, y_train, results_test, y_test, args.rule, projection=3)
 
 main()

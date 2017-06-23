@@ -13,66 +13,70 @@ Principales basado en Aprendizaje Hebiano.
 
 
 \section{Modo de uso y requerimientos}
-Para correr este programa es necesario contar con \textbf{Python 3} (No funcionará con python2.7) instalado junto a los paquetes Numpy y Pandas. Ambos paquetes pueden descargarse a través
+Para correr este programa es necesario contar con \textbf{Python 3} (No funcionará con python2.7) instalado junto a los paquetes Numpy, Pandas y Scikit-Learn. Estos paquetes pueden descargarse a través
 de la herramienta pip de python mediante el comando
 \begin{verbatim}
   sudo pip3 install pandas
   sudo pip3 install numpy
+  sudo pip3 install sklearn
 \end{verbatim}
 En caso de no tener instalada la herramienta pip, se la puede instalar con el comando
 \begin{verbatim}
   sudo apt-get install python3-pip
 \end{verbatim}
 
-Para utilizar el programa debe posicionarse en la carpeta correspondiente al ejercicio que se desea correr. Luego se debe ejecutar el siguiente comando
+Para utilizar el programa realizado para el ejercicio 1 debe posicionarse en la carpeta tp2 Luego se debe ejecutar el siguiente comando
 \begin{verbatim}
-  python3 ej --units unidades --act_units af -t tm -n eta -e epochs -a a -b b --alpha alpha
-          --batch_size bs --training-prop tp --random-funct rf --normalize-input
-          --no-normalize-input --normalize-output  --no_normalize-output
-          --test --train --db
+  python3 ej1.py --test --train --db db --epochs epocas --test_size ts --eta eta --rule r
 \end{verbatim}
 
 en donde:
 \begin{itemize}
-  \item \textbf{ej}: es el ejercicio que se va a correr, sus valores pueden ser {ej1-runner.py, ej2-runner.py} desde la carpeta arriba de tp1.
-  \item \textbf{unidades}: es la cantidad de unidades por capa, separados por un guión, por ejemplo 10-20-1
-  \item \textbf{af}: son las funciones de activación que se utilizaran para cada capa intermedia de la red. Sus valores pueden ser:
-	  \begin{itemize}
-	      \item s: Funcion signo
-	      \item t: Tangente hiperbolica
-          \item l: Sigmoidea
-          \item r: ReLu
-          \item i: Funcion identidad
-       \end{itemize}
-	   Las funciones deben ir separadas por un guion, por ejemplo l-t-s.
-  \item \textbf{tm}: es el modo de entrenamiento, sus valores pueden ser {stochastic, online, batch, mini\_batch}. En caso de ser mini\_batch la opción seleccionada se deberá
-            proveer el tamaño del batch a utilizar mediante la opción --batch\_size bs, en donde bs será el tamaño en cuestión.
-  \item \textbf{eta}: es el coeficiente de entrenamiento $\eta$ que se utilizará en el entrenamiento
-  \item \textbf{epochs}: es la cantidad de épocas que se utilizaran para el entrenamiento
-  \item \textbf{a}: es el coeficiente a correspondiente al correspondiente parámetro adaptativo de entrenamiento
-  \item \textbf{b}: es el coeficiente b correspondiente al correspondiente parámetro adaptativo de entrenamiento
-  \item \textbf{alpha}: es un parámetro opcional que se utiliza en caso de querer utilizar la optimización de momentum para el algoritmo de BackPropagation. Corresponde al $\alpha$
-                correspondiente.
-  \item \textbf{tp}: es un parámetro opcional que representa la proporción correspondiente del set de datos que se utilizara como datos de entrenamiento,
-            mientras que el resto se utilizara como datos de validación. El valor de tp provisto debe ser 0 < tp < 1.
-  \item \textbf{rf}: es un parámetro opcional que selecciona el valor de la función rango que se utilizara para la inicialización de los pesos en la matriz de pesos de la red.
-            Sus valores pueden ser {normal, uniform}
   \item \textbf{--test}: es un parámetro opcional que indica que se utilizara la mejor red entrenada por el grupo para testear sobre el set de datos que se pasan en el parámetro
-                        --db. Es decir que evaluara el set de datos con la mejor red entrenada.
+  --db. Es decir que evaluara el set de datos con la mejor red entrenada.
   \item \textbf{--train}: es un parámetro opcional que especifica que se entrenara la red pasada como parámetro y se utilizara el set de datos pasados en el parámetro --db
-                        como conjunto de datos de entrenamiento.
+  como conjunto de datos de entrenamiento.
   \item \textbf{--db}: es un parametro opcional que especifica la base de datos que se utilizara ya sea para entrenar una nueva red si esta activada la opción --train, o
-                        para testear la mejor red obtenida en caso de que este el parámetro --test.
-  \item \textbf{--no-normalize-input}: es un parámetro opcional que especifica que no se normalice la entrada
-  \item \textbf{--normalize-input}: es un parámetro opcional que especifica que se normalice la entrada
-  \item \textbf{--normalize-output}: es un parámetro opcional que especifica que se normalice la salida
-  \item \textbf{--no-normalize-output}: es un parámetro opcional que especifica que no se normalice la salida
+  para testear la mejor red obtenida en caso de que este el parámetro --test.
+  \item \textbf{epocas}: es la cantidad de épocas que se utilizaran para el entrenamiento
+  \item \textbf{ts}: es el porcentaje de datos de la base data que se utilizara como datos de testing.
+  \item \textbf{eta}: es el coeficiente de entrenamiento $\eta$ que se utilizará en el entrenamiento
+  \item \textbf{rule}: es la regla que se utilizara para realizar la reduccion de dimensionalidad. Sus valores pueden ser {"oja", "sanger"}
+  \item \textbf{--normalize-input}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
+\end{itemize}
+
+Para utilizar el programa correspondiente al ejercicio 2, debe ejecutarse el siguiente comando
+\begin{verbatim}
+  python3 ej2.py --test --train --db db --preprocess --no-preprocess  --epochs epocas --test_size ts --rows r --cols c --eta0 eta0 --sigma0 sigma0
+                --tao0 tao0 --tao1 tao1
+\end{verbatim}
+
+en donde:
+\begin{itemize}
+  \item \textbf{--test}: es un parámetro opcional que indica que se utilizara la mejor red entrenada por el grupo para testear sobre el set de datos que se pasan en el parámetro
+  --db. Es decir que evaluara el set de datos con la mejor red entrenada.
+  \item \textbf{--train}: es un parámetro opcional que especifica que se entrenara la red pasada como parámetro y se utilizara el set de datos pasados en el parámetro --db
+  como conjunto de datos de entrenamiento.
+  \item \textbf{--db}: es un parametro opcional que especifica la base de datos que se utilizara ya sea para entrenar una nueva red si esta activada la opción --train, o
+  para testear la mejor red obtenida en caso de que este el parámetro --test.
+  \item \textbf{--preprocess}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
+  \item \textbf{--no-preprocess}: es un parámetro opcional que especifica que no se normalice la entrada correspondiente.
+  \item \textbf{epocas}: es la cantidad de épocas que se utilizaran para el entrenamiento
+  \item \textbf{ts}: es el porcentaje de datos de la base data que se utilizara como datos de testing.
+  \item \textbf{r}: es la cantidad de filas que tendra la grilla del mapa auto-organizado
+  \item \textbf{c}: es la cantidad de columnas que tendra la grilla del mapa auto-organizado
+  \item \textbf{eta0}: es el coeficiente de entrenamiento $\eta$ inicial
+  \item \textbf{sigma0}: es el coeficiente $\sigma$ inicial
+  \item \textbf{tao0}: es el factor de dilatacion del tiempo (eta)
+  \item \textbf{tao1}: es el factor de dilatacion del tiempo (sigma)
+
+
 \end{itemize}
 
 En caso de querer consultar el modo de uso manualmente puede hacerse mediante el comando
 \begin{verbatim}
     sudo python3 ej -h
 \end{verbatim}
-en donde ej puede ser {ej1-runner.py, ej2-runner.py} desde la carpeta arriba de tp1.
+en donde ej puede ser {ej1.py, ej2.py} desde la carpeta arriba de tp1.
 
 \newpage

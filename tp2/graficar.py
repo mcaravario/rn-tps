@@ -71,4 +71,5 @@ def graficar_som(grilla):
     Y = np.linspace(0,grilla.shape[0]+1, grilla.shape[0]+1)
     plt.pcolor(X,Y,grilla,vmin=1, vmax=9)
     plt.colorbar()
+    fig.savefig('som_{}_{}.png'.format(grilla.shape[0],grilla.shape[1]))
     plt.show()

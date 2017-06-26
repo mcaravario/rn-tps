@@ -52,29 +52,49 @@ con el tamaño del díametro de la grilla
 \[
 	diam = \sqrt{rows^2+cols^2}
 \]
-	\item $\tau_1$ y $\tau_0$ deben elegirse de forma tal que al terminar
+	\item $\tau_1$ y $\tau_2$ deben elegirse de forma tal que al terminar
 	todas las iteraciones los valores de $\eta$ y $\sigma$ alcancen
 	una pequeña proporcion de los $\eta$ y $\sigma$ iniciales.
 
-	La cantidad de iteraciones totales es $epochs \cdot training\_size $
+	La cantidad de iteraciones totales es $epochs \cdot training\_size $.
+	Entonces si se quiere al final del entrenamiento que $\eta(t) \in (\eta_{f_l}, \eta_{f_u})$.
+	Debe cumplirse que
+
+	\[ \frac{t}{ln(\frac{\eta_0}{\eta_{f_l}})} < \tau_{1} < \frac{t}{ln(\frac{\eta_0}{\eta_{f_u}})} \]
+
+	De igual manera si se quiere que $\sigma(t) \in (\eta_{f_l}, \eta_{f_u})$. Debe cumplirse que
+
+	\[ \frac{t}{ln(\frac{\sigma_0}{\sigma_{f_l}})} < \tau_{2} < \frac{t}{ln(\frac{\sigma_0}{\sigma_{f_u}})} \]
+
+	En las experimentaciones con las formulas anteriores se buscó que el $\eta$ final este entre 0.001 y 0.002.
+	y que el $\sigma$ final termine entre 0.1 y 0.05.
 
 \end{itemize}
 
-
-Para el entrenamiento se utilizaron los siguientes parametros:
+Por lo anteriormente explicado para el entrenamiento se utilizaron los siguientes parametros:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AGREGAR PARAMETROS
 \begin{center}
-  \begin{tabular}{|c|c|c|c|}
+  \begin{tabular}{|c|c|c|c|c|c|c|c|c|}
     \hline
-    $\eta_0$ & $\sigma_0$ & $\tau_1$ & $\tau_2$ \\
+    filas & columnas & epochs & $\eta_0$ & $\sigma_0$ & $\tau_1$ & $\tau_2$ & preprocess & componentes \\
     \hline
-    fruta  & fruta & fruta & fruta \\
+	10 & 10 & 100 & 0.1 & 16 & 1300 & 1100 & NO & \ \\
+    \hline
+	10 & 10 & 100 & 0.1 & 16 & 1300 & 1100 & SI & 3 \\
+    \hline
+	10 & 10 & 100 & 0.1 & 16 & 1300 & 1100 & SI & 9 \\
+    \hline
+	25 & 25 & 100 & 0.1 & 36 & 1300 & 1100 & NO & \  \\
+    \hline
+	25 & 25 & 100 & 0.1 & 36 & 1300 & 1100 & SI & 9  \\
     \hline
   \end{tabular}
 \end{center}
 
-Para la visualizacion de los resultados se realizo un grafico que por cada muestra del conjunto de entrenamiento
- con su correspondiente etiqueta, se calculo cual fue la neurona ganadora. Luego se calculo por cada neurona cual fue la etiqueta
- que mas la activo y se la coloreo en base a esa categoria.
-Los resultados obtenidos fueron los siguientes
+Para la visualizacion de los resultados se realizo un grafico que por cada
+muestra del conjunto de entrenamiento con su correspondiente etiqueta, se
+calculo cual fue la neurona ganadora. Luego se calculo por cada neurona cual
+fue la etiqueta que mas la activo y se la coloreo en base a esa categoria.  Los
+resultados obtenidos fueron los siguientes
+
 \subsection{Conclusión}

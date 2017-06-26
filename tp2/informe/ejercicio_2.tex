@@ -1,7 +1,38 @@
 \section{Ejercicio 2}
 
 \subsection{Introducción}
+Este ejercicio consistio en crear un modelo de mapeo de caracteristicas auto-organizadas con el objetivo de clasificar documentos. El mapa
+auto-organizado que se utilizo fue una grilla bidimensional de 10 filas y 10 columnas. El objetivo de este ejercicio es el de observar espacialamente
+en la grilla las distintas clases de los datos.
 
+Para el entrenamiento se utilizo la siguiente formula para obtener la neurona ganadora $k^*$:
+  \[
+  k^* = \argmin_{i,j} \lvert\lvert x-w_{i,j} \rvert\rvert
+  \]
+
+Las funciones de enfriamiento de $\eta y \sigma$ que se utilizaron fueron las siguientes:
+\[
+  \begin{array}{ccc}
+    \eta_t & = & \eta_0 * e^{\frac{-x}{\tau_1}} \\
+    \sigma_t & = & \sigma_0 * e^{\frac{-x}{\tau_2}} \\
+  \end{array}
+   \\ \mbox{                     con } t = 1 \dots epochs
+\]
 \subsection{Resultados}
+Para el entrenamiento se utilizaron los siguientes parametros:
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AGREGAR PARAMETROS
+\begin{center}
+  \begin{tabular}{|c|c|c|c|}
+    \hline
+    $\eta_0$ & $\sigma_0$ & $\tau_1$ & $\tau_2$ \\
+    \hline
+    fruta  & fruta & fruta & fruta \\
+    \hline
+  \end{tabular}
+\end{center}
 
+Para la visualizacion de los resultados se realizo un grafico que por cada muestra del conjunto de entrenamiento
+ con su correspondiente etiqueta, se calculo cual fue la neurona ganadora. Luego se calculo por cada neurona cual fue la etiqueta
+ que mas la activo y se la coloreo en base a esa categoria.
+Los resultados obtenidos fueron los siguientes
 \subsection{Conclusión}

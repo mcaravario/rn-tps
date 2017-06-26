@@ -78,6 +78,5 @@ class SOMTrainer(Trainer):
             for x in train:
                 eta = eta0 * self.cooling_fn(t/tao0)
                 sigma = sigma0 * self.cooling_fn(t/tao1)
-
-                self.fit(x, eta, sigma)
+                self.fit(x, eta=eta, sigma=sigma)
                 t += 1

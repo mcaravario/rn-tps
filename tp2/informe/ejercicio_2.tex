@@ -56,10 +56,20 @@ con el tamaño del díametro de la grilla
 	todas las iteraciones los valores de $\eta$ y $\sigma$ alcancen
 	una pequeña proporcion de los $\eta$ y $\sigma$ iniciales.
 
-	La cantidad de iteraciones totales es $epochs \cdot training\_size $
+	La cantidad de iteraciones totales es $epochs \cdot training\_size $.
+	Entonces si se quiere al final del entrenamiento que $\eta(t) \in (\eta_{f_l}, \eta_{f_u})$.
+	Debe cumplirse que
+
+	\[ \frac{t}{ln(\frac{\eta_0}{\eta_{f_l}})} < \tau_{1} < \frac{t}{ln(\frac{\eta_0}{\eta_{f_u}})} \]
+
+	De igual manera si se quiere que $\sigma(t) \in (\eta_{f_l}, \eta_{f_u})$. Debe cumplirse que
+
+	\[ \frac{t}{ln(\frac{\sigma_0}{\sigma_{f_l}})} < \tau_{2} < \frac{t}{ln(\frac{\sigma_0}{\sigma_{f_u}})} \]
+
+	En las experimentaciones con las formulas anteriores se buscó que el $\eta$ final este entre 0.001 y 0.002.
+	y que el $\sigma$ final termine entre 0.1 y 0.05.
 
 \end{itemize}
-
 
 Para el entrenamiento se utilizaron los siguientes parametros:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AGREGAR PARAMETROS

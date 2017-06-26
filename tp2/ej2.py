@@ -50,7 +50,7 @@ def get_grid(red, data, y_data):
 
 def main():
     args = parser_args()
-    df = pd.read_csv(args.db)
+    df = pd.read_csv(args.db, header=None)
 
     y = df[df.columns[0]]
     X = df[df.columns[1:]].as_matrix()

@@ -99,6 +99,12 @@ def main():
         red = trained_networks.som_network
 
     c = get_grid(red, training, y_train)
-    graficar_som(c)
+    c2 = get_grid(red, tests, y_test)
+
+    def get_filename(grilla, pre):
+        return 'som_{}_{}'.format(grilla.shape[0], grilla.shape[1],
+                                  '_preprocess' if pre else '')
+
+    graficar_som(c, c2, "Activaciones SOM", get_filename(c, args.preprocess))
 
 main()

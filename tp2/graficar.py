@@ -66,10 +66,28 @@ def graficar_componentes(matriz, y, matriz_test, y_test, rule, projection=1):
     plt.suptitle("Reduccion con {}".format(rule.capitalize()))
     fig.savefig('componentes_{}_{}.png'.format(rule,projection))
 
-def graficar_som(grilla):
-    X = np.linspace(-grilla.shape[1]-1,0, grilla.shape[1]+1)
-    Y = np.linspace(0,grilla.shape[0]+1, grilla.shape[0]+1)
-    plt.pcolor(X,Y,grilla,vmin=1, vmax=9)
-    plt.colorbar()
-    fig.savefig('som_{}_{}.png'.format(grilla.shape[0],grilla.shape[1]))
-    plt.show()
+def graficar_som(grilla_t, grilla_v, title, filename):
+    fig = plt.figure(figsize=(16,7))
+
+    cmap = plt.get_cmap('jet', 9)
+    cmap.set_under('gray')
+
+    ax1 = fig.add_subplot(121)
+    ax1.set_title("Training")
+    X1 = np.linspace(-grilla_t.shape[1]-1,0, grilla_t.shape[1]+1)
+    Y1 = np.linspace(0,grilla_t.shape[0]+1, grilla_t.shape[0]+1)
+    i1 = ax1.pcolor(X1,Y1,grilla_t,cmap=cmap,vmin=1, vmax=9, edgecolors='white')
+    cbar_ax1 = fig.add_axes()
+    plt.colorbar(i1, cax=cbar_ax1, extend='min')
+
+    ax2 = fig.add_subplot(122)
+    ax2.set_title("Validación")
+    X2 = np.linspace(-grilla_v.shape[1]-1,0, grilla_v.shape[1]+1)
+    Y2 = np.linspace(0,grilla_v.shape[0]+1, grilla_v.shape[0]+1)
+    i2 = ax2.pcolor(X2,Y2,grilla_v,cmap=cmap,vmin=1, vmax=9, edgecolors='white')
+    cbar_ax2 = fig.add_axes()
+    plt.colorbar(i2, cax=cbar_ax2, extend='min')
+
+    plt.suptitle(title)
+    plt.tight_layout()
+    plt.savefig('{}.png'.format(filename))

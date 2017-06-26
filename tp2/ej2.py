@@ -30,6 +30,7 @@ def parser_args():
     parser.add_argument('--output', help="Salida con los pesos de la red", type=str)
     parser.add_argument('--normalize', help="Normaliza la entrada", dest='normalize', action='store_true')
     parser.add_argument('--no-normalize', help="No normaliza la entrada (defecto)", dest='normalize', action='store_false')
+    parser.add_argument('--components', help="Cantidad de componentes en caso de preprocesado", type=int, default=9)
     parser.set_defaults(preprocess=False, train=True, normalize=False)
     return parser.parse_args()
 
@@ -65,7 +66,7 @@ def main():
 
     if args.preprocess:
         inputs = x_train.shape[1]
-        outputs = 9
+        outputs = args.components
         red = RN(inputs, outputs)
         trainer = Sanger(red)
 

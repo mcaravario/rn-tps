@@ -136,6 +136,17 @@ Los resultados obtenidos fueron los siguientes
 \subsection{Conclusión}
 Una conclusion que se observo fue la diferencia en los tiempos de entrenamiento de la red con preprocesamiento
 con respecto al entrenamiento sin preprocesado. Esto tiene sentido ya que se esta entrenando con una entrada de menor
-dimensionalidad logrando que el computo realizado sea menor. Con respecto a la calidad obtenida por cada experimento
+dimensionalidad logrando que el computo realizado sea menor teniendo en cuenta aun el tiempo de  preprocesado.
+ Con respecto a la calidad obtenida por cada experimento
 se concluyo que la calidad de la red con preprocesamiento es superior a la red sin preprocesamiento, considerando calidad
-la forma en la que la red agrupa instancias.
+la forma en la que la red agrupa instancias, es decir la forma de los clusters.
+
+Con respecto a los datos de testeo se observo que el mapa generado presenta una mayor cantidad de neuronas en color gris,
+esto quiere decir que hay mas neuronas que nunca se activan en el testing en comparacion con el entrenamiento.
+
+Tambien se observo que al preprocesar tomando 3 componentes principales se pudieron distinguir 3 clusters del resto pero
+sin poder diferenciarse entre si. El resto de los clusters se entremezclaron con facilidad sin lograr hacer una distincion.
+Esto no sucedio cuando se tomaron 9 componentes principales, caso en el que se lograron visualizar los 9 clusters bien definidos.
+
+Se observo que la red agrupa siempre en 9 clusters similares pero no siempre los mismos colores se mapean a las misma
+distribucion espacial. Esto no ocurre con el cluster central que siempre le asigna la categoria 9 (color bordo).

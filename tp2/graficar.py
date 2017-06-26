@@ -47,7 +47,7 @@ def graficar_componentes(matriz, y, matriz_test, y_test, rule, projection=1):
     i = ax3.scatter(c3[:,[0]], c3[:,[1]], c3[:,[2]],vmin=1,vmax=9,cmap=cmap, s=POINT_SIZE, c=y2,  marker='o')
     j = ax3.scatter(v3[:,[0]], v3[:,[1]], v3[:,[2]],vmin=1,vmax=9,cmap=cmap, s=POINT_SIZE, c=z2,  marker='^')
     cbar_ax3 = fig.add_axes()
-    plt.colorbar(i, cax=cbar_ax3, extend='min')
+    plt.colorbar(i, cax=cbar_ax3, extend='min', pad=0.05, shrink=0.9)
 
     ax3.set_xlabel('X')
     ax3.set_ylabel('Y')
@@ -68,7 +68,6 @@ def graficar_componentes(matriz, y, matriz_test, y_test, rule, projection=1):
         ax3.view_init(elev=10., azim=135)
 
     plt.suptitle("Reduccion con {}".format(rule.capitalize()))
-    plt.tight_layout()
     fig.savefig('componentes_{}_{}.png'.format(rule,projection))
 
 def graficar_som(grilla_t, grilla_v, title, filename):

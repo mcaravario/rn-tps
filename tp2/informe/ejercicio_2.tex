@@ -10,14 +10,34 @@ Para el entrenamiento se utilizo la siguiente formula para obtener la neurona ga
   k^* = \argmin_{i,j} \lvert\lvert x-w_{i,j} \rvert\rvert
   \]
 
-Las funciones de enfriamiento de $\eta y \sigma$ que se utilizaron fueron las siguientes:
+La regla de entrenamiento en cada patron luego de obtener la neurona ganadora es
+
+\begin{equation}
+	\Delta W = \eta_t \cdot h_{k^*}(i,j) \cdot (X^{\mu}-W_{i,j})
+\end{equation}
+donde h es una función que mapea la distancia entre dos neuronas
+según la distribución normal.
+\[
+	h_{k^*}(i, j) = e^{-\frac{d_{k^*}(i,j)^2}{2}}
+\]
+con $d_{k^*}(i,j)$ es la típica distancia euclideana entre los puntos de la grilla (i,j) y
+la neurona ganadora $k^*$ escalada por un factor de $1/\sigma_t$, ie.
+$ d_{k^*}(i,j) = \frac{\lvert \lvert (i,j)-k^* \rvert \rvert}{\sigma_t} $
+
+Las funciones de enfriamiento de $\eta$ y $\sigma$ que se utilizaron 
+en cada iteración $t$ fueron las siguientes:
 \[
   \begin{array}{ccc}
-    \eta_t & = & \eta_0 * e^{\frac{-x}{\tau_1}} \\
-    \sigma_t & = & \sigma_0 * e^{\frac{-x}{\tau_2}} \\
+    \eta_t & = & \eta_0 \cdot e^{\frac{-x}{\tau_1}} \\
+    \sigma_t & = & \sigma_0 \cdot e^{\frac{-x}{\tau_2}} \\
   \end{array}
-   \\ \mbox{                     con } t = 1 \dots epochs
 \]
+
+Este enfriamiento de las variables $\eta$ y $\sigma$ permiten ir disminuyendo
+el nivel de aprendizaje y el area de vecindad respectivamente de cada neurona
+para que la red a traves del tiempo pueda converger a un estado final estable.
+
+
 \subsection{Resultados}
 Para el entrenamiento se utilizaron los siguientes parametros:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AGREGAR PARAMETROS

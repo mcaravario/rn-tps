@@ -18,12 +18,13 @@ entrada y 9 neuronas de salida. Esta topología fue pensada para poder clasifica
 de forma no supervisada los documentos en 9 tipos de categorías.
 
 Los algoritmo utilizados para el entrenamiento fueron los de \textit{Oja} y
-\textit{Sanger} cuyos pseudocodigos se presentan a continuacion:
-%%%%%%%%%%%%%%%%%%%%%% PONER PSEUDO DE OJA Y SANGER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ \textit{Sanger}
+ % cuyos pseudocodigos se presentan a continuacion:
+% %%%%%%%%%%%%%%%%%%%%%% PONER PSEUDO DE OJA Y SANGER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 Se decidió separar el conjunto de datos en entrenamiento y testing con una
 proporcion de 90\% y 10\% respectivamente. Los hiperparametros utilizados para
-el entrenamiento de la red fueron $\eta = 0.0001$ y 500 epocas. La razon por la
+el entrenamiento de la red fueron $\eta = 0.0001$ y 1000 epocas. La razon por la
 que se decidió utilizar un coeficiente de entrenamiento de una magnitud tan
 pequeña fue que los datos de entrada no estaban normalizados, logrando que
 ocurran errores de overflow.
@@ -37,32 +38,32 @@ de entrenamiento. Los resultados obtenidos se presentan a continuacion:
 
 
 \begin{figure}[H]
-  \includegraphics[width=160mm]{imagenes/reduccion_Oja_1.jpg}
+  \includegraphics[width=160mm]{imagenes/componentes_oja_1.png}
   \caption{Vista desde arriba con Oja}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=160mm]{imagenes/reduccion_Oja_2.jpg}
+  \includegraphics[width=160mm]{imagenes/componentes_oja_2.png}
   \caption{Vista desde abajo con Oja}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=160mm]{imagenes/reduccion_Oja_3.jpg}
+  \includegraphics[width=160mm]{imagenes/componentes_oja_3.png}
   \caption{Vista de costado con Oja}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=160mm]{imagenes/reduccion_Sanger_1.jpg}
+  \includegraphics[width=160mm]{imagenes/componentes_sanger_1.png}
   \caption{Vista desde arriba con Sanger}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=160mm]{imagenes/reduccion_Sanger_2.jpg}
+  \includegraphics[width=160mm]{imagenes/componentes_sanger_2.png}
   \caption{Vista desde abajo con Sanger}
 \end{figure}
 
 \begin{figure}[H]
-  \includegraphics[width=160mm]{imagenes/reduccion_Sanger_3.jpg}
+  \includegraphics[width=160mm]{imagenes/componentes_sanger_3.png}
   \caption{Vista de costado con Sanger}
 \end{figure}
 

@@ -103,8 +103,8 @@ def main():
     c2 = get_grid(red, tests, y_test)
 
     def get_filename(grilla, pre):
-        return 'som_{}_{}_{}'.format(grilla.shape[0], grilla.shape[1],
-                                  '_preprocess' if pre else '')
+        return 'som_{}_{}{}'.format(grilla.shape[0], grilla.shape[1],
+                                    '_{}_preprocess'.format(args.components) if pre else '')
 
     graficar_som(c, c2, "Activaciones SOM", get_filename(c, args.preprocess))
 

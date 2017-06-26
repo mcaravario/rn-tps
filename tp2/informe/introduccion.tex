@@ -54,7 +54,7 @@ Para utilizar el programa correspondiente al ejercicio 2, debe ejecutarse el sig
   python3 ej2.py --test --train --db db --preprocess --no-preprocess
                 --epochs epocas --test_size ts --rows r --cols c --eta0 eta0
                 --sigma0 sigma0 --tao0 tao0 --tao1 tao1 --output output
-                --normalize --no-normalize
+                --normalize --no-normalize --components comp
 \end{verbatim}
 
 en donde:
@@ -78,6 +78,7 @@ en donde:
   \item \textbf{output}: es un parámetro opcional que indica el archivo en el que se guardan los pesos.
   \item \textbf{--normalize}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
   \item \textbf{--no-normalize}: es un parámetro opcional que especifica que no se normalice la entrada correspondiente.
+  \item \textbf{comp}: es un parámetro opcional que especifica la cantidad de componentes a las que se quiere reducir en caso     de usar preprocesamiento de la entrada (por defecto es 9).
 
 \end{itemize}
 

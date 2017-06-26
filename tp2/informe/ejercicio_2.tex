@@ -39,6 +39,28 @@ para que la red a traves del tiempo pueda converger a un estado final estable.
 
 
 \subsection{Resultados}
+\subsubsection{Elección de los parametros}
+\begin{itemize}
+	\item $\eta_0$: debe eligirse grande de forma tal que al inicio
+puedan ser realizados cambios bruscos por la red para 
+poder organizarse inicialmente.
+
+	\item $\sigma_0$: Inicialmente tiene que ser grande para que el área
+de vecindad pueda abarcar a todos los nodos con esto alcanzaría aproximadamente
+con el tamaño del díametro de la grilla
+
+\[
+	diam = \sqrt{rows^2+cols^2}
+\]
+	\item $\tau_1$ y $\tau_0$ deben elegirse de forma tal que al terminar
+	todas las iteraciones los valores de $\eta$ y $\sigma$ alcancen
+	una pequeña proporcion de los $\eta$ y $\sigma$ iniciales.
+
+	La cantidad de iteraciones totales es $epochs \cdot training\_size $
+
+\end{itemize}
+
+
 Para el entrenamiento se utilizaron los siguientes parametros:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% AGREGAR PARAMETROS
 \begin{center}

@@ -34,7 +34,7 @@ def parser_args():
     return parser.parse_args()
 
 def get_grid(red, data, y_data):
-    winning_table = [[{i: 0 for i in range(1,10)} for _ in range(red.columns)] for _ in range(red.rows)]
+    winning_table = [[{i: 0 for i in range(0,10)} for _ in range(red.columns)] for _ in range(red.rows)]
 
     for x, y in zip(data, y_data):
         i, j = red.winner(x)
@@ -102,7 +102,7 @@ def main():
     c2 = get_grid(red, tests, y_test)
 
     def get_filename(grilla, pre):
-        return 'som_{}_{}'.format(grilla.shape[0], grilla.shape[1],
+        return 'som_{}_{}_{}'.format(grilla.shape[0], grilla.shape[1],
                                   '_preprocess' if pre else '')
 
     graficar_som(c, c2, "Activaciones SOM", get_filename(c, args.preprocess))

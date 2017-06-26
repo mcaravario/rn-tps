@@ -21,10 +21,10 @@ def parser_args():
     parser.add_argument('--test-size', help="Proporcion de test en la particion entrenamiento/test", type=float, default=0.3)
     parser.add_argument('-r', '--rows', help='Filas en la grilla SOM', type=int, default=10)
     parser.add_argument('-c', '--cols', help='Columnas en la grilla SOM', type=int, default=10)
-    parser.add_argument('--eta0', help="Eta inicial", type=float, default=0.001)
-    parser.add_argument('--sigma0', help="Sigma inicial", type=float, default=10)
-    parser.add_argument('--tao0', help="Factor dilatacion del tiempo (eta)", type=float, default=20)
-    parser.add_argument('--tao1', help="Factor dilatacion del tiempo (sigma)", type=float, default=20)
+    parser.add_argument('--eta0', help="Eta inicial", type=float, default=0.1)
+    parser.add_argument('--sigma0', help="Sigma inicial", type=float, default=15)
+    parser.add_argument('--tao0', help="Factor dilatacion del tiempo (eta)", type=float, default=2000)
+    parser.add_argument('--tao1', help="Factor dilatacion del tiempo (sigma)", type=float, default=2000)
     parser.add_argument('--train', help="Modo entrenamiento", dest='training', action="store_true")
     parser.add_argument('--test', help="Testea la red ya entrenada", dest='training', action="store_false")
     parser.add_argument('--output', help="Salida con los pesos de la red", type=str)
@@ -50,7 +50,7 @@ def get_grid(red, data, y_data):
 
 def main():
     args = parser_args()
-    df = pd.read_csv(args.db)
+    df = pd.read_csv(args.db, header=None)
 
     y = df[df.columns[0]]
     X = df[df.columns[1:]].as_matrix()
@@ -99,6 +99,12 @@ def main():
         red = trained_networks.som_network
 
     c = get_grid(red, training, y_train)
-    graficar_som(c)
+    c2 = get_grid(red, tests, y_test)
+
+    def get_filename(grilla, pre):
+        return 'som_{}_{}'.format(grilla.shape[0], grilla.shape[1],
+                                  '_preprocess' if pre else '')
+
+    graficar_som(c, c2, "Activaciones SOM", get_filename(c, args.preprocess))
 
 main()

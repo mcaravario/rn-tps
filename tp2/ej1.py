@@ -53,6 +53,7 @@ def main():
         trainer.fit_train(training, epochs=args.epochs, eta=args.eta)
 
         if args.output is not None:
+            np.set_printoptions(threshold=np.nan)
             with open(args.output, 'w') as f:
                 f.write(str(red.w))
     else:

@@ -25,7 +25,7 @@ def parser_args():
     parser.add_argument('--output', help="Salida con los pesos de la red", type=str)
     parser.add_argument('--normalize', help="Normaliza la entrada", dest='normalize', action='store_true')
     parser.add_argument('--no-normalize', help="No normaliza la entrada (defecto)", dest='normalize', action='store_false')
-    parser.set_defaults(train=True, normalize=False)
+    parser.set_defaults(training=True, normalize=False)
     return parser.parse_args()
 
 
@@ -45,9 +45,10 @@ def main():
     training = x_train
     test = x_test
 
-    if args.train:
-        inputs = x_train.shape[1]
-        outputs = 9
+    inputs = x_train.shape[1]
+    outputs = 9
+
+    if args.training:
         red = RN(inputs, outputs)
         trainer = Sanger(red) if args.rule == "sanger" else Oja(red)
         trainer.fit_train(training, epochs=args.epochs, eta=args.eta)

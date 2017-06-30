@@ -31,7 +31,7 @@ def parser_args():
     parser.add_argument('--normalize', help="Normaliza la entrada", dest='normalize', action='store_true')
     parser.add_argument('--no-normalize', help="No normaliza la entrada (defecto)", dest='normalize', action='store_false')
     parser.add_argument('--components', help="Cantidad de componentes en caso de preprocesado", type=int, default=9)
-    parser.set_defaults(preprocess=False, train=True, normalize=False)
+    parser.set_defaults(preprocess=False, training=True, normalize=False)
     return parser.parse_args()
 
 def get_grid(red, data, y_data):
@@ -88,7 +88,7 @@ def main():
 
 
     inputs = training.shape[1]
-    if args.train:
+    if args.training:
         red = SOM(inputs, args.rows, args.cols)
         trainer = SOMTrainer(red)
         trainer.fit_train(training, eta0=args.eta0, sigma0=args.sigma0, tao0=args.tao0, tao1=args.tao1, epochs=args.epochs)

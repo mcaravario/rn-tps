@@ -8,7 +8,6 @@ from rn import RN, SOM
 from trainer import Oja, Sanger, SOMTrainer
 import operator
 from graficar import graficar_som
-import trained_networks
 import argparse
 import config
 
@@ -64,7 +63,7 @@ def main():
     training = x_train
     tests = x_test
 
-    if args.preprocess:
+    if args.preprocess or not args.training:
         inputs = x_train.shape[1]
         outputs = args.components
         red = RN(inputs, outputs)
@@ -88,16 +87,20 @@ def main():
 
 
     inputs = training.shape[1]
+    red = None
+
     if args.training:
         red = SOM(inputs, args.rows, args.cols)
         trainer = SOMTrainer(red)
         trainer.fit_train(training, eta0=args.eta0, sigma0=args.sigma0, tao0=args.tao0, tao1=args.tao1, epochs=args.epochs)
 
         if args.output is not None:
-            with open(args.output, 'w') as f:
-                f.write(str(red.w))
+            red.savetxt(args.output, red.w, fmt='%.6e')
     else:
-        red = trained_networks.som_network
+        w = np.loadtxt('networks/som.txt', dtype=float)
+        w = w.reshape(10, 10, 9)
+        red = SOM(9, 10, 10, w=w)
+
 
     c = get_grid(red, training, y_train)
     c2 = get_grid(red, tests, y_test)

@@ -6,7 +6,6 @@ import argparse
 import config
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-import trained_networks
 from rn import RN
 from trainer import Oja, Sanger, Trainer
 from sklearn.decomposition import PCA
@@ -54,14 +53,12 @@ def main():
         trainer.fit_train(training, epochs=args.epochs, eta=args.eta)
 
         if args.output is not None:
-            np.set_printoptions(threshold=np.nan)
-            with open(args.output, 'w') as f:
-                f.write(str(red.w))
+            np.savetxt(args.output, fmt='%.6e')
     else:
         if args.rule == 'sanger':
-            red = trained_network.sanger_network
+            red = RN(inputs,outputs,w=np.loadtxt('networks/sanger.txt', dtype=float))
         else:
-            red = trained_network.oja_network
+            red = RN(inputs,outputs,w=np.loadtxt('networks/oja.txt', dtype=float))
 
     results = []
     for x in training:

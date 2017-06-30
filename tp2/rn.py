@@ -8,7 +8,7 @@ from numpy import random as npr
 class RN:
     def __init__(self, inputs, outputs, w=None):
         self.n = inputs
-        self.w = w or npr.random((outputs, self.n))
+        self.w = w if w is not None else npr.random((outputs, self.n))
 
     def eval(self, x):
         x = np.array(x).reshape((self.n, 1))
@@ -20,7 +20,7 @@ class SOM:
         self.inputs = inputs
         self.rows = rows
         self.columns = columns
-        self.w = w or npr.random((rows, columns, inputs))
+        self.w = w if w is not None else npr.random((rows, columns, inputs))
 
     def dist(self, i, j, x):
         return np.linalg.norm(self.w[i][j]-x)

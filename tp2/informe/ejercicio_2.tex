@@ -11,14 +11,14 @@ Para el entrenamiento se utilizo la siguiente formula para obtener la neurona
 ganadora $k^*$:
 
   \[
-  k^* = \argmin_{i,j} \lvert\lvert x-w_{i,j} \rvert\rvert
+  k^* = \argmin_{i,j} \lvert\lvert x-w_{ij} \rvert\rvert
   \]
 
 La regla de entrenamiento en cada patrón luego de obtener la neurona ganadora
 es
 
 \begin{equation}
-	\Delta W = \eta_t \cdot h_{k^*}(i,j) \cdot (X^{\mu}-W_{i,j})
+	\Delta W_{ij} = \eta_t \cdot h_{k^*}(i,j) \cdot (X^{\mu}-W_{ij})
 \end{equation}
 
 donde h es una función que mapea la distancia entre dos neuronas según la

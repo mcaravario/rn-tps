@@ -1,15 +1,15 @@
 \section{Introducción}
 
 En este trabajo se implementaron técnicas de aprendizaje no supervisado para
-clasificar documentos en distintas categorias. Para este cometido se entrenaron no
-supervisadamente diversos tipos de redes neuronales basados en Aprendizaje Hebbiano y
-Redes Autorganizadas. Cada documento fue preprocesado con el esquema Bag of
-Words para obtener vector de 850 componentes que indica en la i-ésima coordenada
-la frecuencia de la iésima palabra del diccionario en el documento.
+clasificar documentos en distintas categorías. Para este cometido se entrenaron
+no supervisadamente diversos tipos de redes neuronales basados en Aprendizaje
+Hebbiano y Redes Auto-organizadas. Cada documento fue preprocesado con el
+esquema Bag of Words para obtener vector de 850 componentes que indica en la i-ésima
+coordenada la frecuencia de la iésima palabra del diccionario en el documento.
 Debido a la alta dimensionalidad del espacio de este problema primero se buscó
 disminuir los datos a un espacio de dimensionalidad menor y más tratable que
-capturara aproximadamente la misma información con el Analisis de Componentes
-Principales basado en Aprendizaje Hebiano.
+capturara aproximadamente la misma información con el Análisis de Componentes
+Principales basado en Aprendizaje Hebbiano.
 
 
 \section{Modo de uso y requerimientos}
@@ -38,12 +38,12 @@ en donde:
   --db. Es decir que evaluara el set de datos con la mejor red entrenada.
   \item \textbf{--train}: es un parámetro opcional que especifica que se entrenara la red pasada como parámetro y se utilizara el set de datos pasados en el parámetro --db
   como conjunto de datos de entrenamiento.
-  \item \textbf{--db}: es un parametro opcional que especifica la base de datos que se utilizara ya sea para entrenar una nueva red si esta activada la opción --train, o
+  \item \textbf{--db}: es un parámetro opcional que especifica la base de datos que se utilizara ya sea para entrenar una nueva red si esta activada la opción --train, o
   para testear la mejor red obtenida en caso de que este el parámetro --test.
   \item \textbf{epocas}: es la cantidad de épocas que se utilizaran para el entrenamiento
   \item \textbf{ts}: es el porcentaje de datos de la base data que se utilizara como datos de testing.
   \item \textbf{eta}: es el coeficiente de entrenamiento $\eta$ que se utilizará en el entrenamiento
-  \item \textbf{rule}: es la regla que se utilizara para realizar la reduccion de dimensionalidad. Sus valores pueden ser {"oja", "sanger"}
+  \item \textbf{rule}: es la regla que se utilizara para realizar la reducción de dimensionalidad. Sus valores pueden ser {"oja", "sanger"}
   \item \textbf{--normalize}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
   \item \textbf{--no-normalize}: es un parámetro opcional que especifica que no se normalice la entrada correspondiente.
   \item \textbf{output}: es un parámetro opcional que indica el archivo en el que se guardan los pesos.
@@ -63,7 +63,7 @@ en donde:
   --db. Es decir que evaluara el set de datos con la mejor red entrenada.
   \item \textbf{--train}: es un parámetro opcional que especifica que se entrenara la red pasada como parámetro y se utilizara el set de datos pasados en el parámetro --db
   como conjunto de datos de entrenamiento.
-  \item \textbf{--db}: es un parametro opcional que especifica la base de datos que se utilizara ya sea para entrenar una nueva red si esta activada la opción --train, o
+  \item \textbf{--db}: es un parámetro opcional que especifica la base de datos que se utilizara ya sea para entrenar una nueva red si esta activada la opción --train, o
   para testear la mejor red obtenida en caso de que este el parámetro --test.
   \item \textbf{--preprocess}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
   \item \textbf{--no-preprocess}: es un parámetro opcional que especifica que no se normalice la entrada correspondiente.
@@ -78,7 +78,7 @@ en donde:
   \item \textbf{output}: es un parámetro opcional que indica el archivo en el que se guardan los pesos.
   \item \textbf{--normalize}: es un parámetro opcional que especifica que se normalice la entrada correspondiente.
   \item \textbf{--no-normalize}: es un parámetro opcional que especifica que no se normalice la entrada correspondiente.
-  \item \textbf{comp}: es un parámetro opcional que especifica la cantidad de componentes a las que se quiere reducir en caso     de usar preprocesamiento de la entrada (por defecto es 9).
+  \item \textbf{comp}: es un parámetro opcional que especifica la cantidad de componentes a las que se quiere reducir en caso  de usar preprocesamiento de la entrada (por defecto es 9).
 
 \end{itemize}
 
